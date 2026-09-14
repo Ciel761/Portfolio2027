@@ -1,0 +1,248 @@
+:root {
+  /* Viewport percentages: adjust these two values to change scroll timing. */
+  --block-height: 200;
+  --transition-height: 20;
+  --content-left: 30vw;
+  --card-size: 35vh;
+  --card-radius: calc(2 * var(--h1-font-size));
+  --card-gap-vw: -7;
+  --card-gap-step-vw: 5;
+  --card-snap-delay: 60;
+  --card-snap-duration: 500;
+}
+
+/* Layout only. Shared font settings live in typography.css.
+   Without JavaScript the document remains in normal flow. */
+html.block-layout body { margin-block: 0; }
+.block-layout main { height: var(--layout-height); }
+.block-layout .block-stage {
+  position: sticky;
+  top: 0;
+  height: 100dvh;
+  overflow: hidden;
+}
+.block-layout .layout-block {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: safe center;
+  box-sizing: border-box;
+  padding-inline-start: var(--content-left);
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior-y: auto;
+  transform: translateY(var(--block-offset, 0%));
+  visibility: hidden;
+}
+.block-layout .layout-block[data-visible] { visibility: visible; }
+
+.site-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: grid;
+  grid-template-columns: var(--content-left) minmax(0, 1fr);
+  box-sizing: border-box;
+  pointer-events: none;
+}
+.overlay-left {
+  grid-column: 1;
+}
+.overlay-right {
+  grid-column: 2;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  min-width: 0;
+  min-height: 0;
+}
+.overlay-header {
+  grid-row: 1;
+}
+.overlay-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 5vh;
+  margin-block-start: 30vh;
+  margin-inline-start: 1vw;
+  pointer-events: auto;
+}
+.overlay-nav a {
+  font-size: calc(1rem + var(--nav-growth, 0rem));
+  font-weight: var(--nav-weight, 400);
+}
+.overlay-nav a[aria-current] {
+  --nav-growth: 0.5rem;
+  --nav-weight: 700;
+}
+.overlay-info {
+  grid-row: 2;
+  justify-self: end;
+  box-sizing: border-box;
+  width: 30vw;
+  margin-inline-end: 20vw;
+  min-height: 0;
+  overflow: auto;
+}
+.overlay-footer {
+  grid-row: 3;
+  pointer-events: auto;
+}
+
+.card-system {
+  position: relative;
+  height: 80vh;
+  width: 100vw;
+  max-width: none;
+  margin-inline-start: calc(0px - var(--content-left));
+  flex-shrink: 0;
+}
+.card-row {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  max-width: none;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline-start: var(--content-left);
+  overscroll-behavior-x: contain;
+  touch-action: pan-x pan-y;
+}
+.card-row::-webkit-scrollbar { display: none; }
+.card-vertical-scroll .card-row {
+  scroll-snap-type: none;
+}
+.card-indicator {
+  position: absolute;
+  right: 2vw;
+  bottom: 2vh;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  pointer-events: auto;
+}
+.card-indicator button {
+  width: 0.5rem;
+  height: 0.5rem;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: #000;
+  opacity: var(--dot-opacity, 0.25);
+  transform: scale(var(--dot-scale, 1));
+}
+.card-track {
+  display: flex;
+  align-items: stretch;
+  gap: 10vw;
+  box-sizing: border-box;
+  width: max-content;
+  height: 100%;
+  padding-inline-start: var(--content-left);
+  padding-inline-end: max(0px, calc(100vw - var(--content-left) - var(--card-size)));
+}
+.card-item {
+  position: relative;
+  flex: 0 0 var(--card-size);
+  height: 100%;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+.card-scroll-effects .card-item {
+  transform: translate3d(var(--card-x, 0px), var(--card-y, 0px), 0);
+  filter: blur(var(--card-blur, 2px));
+  z-index: var(--card-layer, 1);
+}
+.card {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: safe flex-end;
+  width: var(--card-size);
+  height: var(--card-size);
+  min-width: 0;
+  padding: 4vh;
+  text-transform: uppercase;
+  color: #fff;
+  background: #000;
+  border-radius: var(--card-radius);
+  overflow-x: hidden;
+  overflow-y: auto;
+  overflow-wrap: anywhere;
+  transform-origin: left center;
+  transform: translateY(-50%);
+}
+.card-scroll-effects .card {
+  transform: translateY(-50%) scale(var(--card-scale, 0.9));
+  filter: brightness(var(--card-brightness, 80%));
+}
+.card-scroll-effects .card[data-focused] {
+  --card-scale: 1.5;
+  --card-brightness: 100%;
+}
+.card-year {
+  position: absolute;
+  top: var(--card-year-top, calc(50% - var(--card-size) / 2 - 1vh));
+  left: var(--card-radius);
+  margin: 0;
+  font-size: 2vh;
+  font-weight: 700;
+  text-transform: uppercase;
+  transform: translateY(-100%);
+}
+.card > * { flex-shrink: 0; }
+.card > :first-child { margin-block-start: 0; }
+.card > :last-child { margin-block-end: 0; }
+@supports not (height: 100dvh) {
+  .block-layout .block-stage { height: 100vh; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .card-row { scroll-behavior: auto; }
+}
+@media print {
+  .site-overlay { display: none; }
+  .card-system {
+    width: auto;
+    height: auto;
+    margin: 0;
+  }
+  .card-indicator { display: none; }
+  .card-row {
+    display: block;
+    width: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+  }
+  .card-track { display: block; width: auto; height: auto; padding: 0; }
+  .card-item {
+    height: auto;
+    filter: none;
+    transform: none;
+  }
+  .card {
+    position: static;
+    margin-block-end: 1rem;
+    filter: none;
+    transform: none;
+    break-inside: avoid;
+  }
+  .card-year { position: static; transform: none; }
+  html.block-layout main { height: auto; }
+  .block-layout .block-stage { position: static; height: auto; overflow: visible; }
+  .block-layout .layout-block {
+    position: static;
+    display: block;
+    padding-inline-start: 0;
+    overflow: visible;
+    transform: none;
+    visibility: visible;
+  }
+}
