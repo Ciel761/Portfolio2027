@@ -37,58 +37,6 @@ html.block-layout body { margin-block: 0; }
 }
 .block-layout .layout-block[data-visible] { visibility: visible; }
 
-.site-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 1000;
-  display: grid;
-  grid-template-columns: var(--content-left) minmax(0, 1fr);
-  box-sizing: border-box;
-  pointer-events: none;
-}
-.overlay-left {
-  grid-column: 1;
-}
-.overlay-right {
-  grid-column: 2;
-  display: grid;
-  grid-template-rows: auto minmax(0, 1fr) auto;
-  min-width: 0;
-  min-height: 0;
-}
-.overlay-header {
-  grid-row: 1;
-}
-.overlay-nav {
-  display: flex;
-  flex-direction: column;
-  gap: 5vh;
-  margin-block-start: 30vh;
-  margin-inline-start: 1vw;
-  pointer-events: auto;
-}
-.overlay-nav a {
-  font-size: calc(1rem + var(--nav-growth, 0rem));
-  font-weight: var(--nav-weight, 400);
-}
-.overlay-nav a[aria-current] {
-  --nav-growth: 0.5rem;
-  --nav-weight: 700;
-}
-.overlay-info {
-  grid-row: 2;
-  justify-self: end;
-  box-sizing: border-box;
-  width: 30vw;
-  margin-inline-end: 20vw;
-  min-height: 0;
-  overflow: auto;
-}
-.overlay-footer {
-  grid-row: 3;
-  pointer-events: auto;
-}
-
 .card-system {
   position: relative;
   height: 80vh;
@@ -207,7 +155,6 @@ html.block-layout body { margin-block: 0; }
   .card-row { scroll-behavior: auto; }
 }
 @media print {
-  .site-overlay { display: none; }
   .card-system {
     width: auto;
     height: auto;
