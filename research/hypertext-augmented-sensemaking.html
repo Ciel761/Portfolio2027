@@ -3,17 +3,128 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Patterns of Hypertext-augmented Sensemaking — Siyi Zhu</title>
+  <meta name="description" content="Patterns of Hypertext-Augmented Sensemaking studies how scholars use modern hypertext notebooks to revisit, connect, and develop ideas over time.">
+  <title>Patterns of Hypertext-Augmented Sensemaking — Siyi Zhu</title>
   <link rel="stylesheet" href="../typography.css">
+  <link rel="stylesheet" href="../overlay.css">
+  <link rel="stylesheet" href="project-layout.css">
+  <script src="../overlay.js" defer></script>
+  <script src="project-layout.js" defer></script>
 </head>
 <body>
-  <main>
-    <p><a href="../index.html#research">Back to research</a></p>
-    <h1>Patterns of Hypertext-augmented Sensemaking</h1>
-    <p>Research project</p>
-    <p>UIST 2024</p>
-    <p>Abstract: The early days of HCI were marked by bold visions of hypertext as a transformative medium for augmented sensemaking, exemplified in systems like Memex, Xanadu, and NoteCards. Today, however, hypertext is often disconnected from discussions of the future of sensemaking. In this paper, we investigate how the recent resurgence in hypertext “tools for thought” might point to new directions for hypertext-augmented sensemaking. Drawing on detailed analyses of guided tours with 23 scholars, we describe hypertext-augmented use patterns for dealing with the core problem of revisiting and reusing existing/past ideas during scholarly sensemaking. We then discuss how these use patterns validate and extend existing knowledge of hypertext design patterns for sensemaking, and point to new design opportunities for augmented sensemaking.</p>
-    <p><a href="https://dl.acm.org/doi/abs/10.1145/3654777.3676338">Read the publication</a></p>
+  <main class="project-page" data-project-page>
+    <div class="project-page-stage">
+      <section class="project-opening-block" id="project-opening" data-project-opening data-visible>
+        <div class="project-opening-stage">
+          <section class="project-title-section" aria-labelledby="project-title">
+            <h1 id="project-title">Patterns of Hypertext-Augmented Sensemaking</h1>
+            <p class="project-year">2024</p>
+            <p class="project-venue">UIST 2024 · Siyi Zhu, Robert Haisfield, Brendan Langen, and Joel Chan</p>
+          </section>
+
+          <section class="project-overview-section" id="project-overview" aria-label="Project overview">
+            <div class="project-overview-grid">
+              <div class="project-overview-abstract">
+                <p>Modern hypertext notebooks promise more than connected documents: they can help scholars resume interrupted thinking, recover ideas distributed across time and tools, and develop source material into new synthesis. Guided tours with 23 scholars revealed two families of practices: explicit note types that advance stages of sensemaking, and associative structures - hubs, indices, and incubators - that make fragmented information usable again.</p>
+              </div>
+              <div class="project-overview-custom"><p>23 scholars<br>16 hypertext users<br>7 comparison participants</p></div>
+              <div class="project-overview-custom"><p><a class="project-publication-link" href="https://doi.org/10.1145/3654777.3676338">Read the publication</a><br>CC BY 4.0</p></div>
+            </div>
+          </section>
+        </div>
+      </section>
+
+      <section class="project-regular-block" id="project-fragmentation" data-project-part="fragmentation" aria-labelledby="fragmentation-title" aria-hidden="true" inert>
+        <h2 id="fragmentation-title">The Fragmentation Problem</h2>
+        <div class="project-content-grid">
+          <div class="project-content-grid-cell span-columns-3 span-rows-3 media-contain"><img src="../assets/research/hypertext-augmented-sensemaking/patterns-overview.png" alt="Model of explicit note types and associative navigation structures found in the study" loading="lazy" decoding="async"></div>
+          <div class="project-content-grid-cell has-copy"><p><strong>Temporal fragmentation</strong><br>Long projects are repeatedly interrupted. When scholars return, their context, questions, and interpretation may have changed.</p></div>
+          <div class="project-content-grid-cell has-copy"><p><strong>Spatial fragmentation</strong><br>Papers, annotations, provisional notes, and developed ideas become distributed across pages, folders, tools, and devices.</p></div>
+          <div class="project-content-grid-cell has-copy"><p>The difficult work is often the “meta-work” of getting back into position to think: locating prior material, restoring context, and deciding what should happen next.</p></div>
+        </div>
+      </section>
+
+      <section class="project-regular-block" id="project-study" data-project-part="study" aria-labelledby="study-title" aria-hidden="true" inert>
+        <h2 id="study-title">Guided Tours of Scholarly Work</h2>
+        <div class="project-content-grid">
+          <div class="project-content-grid-cell span-columns-2 span-rows-3 media-contain"><img src="../assets/research/hypertext-augmented-sensemaking/active-sensemaking-canvas.png" alt="A participant's canvas connecting claims, questions, hypotheses, and evidence to source notes" loading="lazy" decoding="async"></div>
+          <div class="project-content-grid-cell span-columns-2 has-copy"><p><strong>Participants</strong><br>The core sample included 16 scholars using newer hypertext notebooks. Seven scholars using mainstream tools such as Google Docs provided comparison cases.</p></div>
+          <div class="project-content-grid-cell span-columns-2 has-copy"><p><strong>Procedure</strong><br>Remote guided tours lasted approximately 1 to 1.5 hours. Participants shared their screens and walked through real sensemaking workflows, structures, artifacts, changes, and pain points.</p></div>
+          <div class="project-content-grid-cell span-columns-2 has-copy"><p><strong>Analysis</strong><br>Full transcripts and screen recordings were analyzed thematically. Open coding and constant comparison developed lower-level actions such as linking and querying into patterns including hubs, incubators, and temporo-spatial fragmentation.</p></div>
+        </div>
+      </section>
+
+      <section class="project-regular-block" id="project-note-types" data-project-part="note-types" aria-labelledby="note-types-title" aria-hidden="true" inert>
+        <h2 id="note-types-title">Explicit Note Types</h2>
+        <div class="project-content-grid">
+          <div class="project-content-grid-cell span-columns-3 span-rows-3 media-contain"><img src="../assets/research/hypertext-augmented-sensemaking/explicit-note-types.png" alt="Examples showing source notes developing into summary notes and higher-level synthesis notes" loading="lazy" decoding="async"></div>
+          <div class="project-content-grid-cell has-copy"><p><strong>Source notes</strong><br>Represent papers and other source material as referenceable, linkable objects with provenance and metadata.</p></div>
+          <div class="project-content-grid-cell has-copy"><p><strong>Summary notes</strong><br>Compress a result, quotation, or idea from one source into a reusable unit while preserving a link to its origin.</p></div>
+          <div class="project-content-grid-cell has-copy"><p><strong>Synthesis notes</strong><br>Combine summaries into higher-level concepts, questions, findings, and hypotheses that can guide new reading, experiments, and writing.</p></div>
+        </div>
+      </section>
+
+      <section class="project-regular-block" id="project-navigation" data-project-part="navigation" aria-labelledby="navigation-title" aria-hidden="true" inert>
+        <h2 id="navigation-title">Hubs and Indices</h2>
+        <div class="project-content-grid">
+          <div class="project-content-grid-cell span-columns-2 span-rows-2 media-contain"><img src="../assets/research/hypertext-augmented-sensemaking/hubs.png" alt="Examples of empty hub notes whose contextual backlinks gather related information" loading="lazy" decoding="async"></div>
+          <div class="project-content-grid-cell span-columns-2 span-rows-2 media-contain"><img src="../assets/research/hypertext-augmented-sensemaking/indices.png" alt="Examples of manually and semi-automatically constructed indices" loading="lazy" decoding="async"></div>
+          <div class="project-content-grid-cell span-columns-2 has-copy"><p><strong>Hubs</strong><br>Often-empty pages use contextual backlinks as waypoints to related notes distributed throughout a notebook.</p></div>
+          <div class="project-content-grid-cell span-columns-2 has-copy"><p><strong>Indices</strong><br>Curated links and structure searches gather notes into more deliberate topical views that can update as the notebook changes.</p></div>
+        </div>
+      </section>
+
+      <section class="project-regular-block" id="project-incubators" data-project-part="incubators" aria-labelledby="incubators-title" aria-hidden="true" inert>
+        <h2 id="incubators-title">Incubators</h2>
+        <div class="project-content-grid">
+          <div class="project-content-grid-cell span-columns-2 span-rows-3 media-contain"><img src="../assets/research/hypertext-augmented-sensemaking/incubator-log.png" alt="A log-type incubator linking a research question to findings and alternative explanations over time" loading="lazy" decoding="async"></div>
+          <div class="project-content-grid-cell span-columns-2 span-rows-2 media-contain"><img src="../assets/research/hypertext-augmented-sensemaking/incubator-query.png" alt="A group meeting incubator that retrieves recent work through a customizable structure search" loading="lazy" decoding="async"></div>
+          <div class="project-content-grid-cell span-columns-2 has-copy"><p>Incubators develop ideas over time. They combine links, dated records, questions, tasks, and provenance, sometimes adding structure searches that retrieve relevant material automatically.</p></div>
+        </div>
+      </section>
+
+      <section class="project-regular-block" id="project-implications" data-project-part="implications" aria-labelledby="implications-title" aria-hidden="true" inert>
+        <h2 id="implications-title">Design Implications</h2>
+        <div class="project-content-grid">
+          <div class="project-content-grid-cell span-columns-2 span-rows-3 has-copy"><p>The observed patterns extend classic hypertext ideas through granular contextual backlinks, flexible many-to-many organization, formal note schemas, and dynamic structure searches. Together they show how hypertext can support the evolving state of thought rather than merely connect finished documents.</p></div>
+          <div class="project-content-grid-cell span-columns-2 has-copy"><p><strong>Match the work</strong><br>Let people define information types that correspond to their own stages of sensemaking and provide actions that help each type move forward.</p></div>
+          <div class="project-content-grid-cell span-columns-2 has-copy"><p><strong>Support associative retrieval</strong><br>Let people construct dynamic hubs, indices, and incubators without forcing their knowledge into one fixed hierarchy.</p></div>
+          <div class="project-content-grid-cell span-columns-2 has-copy"><p><strong>Lower the cost of structure</strong><br>End-user programming and mixed-initiative AI could make powerful structures easier to create while preserving user control and meaning.</p></div>
+        </div>
+      </section>
+
+      <section class="project-regular-block project-related-projects-block" id="project-related-projects" data-project-part="related-projects" data-project-related data-project-dark data-project-hold="300" aria-labelledby="related-projects-title" aria-hidden="true" inert>
+        <div class="project-related-experience">
+          <section class="project-related-scene project-related-content" data-related-scene data-start="-0.12" data-persist>
+            <h2 id="related-projects-title">Related Projects</h2>
+          </section>
+        </div>
+      </section>
+    </div>
   </main>
+
+  <aside class="site-overlay" aria-label="Site navigation and project information">
+    <div class="overlay-left">
+      <nav class="overlay-nav project-overlay-nav" aria-label="Hypertext sensemaking sections">
+        <a href="#project-opening" data-project-nav="opening" aria-current="location">Hypertext Sensemaking</a>
+        <a href="#project-overview" data-project-nav="overview">Overview</a>
+        <a href="#project-fragmentation" data-project-nav="fragmentation">Fragmentation</a>
+        <a href="#project-study" data-project-nav="study">Study</a>
+        <a href="#project-note-types" data-project-nav="note-types">Note Types</a>
+        <a href="#project-navigation" data-project-nav="navigation">Hubs and Indices</a>
+        <a href="#project-incubators" data-project-nav="incubators">Incubators</a>
+        <a href="#project-implications" data-project-nav="implications">Implications</a>
+        <a href="#project-related-projects" data-project-nav="related-projects">Related Projects</a>
+      </nav>
+    </div>
+    <div class="overlay-right">
+      <header class="overlay-header project-overlay-header">
+        <p><a class="project-overlay-home" href="../index.html#research">Home</a></p>
+        <p class="overlay-name">Siyi Zhu</p>
+      </header>
+      <section class="overlay-info" aria-label="Current project information"></section>
+      <footer class="overlay-footer"><p>© Siyi Zhu</p></footer>
+    </div>
+  </aside>
 </body>
 </html>

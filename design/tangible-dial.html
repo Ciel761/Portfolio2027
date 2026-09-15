@@ -3,15 +3,137 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Tangible Dial is a shape-changing control interface for reducing interaction complexity across connected devices.">
   <title>Tangible Dial — Siyi Zhu</title>
   <link rel="stylesheet" href="../typography.css">
+  <link rel="stylesheet" href="../overlay.css">
+  <link rel="stylesheet" href="project-layout.css">
+  <script src="../overlay.js" defer></script>
+  <script src="project-layout.js" defer></script>
 </head>
 <body>
-  <main>
-    <p><a href="../index.html#design">Back to design</a></p>
-    <h1>Tangible Dial</h1>
-    <p>Design project</p>
-    <p>2020 Fall</p>
+  <main class="project-page" data-project-page>
+    <div class="project-page-stage">
+      <section class="project-opening-block" id="project-opening" data-project-opening data-visible>
+        <div class="project-opening-stage">
+          <section class="project-title-section" aria-labelledby="project-title">
+            <h1 id="project-title">Tangible Dial</h1>
+            <p>2021</p>
+            <p>Master of Design · AHFE 2021</p>
+          </section>
+          <section class="project-overview-section" id="project-overview" aria-label="Project overview">
+            <div class="project-overview-grid">
+              <div class="project-overview-summary">
+                <p>Tangible Dial is an integrated control interface with a detachable, shape-changing dial and digital displays. It explores how spatial references and sequential physical affordances can reduce cognitive effort when people move between interfaces on connected devices.</p>
+              </div>
+              <div class="project-overview-fact"><p>Research through Design<br>Interaction Design<br>Prototyping</p></div>
+              <div class="project-overview-fact"><p>Shape-changing tangible interface</p></div>
+            </div>
+          </section>
+        </div>
+      </section>
+
+      <section class="project-regular-block" id="project-challenge" data-project-part="challenge" aria-labelledby="challenge-title" aria-hidden="true" inert>
+        <h2 id="challenge-title">Challenge</h2>
+        <div class="project-content-grid">
+          <div class="project-content-grid-cell span-columns-2 span-rows-2">
+            <p>Distributed interfaces in cross-device interaction can increase cognitive load as people switch from one device to another. Physical affordances establish clear spatial references, but exposing every possible action at once can make a complex interface harder to understand.</p>
+            <p>The project asks how a tangible interface can communicate one possible action at a time while remaining connected to flexible digital content.</p>
+          </div>
+          <div class="project-content-grid-cell span-columns-2 span-rows-2">
+            <figure><img src="../assets/design/tangible-dial/ShapeChangingInterface.png" alt="Shape-changing physical interface reference" loading="lazy" decoding="async"><figcaption>Shape-changing interface precedent</figcaption></figure>
+          </div>
+          <div class="project-content-grid-cell span-columns-2"><p><strong>Sequential affordance</strong><br>Each interaction step reveals the physical affordance needed for that moment and conceals actions that are not available.</p></div>
+          <div class="project-content-grid-cell span-columns-2 media-contain"><img src="../assets/design/tangible-dial/MITShapeChangingInterface.png" alt="Shape-changing interface study from MIT Media Lab" loading="lazy" decoding="async"></div>
+        </div>
+      </section>
+
+      <section class="project-regular-block" id="project-process" data-project-part="process" aria-labelledby="process-title" aria-hidden="true" inert>
+        <h2 id="process-title">Process</h2>
+        <div class="project-content-grid">
+          <div class="project-content-grid-cell span-columns-2 span-rows-2 media-contain"><img src="../assets/design/tangible-dial/TangibleDialProcess.png" alt="Tangible Dial research-through-design workflow" loading="lazy" decoding="async"></div>
+          <div class="project-content-grid-cell span-columns-2">
+            <p>The work combined literature research with two design phases. The first developed the product form and changing physical affordances; the second developed the interface architecture and graphical user experience.</p>
+          </div>
+          <div class="project-content-grid-cell span-columns-2 span-rows-2"><img src="../assets/design/tangible-dial/TangibleDial_IdeationSketch.png" alt="Early Tangible Dial ideation sketches" loading="lazy" decoding="async"></div>
+          <div class="project-content-grid-cell span-columns-2"><p>A dial form emerged through mechanism studies, sketching, and prototyping because pressing and rotating could be expressed through distinct changes around its edge.</p></div>
+        </div>
+      </section>
+
+      <section class="project-regular-block" id="project-experience" data-project-part="experience" aria-labelledby="experience-title" aria-hidden="true" inert>
+        <h2 id="experience-title">Experience</h2>
+        <div class="project-content-grid">
+          <div class="project-content-grid-cell span-columns-2 span-rows-2"><img src="../assets/design/tangible-dial/Storyboard.png" alt="Storyboard showing Tangible Dial controlling a washing machine" loading="lazy" decoding="async"></div>
+          <div class="project-content-grid-cell span-columns-2"><p>A washing machine provided a demanding connected-home scenario: its controls combine physical and digital components, require detailed multistep settings, and often run while people use other devices.</p></div>
+          <div class="project-content-grid-cell span-columns-2 media-contain"><img src="../assets/design/tangible-dial/TangibleDial_HTA.png" alt="Hierarchical task analysis for operating a washing machine" loading="lazy" decoding="async"></div>
+          <div class="project-content-grid-cell span-columns-2 media-contain"><img src="../assets/design/tangible-dial/TangibleDial_UXFlow.png" alt="Tangible Dial user experience flow" loading="lazy" decoding="async"></div>
+        </div>
+      </section>
+
+      <section class="project-regular-block" id="project-prototype" data-project-part="prototype" aria-labelledby="prototype-title" aria-hidden="true" inert>
+        <h2 id="prototype-title">Prototype</h2>
+        <div class="project-content-grid">
+          <div class="project-content-grid-cell span-columns-2 span-rows-2"><img src="../assets/design/tangible-dial/TangibleDial_Rendering.png" alt="Rendering of Tangible Dial and its base display" loading="lazy" decoding="async"></div>
+          <div class="project-content-grid-cell span-columns-2"><p>The final concept combines a detachable dial, a round top display, and a base display. Self-actuated ribs change the dial’s silhouette to communicate pressing or rotation.</p></div>
+          <div class="project-content-grid-cell"><img src="../assets/design/tangible-dial/TangibleDial_Press.png" alt="Tangible Dial press affordance" loading="lazy" decoding="async"></div>
+          <div class="project-content-grid-cell"><img src="../assets/design/tangible-dial/TangibleDial_Rotate.png" alt="Tangible Dial rotation affordance" loading="lazy" decoding="async"></div>
+          <div class="project-content-grid-cell span-columns-2"><p>The base display separates a tangible area, a function area, and a procedure area so people can see previous choices, the current step, and suggested next actions.</p></div>
+        </div>
+      </section>
+
+      <section class="project-regular-block" id="project-evaluation" data-project-part="evaluation" aria-labelledby="evaluation-title" aria-hidden="true" inert>
+        <h2 id="evaluation-title">Evaluation</h2>
+        <div class="project-content-grid">
+          <div class="project-content-grid-cell span-columns-2 span-rows-2"><img src="../assets/design/tangible-dial/TangibleDial_FinalTest.jpg" alt="Participant evaluating a Tangible Dial prototype" loading="lazy" decoding="async"></div>
+          <div class="project-content-grid-cell span-columns-2"><p>Two rounds of testing combined 3D-printed dial states with printed interface prototypes. The first round examined whether the physical forms communicated pressing and rotating; the second evaluated the complete tangible and graphical interaction.</p></div>
+          <div class="project-content-grid-cell"><img src="../assets/design/tangible-dial/TangibleDalPrototype1.png" alt="Early physical dial prototype" loading="lazy" decoding="async"></div>
+          <div class="project-content-grid-cell"><img src="../assets/design/tangible-dial/TangibleDalPrototype2.png" alt="Physical dial prototype with interface" loading="lazy" decoding="async"></div>
+          <div class="project-content-grid-cell span-columns-2"><p>Participants found the graphical interface clear and reported that the changing ribs helped them understand relations between steps. Testing also revealed ambiguity around pressing and practical issues around the edge of the base.</p></div>
+        </div>
+      </section>
+
+      <section class="project-regular-block" id="project-outcome" data-project-part="outcome" aria-labelledby="outcome-title" aria-hidden="true" inert>
+        <h2 id="outcome-title">Outcome</h2>
+        <div class="project-content-grid">
+          <div class="project-content-grid-cell span-columns-2 span-rows-3"><img src="../assets/design/tangible-dial/TangibleDial_Cover.png" alt="Tangible Dial final concept" loading="lazy" decoding="async"></div>
+          <div class="project-content-grid-cell span-columns-2"><p>The study indicates that sequential physical affordances, paired with graphical guidance, can communicate complex interaction steps and support a clearer mental model across distributed devices.</p></div>
+          <div class="project-content-grid-cell span-columns-2"><p>Future work includes building an actuated prototype, exploring a broader vocabulary of changing physical cues, and applying the concept to vehicle interfaces or immersive systems.</p></div>
+          <div class="project-content-grid-cell span-columns-2"><p>Zhu, S., &amp; Ghim, Y. G. (2021). Shape-Changing Control Interface Design: Augmenting Physical Affordances to Enhance a Digital Interface Experience in Cross-Device Interaction. AHFE 2021.</p></div>
+        </div>
+      </section>
+
+      <section class="project-regular-block project-related-projects-block" id="project-related-projects" data-project-part="related-projects" data-project-related data-project-dark data-project-hold="300" aria-labelledby="related-projects-title" aria-hidden="true" inert>
+        <div class="project-related-experience">
+          <section class="project-related-scene project-related-content" data-related-scene data-start="-0.12" data-persist>
+            <h2 id="related-projects-title">Related Projects</h2>
+          </section>
+        </div>
+      </section>
+    </div>
   </main>
+
+  <aside class="site-overlay" aria-label="Site navigation and project information">
+    <div class="overlay-left">
+      <nav class="overlay-nav" aria-label="Tangible Dial sections">
+        <a href="#project-opening" data-project-nav="opening" aria-current="location">Tangible Dial</a>
+        <a href="#project-overview" data-project-nav="overview">Overview</a>
+        <a href="#project-challenge" data-project-nav="challenge">Challenge</a>
+        <a href="#project-process" data-project-nav="process">Process</a>
+        <a href="#project-experience" data-project-nav="experience">Experience</a>
+        <a href="#project-prototype" data-project-nav="prototype">Prototype</a>
+        <a href="#project-evaluation" data-project-nav="evaluation">Evaluation</a>
+        <a href="#project-outcome" data-project-nav="outcome">Outcome</a>
+        <a href="#project-related-projects" data-project-nav="related-projects">Related Projects</a>
+      </nav>
+    </div>
+    <div class="overlay-right">
+      <header class="overlay-header project-overlay-header">
+        <a class="project-overlay-home" href="../index.html#design">Home</a>
+        <p class="overlay-name">Siyi Zhu</p>
+      </header>
+      <section class="overlay-info" aria-label="Current project information"></section>
+      <footer class="overlay-footer"><p>© Siyi Zhu</p></footer>
+    </div>
+  </aside>
 </body>
 </html>

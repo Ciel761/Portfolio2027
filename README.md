@@ -8,9 +8,9 @@ A fresh, responsive redesign of Siyi Zhu’s portfolio.
 
 ## Local preview
 
-The homepage uses CSS and JavaScript for full-screen sticky blocks, a fixed navigation overlay, and scroll-driven card carousels. Project pages remain plain HTML. Visual refinement is ongoing.
+The homepage uses CSS and JavaScript for full-screen sticky blocks, a fixed navigation overlay, and scroll-driven card carousels. Principal project pages use content-driven sticky timelines, responsive grids, project-specific overlay navigation, and cinematic dark sections. Visual refinement is ongoing.
 
-Adjust `--block-height` (200) and `--transition-height` (20) in `layout.css` to change viewport-based scroll timing. Current values give a 100vh hold and 20vh transition for each block.
+Adjust `--block-height` (200) and `--transition-height` (50) in `layout.css` to change homepage scroll timing. Current values give a 100vh hold and 50vh transition for each block. Project timing is configured separately in `research/project-layout.css` and `design/project-layout.css`.
 
 Open `index.html` in a browser, or run from this folder:
 
@@ -20,4 +20,4 @@ python3 -m http.server 8000 --bind 127.0.0.1
 
 Visit <http://127.0.0.1:8000/>. No install or build is required.
 
-The homepage links to five research pages in `research/` and three design pages in `design/`. Pages contain available reference descriptions, dates, and publication links. Full case-study text and media migration remain pending.
+The homepage links to five research pages in `research/` and four design pages in `design/`. Seven pages use the full project framework; two research pages remain lightweight documents with static Related Projects footers. See the living specification for current measurements, interaction states, and remaining work.

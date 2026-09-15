@@ -1,11 +1,11 @@
 # Portfolio renovation specification
 
-Last updated: 2026-09-13.
-Status: Active local structural prototype with full-screen blocks, overlay navigation, and synchronized card carousels.
+Last updated: 2026-09-14.
+Status: Active local implementation with full-screen homepage and project-page timelines, a shared overlay, synchronized homepage card carousels, responsive project grids, and cinematic dark sections.
 
-## Current direction — 2026-09-13
+## Current direction — 2026-09-14
 
-The homepage is an active layout and interaction prototype. It uses plain project content inside full-screen sticky sections, a fixed overlay, and horizontal card systems controlled by native horizontal input and the page's vertical scroll position. Visual refinement and final responsive behavior remain pending. The authoritative current implementation is recorded at the end of this document; earlier sections preserve the design history.
+The homepage and principal project pages share an active layout and interaction framework. The homepage uses full-screen sticky sections, a fixed overlay, and horizontal card systems controlled by native horizontal input and page scroll. Project pages use a content-driven sticky block timeline, overview and content grids, project-specific overlay navigation, and black cinematic sections. Visual refinement, the remaining two project-page conversions, and device-level responsive validation remain pending. The authoritative current implementation is recorded at the end of this document; earlier sections preserve the design history.
 
 ## Purpose and confirmed requirements
 
@@ -121,8 +121,8 @@ Visual direction, framework, final routes, and hosting are currently undecided. 
 ## Delivery sequence
 
 1. Establish the reference library and content inventory — complete.
-2. Develop the new design direction and page structure — pending.
-3. Specify reusable components and responsive behavior — pending.
+2. Develop the new design direction and page structure — in progress.
+3. Specify reusable components and responsive behavior — in progress.
 4. Prepare plain HTML content — complete for current content subset; full migration pending. UI implementation deferred.
 5. Verify layouts, navigation, links, accessibility, and media behavior — pending.
 6. Record final implementation and publishing details — pending.
@@ -131,6 +131,11 @@ Visual direction, framework, final routes, and hosting are currently undecided. 
 
 | Date | Decision | Basis |
 | --- | --- | --- |
+| 2026-09-14 | Use content-driven sticky blocks for project pages, with 50vh of scroll space before and after regular block content. | Explicit user requirement. |
+| 2026-09-14 | Use black cinematic terminal blocks for Related Projects; keep Contact only on the homepage as its footer. | Explicit user clarification. |
+| 2026-09-14 | Fade the whole document background during transitions into and out of dark blocks. | Explicit user requirement. |
+| 2026-09-14 | Provide overlay focus-on-content, focus-on-overlay, and always-clear modes. | Explicit user requirement. |
+| 2026-09-14 | Use timeline-aware, ease-in-out navigation rather than native anchor scrolling. | Native fragment positions do not represent the custom scroll timeline. |
 | 2026-09-13 | Remove UI and custom interactions; show plain HTML content only. | Explicit user request; supersedes current full-screen prototype. |
 | 2026-09-11 | Develop in the renovation workspace and preserve the original project. | User supplied a separate reference project. |
 | 2026-09-11 | Design from scratch; reuse legacy material selectively. | Explicit user requirement. |
@@ -245,8 +250,8 @@ This section is authoritative for the current prototype. Earlier implementation 
 - The project is a dependency-free static website using `index.html`, `layout.css`, `typography.css`, and `layout.js`.
 - The homepage order is Home → Research → Design → News → About → Contact.
 - All six homepage sections are children of one `.block-stage` inside `main`.
-- Five standalone research pages live in `research/`; three standalone design pages live in `design/`.
-- Project pages use shared Helvetica typography and retain plain document flow.
+- Five standalone research pages live in `research/`; four standalone design pages live in `design/`.
+- Seven project pages use the project timeline framework. The Metaverse Workspace and Synthesis Infrastructure Foundation pages currently retain plain document flow with static Related Projects footers.
 - The legacy project snapshot and asset inventory remain under `reference/`.
 
 ### Full-screen block timeline
@@ -254,8 +259,8 @@ This section is authoritative for the current prototype. Earlier implementation 
 - `.block-stage` is sticky at the top of the viewport and fills `100dvh`, with a `100vh` fallback.
 - Every `.layout-block` occupies the stage and is moved vertically according to native document scroll position.
 - `--block-height: 200` produces a `100vh` stationary hold because the visible `100vh` is subtracted from the configured block height.
-- `--transition-height: 20` reserves `20vh` between adjacent holds for the vertical section transition.
-- Six blocks produce an `800vh` main container and `700vh` of total page travel: six `100vh` holds plus five `20vh` transitions.
+- `--transition-height: 50` reserves `50vh` between adjacent holds for the vertical section transition.
+- Six blocks produce a `950vh` main container and `850vh` of total page travel: six `100vh` holds plus five `50vh` transitions and one visible viewport.
 - The final Contact block has a hold but no outgoing transition.
 - Section motion reverses naturally when the user scrolls upward.
 - Inactive blocks are `inert` and `aria-hidden`; the active block changes at the midpoint of a transition.
@@ -277,13 +282,13 @@ This section is authoritative for the current prototype. Earlier implementation 
 - The overlay itself ignores pointer input; interactive descendants opt back in so underlying cards remain usable.
 - The left column contains the vertical navigation for Home, Research, Design, News, About, and Contact.
 - Navigation begins `30vh` from the top, sits `1vw` from the left edge, and uses a `5vh` gap between links.
-- During the `20vh` section transition, the outgoing navigation label interpolates from `1.5rem / 700` to `1rem / 400`, while the incoming label performs the inverse. The interpolation follows scroll position.
+- During the `50vh` section transition, the outgoing navigation label interpolates from its enlarged bold state to its base state, while the incoming label performs the inverse. The interpolation follows scroll position.
 - The right column has three vertical regions: the name in the header, an empty information region in the middle, and a footer at the bottom.
 - The middle information region is reserved for later focused-card information. It is `30vw` wide, aligned toward the right, and has a `20vw` right margin.
 
 ### Card system geometry and content
 
-- Research, Design, News, About, and Contact each use a `.card-system` wrapping a native horizontal `.card-row`, `.card-track`, and stationary dot indicator.
+- Research, Design, News, and About each use a `.card-system` wrapping a native horizontal `.card-row`, `.card-track`, and stationary dot indicator. Contact is a separate black homepage footer block.
 - The card system is `100vw` wide and `80vh` high. Its negative left margin aligns it to both viewport edges despite the block's `30vw` content offset.
 - Native horizontal overflow remains enabled; scrollbars are hidden.
 - Cards are `35vh × 35vh` with `4vh` internal padding, a black background, white uppercase content, and bottom-aligned text.
@@ -301,7 +306,7 @@ This section is authoritative for the current prototype. Earlier implementation 
 - Brightness is 100% when focused, 80% one step away, and reduces by 10 percentage points per subsequent step to 0%.
 - Blur is 0 when focused, 2px one step away, then increases by 6px per subsequent step to a 50px maximum.
 - The focused card has the highest layer. Layer depth decreases with distance.
-- Animated right-side gaps increase by `5vw` per distance step. Animated left-side gaps decrease by `5vw` per step. The current animated base-gap token is `-7vw`; the native track gap is `10vw`.
+- Animated right-side gaps increase by `10vw` per distance step. Animated left-side gaps decrease by `10vw` per step. The current animated base-gap token is `-7vw`; the native track gap is `10vw`.
 - Cards left of focus move downward using the current viewport-height sequence `[0, 2, 4, 8, 16, 24, 28, 30, 31]`.
 - The wrapper transform and blur also affect its year label. Brightness remains on the card itself.
 - Only a focused card link participates in sequential keyboard focus while effects are enabled. Clicking a nonfocused card first moves it into focus.
@@ -319,7 +324,7 @@ This section is authoritative for the current prototype. Earlier implementation 
 - `card-vertical-scroll` is a per-block class that maps only that block's vertical hold progress to its horizontal carousel.
 - All current card blocks have vertical synchronization enabled. The single About card has no horizontal travel.
 - At the beginning of a block's `100vh` hold, its first card is focused. At the end, its last card is focused.
-- The outgoing carousel remains on its last card throughout the following `20vh` section transition. Scrolling elsewhere does not change it.
+- The outgoing carousel remains on its last card throughout the following `50vh` section transition. Scrolling elsewhere does not change it.
 - Scrolling upward reverses the carousel after the user re-enters its block timeline.
 - Direct horizontal scrolling, dot clicks, and keyboard card navigation update the matching vertical page position. Synchronization guards prevent feedback loops.
 - Vertically controlled rows disable native CSS scroll snapping so intermediate scroll positions remain continuous.
@@ -327,7 +332,7 @@ This section is authoritative for the current prototype. Earlier implementation 
 ### Card snapping
 
 - When scrolling pauses inside a vertically controlled card hold, the page and carousel settle on the nearest exact card position.
-- Snapping does not run in the `20vh` section-transition interval.
+- Snapping does not run in the `50vh` section-transition interval.
 - `--card-snap-delay: 60` waits 60ms after input before beginning the snap.
 - `--card-snap-duration: 500` completes the current snap animation in 500ms.
 - The snap uses a symmetric cubic ease-in-out curve.
@@ -336,12 +341,12 @@ This section is authoritative for the current prototype. Earlier implementation 
 
 ### Current limitations and pending work
 
-- The visual direction, responsive adjustments, final information-area content, and final footer content remain open.
+- The final visual refinement, mobile overlay treatment, related-project links, and overlay information-area content remain open.
 - Fixed viewport-relative card sizing and 150% focus scaling require mobile and short-screen tuning.
-- The new Sense and Senseability card currently points to the Exploring Future Immersive Environments page rather than a separate matching page.
+- The Sense and Senseability and Exploring Future Immersive Environments cards currently point to the same project page.
 - Tangible Dial currently appears in both Research and Design; confirm whether this classification is intentional.
 - The animated gap token and native track gap intentionally remain separate in code but currently use conflicting base values (`-7vw` and `10vw`); review during carousel tuning.
-- Browser rendering, real trackpad behavior, touch behavior, text zoom, and assistive-technology behavior remain to be validated on devices.
+- Real-device trackpad and touch tuning, text zoom, and assistive-technology behavior remain to be validated.
 
 ### Current verification
 
@@ -350,4 +355,68 @@ This section is authoritative for the current prototype. Earlier implementation 
 - `layout.js` passes JavaScript syntax validation.
 - CSS brace checks and `git diff --check` pass.
 - Timeline calculations and nearest-card snap calculations have been inspected with representative values.
-- No browser surface was available for visual or real-input validation during this implementation session.
+- Headless browser navigation checks confirmed that direct navigation traverses intermediate timeline blocks on both the homepage and a project page. Full visual and physical-device validation remains pending.
+
+## Current project-page system — 2026-09-14
+
+This section is authoritative for project pages. Research pages load `research/project-layout.css` and `research/project-layout.js`; design pages load equivalent shared files under `design/`. The shared `overlay.css` and `overlay.js` apply to the homepage and framework project pages.
+
+### Opening block
+
+- The opening block is configured as `140vh`, producing `40vh` of page travel behind a sticky `100vh` viewport.
+- At the opening position, the title, year, and publication venue occupy `100vh` and align to the bottom with `30vh` bottom padding.
+- Across the first `10vh` of scroll, the title section shrinks from `100vh` to `60vh` and its bottom padding shrinks from `30vh` to `5vh`, revealing the `40vh` overview below it.
+- The overview uses four equal columns. The abstract or summary spans the first two columns; two custom fact cells occupy the remaining columns and center their content horizontally and vertically.
+- Desktop project content begins `30vw` from the viewport's left edge. The mobile breakpoint changes the inset to `5vw`.
+
+### Regular blocks and grids
+
+- Regular blocks transition vertically across `20vh` and remain inside one clipped sticky viewport.
+- A regular block's default hold equals its rendered content height plus `50vh` before and `50vh` after the content. A `data-project-hold` value overrides that measured duration for cinematic scenes.
+- Content grids are four columns by three rows, fill `100%` of the available parent width, and are `60vh` high with a `2rem` gap.
+- `.span-columns-2`, `.span-columns-3`, `.span-columns-4`, `.span-rows-2`, and `.span-rows-3` let a cell span multiple tracks.
+- Every grid cell has a `2vh` corner radius. Cells containing copy use a light gray background; media cells preserve their media treatment. Images fill their cell and may opt into `object-fit: contain` with `.media-contain`.
+- At widths below `768px`, grids use two columns, automatic rows, and vertical overflow when necessary. Larger spans collapse to the full mobile width.
+- Project pages do not use the homepage card carousel unless it is explicitly added later.
+
+### Cinematic dark sections
+
+- Immersive and Sensible Scholarly Sensemaking includes a custom `900vh` Introduction hold with scroll-driven text scenes and separately positioned background images.
+- Every framework project page ends with a black Related Projects block using a `300vh` hold and a scroll-driven entrance scene. The two plain research pages use a static full-height black Related Projects footer.
+- The document background, sticky stage, overlay foreground, and adjoining block transition interpolate together when entering or leaving a dark block. This prevents a white document layer from showing during the transition.
+- Contact exists only on the homepage. Its black terminal block uses the same footer-like visual role as Related Projects on project pages.
+- Related Projects and homepage Contact activate `overlay-always-clear`: overlay text and page content remain sharp with no focus blur.
+
+### Project overlay and focus states
+
+- The fixed overlay uses columns of `15vw`, `15vw`, and the remaining width. Navigation occupies the first `15vw`; the right overlay section begins `30vw` from the left edge.
+- The vertical navigation starts `30vh` from the top, sits `1vw` from the left edge, and has a `5vh` item gap. Project navigation reflects the current project's blocks and includes a Home link near the right header.
+- Overlay text uses `1.25rem`. Active navigation labels grow by up to `0.5rem` and interpolate from weight 400 to 700 through block transitions.
+- `focus-on-content` gives noncurrent overlay elements 70% opacity and a `5px` blur while leaving the current navigation item clear.
+- `focus-on-overlay` makes overlay elements sharp and applies a `25px` blur to `main`, five times the overlay's unfocused blur.
+- Overlay hover, keyboard focus, and page scrolling faster than `12px/ms` activate overlay focus. Rapid-scroll focus remains for `600ms` after the last qualifying event.
+- A pointer-clicked overlay control releases browser focus so it does not remain focused after the cursor leaves. Keyboard activation retains focus.
+- Hovering the highlighted navigation item explicitly selects content focus, overriding the navigation container hover and rapid programmatic scrolling. A mutation observer updates the state as soon as `aria-current` moves to the jump destination.
+
+### Timeline-aware navigation
+
+- Homepage and framework project navigation compute destinations from their custom scroll timelines instead of relying on the absolute sections' native document positions.
+- Direct jumps use a cubic smoothstep ease-in-out curve. Duration starts at `550ms`, grows with the square root of the viewport distance, and is capped at `3500ms`.
+- Wheel, touch, pointer, or keyboard input cancels a running programmatic navigation animation.
+- Hash state, browser history, active navigation emphasis, `aria-current`, visible block state, and the scroll timeline stay synchronized.
+- Reduced-motion mode performs immediate navigation and switches scenes without sliding.
+
+### Project content and assets
+
+- Future Work was added as a fourth design project using material from the legacy GitHub portfolio.
+- ResDash describes a UC Health resident-doctor evaluation and longitudinal performance-tracking system. Its current page uses supplied project context and awaits the user's later Figma-directed refinement.
+- Sense and Senseability and Patterns of Hypertext-Augmented Sensemaking include text and figures extracted from the supplied publications.
+- Still Surviving, Tangible Dial, Future Work, Sense and Senseability, and Hypertext-Augmented Sensemaking use local project images under `assets/` with descriptive alternative text and lazy decoding.
+- The site remains local and dependency-free. No remote or deployment is configured.
+
+### Current project-page limitations
+
+- Metaverse-based Workspace for Research and Synthesis Infrastructure Foundation still need conversion to the full project-page timeline.
+- Related Projects currently provides the terminal scene structure but does not yet contain project recommendations or links.
+- The duplicated research and design layout files should remain behaviorally aligned until a later refactor consolidates them.
+- Mobile overlay composition, short-screen grid density, media loading, text zoom, keyboard traversal, and real touch behavior need device-level validation.

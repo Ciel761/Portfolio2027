@@ -1,14 +1,21 @@
 :root {
   /* Viewport percentages: adjust these two values to change scroll timing. */
   --block-height: 200;
-  --transition-height: 20;
+  --transition-height: 50;
   --content-left: 30vw;
   --card-size: 35vh;
   --card-radius: calc(2 * var(--h1-font-size));
   --card-gap-vw: -7;
-  --card-gap-step-vw: 5;
+  --card-gap-step-vw: 10;
   --card-snap-delay: 60;
   --card-snap-duration: 500;
+  --section-nav-duration: 550;
+  --section-nav-max-duration: 3500;
+}
+
+html,
+body {
+  background: var(--document-background, #fff);
 }
 
 /* Layout only. Shared font settings live in typography.css.
@@ -20,6 +27,7 @@ html.block-layout body { margin-block: 0; }
   top: 0;
   height: 100dvh;
   overflow: hidden;
+  background: var(--document-background, #fff);
 }
 .block-layout .layout-block {
   position: absolute;
@@ -36,6 +44,42 @@ html.block-layout body { margin-block: 0; }
   visibility: hidden;
 }
 .block-layout .layout-block[data-visible] { visibility: visible; }
+
+.block-layout .homepage-contact-footer {
+  justify-content: flex-start;
+  padding: 5vh 5vw 5vh var(--content-left);
+  overflow: hidden;
+  color: #fff;
+  background: #000;
+}
+
+.homepage-contact-content {
+  display: flex;
+  flex-direction: column;
+  gap: 3vh;
+  width: 100%;
+}
+
+.homepage-contact-content h2,
+.homepage-contact-item p {
+  margin: 0;
+}
+
+.homepage-contact-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3rem;
+}
+
+.homepage-contact-item {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.homepage-contact-item a {
+  color: inherit;
+  text-decoration: none;
+}
 
 .card-system {
   position: relative;
@@ -151,6 +195,13 @@ html.block-layout body { margin-block: 0; }
 @supports not (height: 100dvh) {
   .block-layout .block-stage { height: 100vh; }
 }
+
+@media (min-width: 768px) and (max-width: 1600px) {
+  :root {
+    --card-radius: var(--h1-font-size);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .card-row { scroll-behavior: auto; }
 }

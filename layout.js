@@ -10,10 +10,15 @@
   const overlayProgress = document.querySelector('[data-overlay-progress]');
   const overlayCard = document.querySelector('[data-overlay-card]');
   const overlayYear = document.querySelector('[data-overlay-year]');
+  const contactBlock = document.querySelector('[data-home-contact]');
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   const cardControllers = new Map();
-  let hold, transition, step, viewport, frame, cardSnapTimer, cardSnapFrame, activeBlock = blocks[0];
+  let hold, transition, step, viewport, frame, cardSnapTimer, cardSnapFrame, sectionNavFrame, activeBlock = blocks[0];
   const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
+  const smoothstep = value => {
+    const progress = clamp(value, 0, 1);
+    return progress * progress * (3 - 2 * progress);
+  };
   const rootNumber = (name, fallback) => {
     const value = parseFloat(getComputedStyle(root).getPropertyValue(name));
     return Number.isFinite(value) ? value : fallback;
@@ -46,6 +51,37 @@
       else cardSnapFrame = 0;
     };
     cardSnapFrame = requestAnimationFrame(tick);
+  }
+
+  function cancelSectionNavigation() {
+    if (sectionNavFrame) cancelAnimationFrame(sectionNavFrame);
+    sectionNavFrame = 0;
+  }
+
+  function animateSectionNavigation(target) {
+    cancelSectionNavigation();
+    cancelCardSnap();
+    const start = scrollY;
+    const distance = target - start;
+    const baseDuration = Math.max(0, rootNumber('--section-nav-duration', 550));
+    const maxDuration = Math.max(baseDuration, rootNumber('--section-nav-max-duration', 3500));
+    const viewportDistance = Math.abs(distance) / Math.max(1, viewport);
+    const duration = clamp(baseDuration * Math.sqrt(Math.max(1, viewportDistance)), baseDuration, maxDuration);
+    if (reduced.matches || duration === 0 || Math.abs(distance) < 0.5) {
+      scrollTo({ top: target, behavior: 'auto' });
+      render();
+      return;
+    }
+    const startTime = performance.now();
+    const tick = now => {
+      const progress = clamp((now - startTime) / duration, 0, 1);
+      const eased = smoothstep(progress);
+      scrollTo({ top: start + distance * eased, behavior: 'auto' });
+      render();
+      if (progress < 1) sectionNavFrame = requestAnimationFrame(tick);
+      else sectionNavFrame = 0;
+    };
+    sectionNavFrame = requestAnimationFrame(tick);
   }
 
   function updateOverlayCardInfo(block = activeBlock) {
@@ -84,6 +120,20 @@
     const progress = index < blocks.length - 1 && transition > 0
       ? clamp((distance - index * step - hold) / transition, 0, 1) : 0;
     const active = progress >= .5 ? index + 1 : index;
+    const isDark = block => Number(block?.hasAttribute('data-dark-block'));
+    const currentDarkness = isDark(blocks[index]);
+    const nextDarkness = index < blocks.length - 1 ? isDark(blocks[index + 1]) : currentDarkness;
+    const darkness = reduced.matches
+      ? isDark(blocks[active])
+      : currentDarkness + (nextDarkness - currentDarkness) * smoothstep(progress);
+    const backgroundChannel = Math.round(255 * (1 - darkness));
+    const foregroundChannel = Math.round(255 * darkness);
+    root.style.setProperty('--document-background', `rgb(${backgroundChannel} ${backgroundChannel} ${backgroundChannel})`);
+    root.style.setProperty('--overlay-foreground', `rgb(${foregroundChannel} ${foregroundChannel} ${foregroundChannel})`);
+    const contactVisible = blocks[index] === contactBlock
+      || (progress > 0 && blocks[index + 1] === contactBlock);
+    root.toggleAttribute('data-home-contact-active', contactVisible);
+    root.classList.toggle('overlay-always-clear', contactVisible);
     blocks.forEach((block, i) => {
       let offset = i < index ? -100 : i > index ? 100 : 0;
       if (i === index) offset = -progress * 100;
@@ -137,7 +187,8 @@
     try { id = decodeURIComponent(location.hash.slice(1)); } catch { return; }
     const index = blocks.findIndex(block => block.id === id || [...block.querySelectorAll('[id]')].some(el => el.id === id));
     if (index < 0 || !root.classList.contains('block-layout')) return;
-    scrollTo({ top: scrollY + main.getBoundingClientRect().top + index * step, behavior: 'instant' });
+    cancelSectionNavigation();
+    scrollTo({ top: scrollY + main.getBoundingClientRect().top + index * step, behavior: 'auto' });
     render();
   }
 
@@ -387,17 +438,34 @@
   root.classList.add('block-layout');
   initializeCardRows();
   measure();
+  overlayLinks.forEach(link => {
+    link.addEventListener('click', event => {
+      let target;
+      try { target = document.querySelector(link.hash); } catch { target = null; }
+      const blockIndex = blocks.indexOf(target?.closest('.layout-block'));
+      if (blockIndex < 0) return;
+      event.preventDefault();
+      history.pushState(null, '', link.hash);
+      const mainTop = scrollY + main.getBoundingClientRect().top;
+      animateSectionNavigation(mainTop + blockIndex * step);
+    });
+  });
   addEventListener('scroll', () => {
     if (!frame) frame = requestAnimationFrame(render);
     scheduleCardSnap();
   }, { passive: true });
   addEventListener('resize', measure);
   addEventListener('wheel', cancelCardSnap, { passive: true });
+  addEventListener('wheel', cancelSectionNavigation, { passive: true });
   addEventListener('touchstart', cancelCardSnap, { passive: true });
+  addEventListener('touchstart', cancelSectionNavigation, { passive: true });
   addEventListener('pointerdown', cancelCardSnap, { passive: true });
+  addEventListener('pointerdown', cancelSectionNavigation, { passive: true });
   addEventListener('keydown', cancelCardSnap);
+  addEventListener('keydown', cancelSectionNavigation);
   new ResizeObserver(measure).observe(stage);
   reduced.addEventListener('change', render);
   addEventListener('hashchange', restoreHash);
+  addEventListener('popstate', restoreHash);
   requestAnimationFrame(restoreHash);
 })();

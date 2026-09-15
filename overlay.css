@@ -1,10 +1,19 @@
+:root {
+  --overlay-text-size: 1.25rem;
+  --overlay-unfocused-opacity: 0.7;
+  --overlay-unfocused-blur: 5px;
+  --content-overlay-focus-blur: 25px;
+  --overlay-focus-transition: 300ms;
+}
+
 .site-overlay {
   position: fixed;
   inset: 0;
   z-index: 1000;
   display: grid;
-  grid-template-columns: var(--content-left, var(--project-content-left, 30vw)) minmax(0, 1fr);
+  grid-template-columns: 15vw 15vw minmax(0, 1fr);
   box-sizing: border-box;
+  color: var(--overlay-foreground, inherit);
   pointer-events: none;
 }
 
@@ -13,7 +22,7 @@
 }
 
 .overlay-right {
-  grid-column: 2;
+  grid-column: 3;
   display: grid;
   grid-template-rows: auto minmax(0, 1fr) auto;
   min-width: 0;
@@ -34,13 +43,79 @@
 }
 
 .overlay-nav a {
-  font-size: calc(1rem + var(--nav-growth, 0rem));
+  font-size: calc(var(--overlay-text-size) + var(--nav-growth, 0rem));
   font-weight: var(--nav-weight, 400);
 }
 
 .overlay-nav a[aria-current] {
   --nav-growth: 0.5rem;
   --nav-weight: 700;
+}
+
+.overlay-nav a,
+.overlay-name,
+.overlay-info > *,
+.overlay-footer > *,
+.project-overlay-home {
+  opacity: 1;
+  filter: blur(0);
+  transition:
+    opacity var(--overlay-focus-transition) ease-in-out,
+    filter var(--overlay-focus-transition) ease-in-out;
+}
+
+.overlay-name,
+.overlay-info,
+.overlay-footer,
+.project-overlay-home {
+  font-size: var(--overlay-text-size);
+}
+
+.overlay-name,
+.overlay-info > *,
+.overlay-footer > * {
+  pointer-events: auto;
+}
+
+html.focus-on-content .overlay-nav a:not([aria-current]),
+html.focus-on-content .overlay-name,
+html.focus-on-content .overlay-info > *,
+html.focus-on-content .overlay-footer > *,
+html.focus-on-content .project-overlay-home {
+  opacity: var(--overlay-unfocused-opacity);
+  filter: blur(var(--overlay-unfocused-blur));
+}
+
+html.focus-on-content .overlay-nav a[aria-current],
+html.focus-on-overlay .overlay-nav a,
+html.focus-on-overlay .overlay-name,
+html.focus-on-overlay .overlay-info > *,
+html.focus-on-overlay .overlay-footer > *,
+html.focus-on-overlay .project-overlay-home {
+  opacity: 1;
+  filter: blur(0);
+}
+
+main {
+  filter: blur(0);
+  transition: filter var(--overlay-focus-transition, 500ms) ease-in-out;
+}
+
+html.focus-on-overlay main {
+  filter: blur(var(--content-overlay-focus-blur));
+}
+
+html.overlay-always-clear .site-overlay .overlay-nav a,
+html.overlay-always-clear .site-overlay .overlay-name,
+html.overlay-always-clear .site-overlay .overlay-info > *,
+html.overlay-always-clear .site-overlay .overlay-footer > *,
+html.overlay-always-clear .site-overlay .project-overlay-home {
+  opacity: 1;
+  filter: none;
+}
+
+html.overlay-always-clear main {
+  filter: none;
 }
 
 .overlay-info {
@@ -61,5 +136,16 @@
 @media print {
   .site-overlay {
     display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .overlay-nav a,
+  .overlay-name,
+  .overlay-info > *,
+  .overlay-footer > *,
+  .project-overlay-home,
+  main {
+    transition-duration: 0ms;
   }
 }

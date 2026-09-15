@@ -3,15 +3,114 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Still Surviving — Siyi Zhu</title>
+  <meta name="description" content="I'm Still Surviving is a participatory digital exhibition of women's oral histories of HIV/AIDS.">
+  <title>I’m Still Surviving — Siyi Zhu</title>
   <link rel="stylesheet" href="../typography.css">
+  <link rel="stylesheet" href="../overlay.css">
+  <link rel="stylesheet" href="project-layout.css">
+  <script src="../overlay.js" defer></script>
+  <script src="project-layout.js" defer></script>
 </head>
 <body>
-  <main>
-    <p><a href="../index.html#design">Back to design</a></p>
-    <h1>Still Surviving</h1>
-    <p>Design project</p>
-    <p>2020 Summer</p>
+  <main class="project-page" data-project-page>
+    <div class="project-page-stage">
+      <section class="project-opening-block" id="project-opening" data-project-opening data-visible>
+        <div class="project-opening-stage">
+          <section class="project-title-section" aria-labelledby="project-title">
+            <h1 id="project-title">I’m Still Surviving</h1>
+            <p>2020</p>
+            <p>Nonprofit group project</p>
+          </section>
+          <section class="project-overview-section" id="project-overview" aria-label="Project overview">
+            <div class="project-overview-grid">
+              <div class="project-overview-summary"><p>I’m Still Surviving is a living women’s history of HIV/AIDS. The digital exhibition brings together hundreds of excerpts from oral-history narratives by 39 women across New York, Illinois, and North Carolina.</p></div>
+              <div class="project-overview-fact"><p>Information Architecture<br>UX Design<br>Web Design</p></div>
+              <div class="project-overview-fact"><p>Oral history<br>Digital public history</p></div>
+            </div>
+          </section>
+        </div>
+      </section>
+
+      <section class="project-regular-block" id="project-goals" data-project-part="goals" aria-labelledby="goals-title" aria-hidden="true" inert>
+        <h2 id="goals-title">Goals</h2>
+        <div class="project-content-grid">
+          <div class="project-content-grid-cell span-columns-2 span-rows-2"><img src="../assets/design/still-surviving/Stillsurviving_Cover.png" alt="I'm Still Surviving exhibition cover" loading="lazy" decoding="async"></div>
+          <div class="project-content-grid-cell span-columns-2"><p>The project set out to make public history participatory, center the voices of women living with HIV, and convert a large archive into an accessible digital exhibition.</p></div>
+          <div class="project-content-grid-cell span-columns-2"><p>Audio and quotations from the women are the core of the experience. The exhibition lets participants speak directly rather than appearing only as anonymous medical subjects or statistics.</p></div>
+          <div class="project-content-grid-cell span-columns-2"><img src="../assets/design/still-surviving/StillSurvivngIdeation1.png" alt="Early exhibition ideation" loading="lazy" decoding="async"></div>
+        </div>
+      </section>
+
+      <section class="project-regular-block" id="project-architecture" data-project-part="architecture" aria-labelledby="architecture-title" aria-hidden="true" inert>
+        <h2 id="architecture-title">Information Architecture</h2>
+        <div class="project-content-grid">
+          <div class="project-content-grid-cell span-columns-2 span-rows-2 media-contain"><img src="../assets/design/still-surviving/Stillsurviving_Flow.png" alt="Information architecture and visitor flow" loading="lazy" decoding="async"></div>
+          <div class="project-content-grid-cell span-columns-2"><p>The team organized the exhibition around two questions: how visitors learn the history and what the history is about. People can navigate by media through SEE, HEAR, and READ, or explore recurring themes such as family dynamics and health care.</p></div>
+          <div class="project-content-grid-cell span-columns-2"><p>The journey also begins outside the website. Posters and QR codes introduce a local story, then lead visitors into related material before they explore the broader archive.</p></div>
+          <div class="project-content-grid-cell"><img src="../assets/design/still-surviving/StillSurvivngIdeation2.png" alt="Exhibition experience concept" loading="lazy" decoding="async"></div>
+          <div class="project-content-grid-cell"><img src="../assets/design/still-surviving/StillSurvivngIdeation3.png" alt="Exhibition content concept" loading="lazy" decoding="async"></div>
+        </div>
+      </section>
+
+      <section class="project-regular-block" id="project-cms" data-project-part="cms" aria-labelledby="cms-title" aria-hidden="true" inert>
+        <h2 id="cms-title">Content System</h2>
+        <div class="project-content-grid">
+          <div class="project-content-grid-cell span-columns-2 span-rows-2"><img src="../assets/design/still-surviving/Stillsurviving_CMSList.png" alt="Content records stored in the exhibition CMS" loading="lazy" decoding="async"></div>
+          <div class="project-content-grid-cell span-columns-2 span-rows-2"><img src="../assets/design/still-surviving/Stillsurviving_CMSReferenceStructue.png" alt="Relationships between content categories in the CMS" loading="lazy" decoding="async"></div>
+          <div class="project-content-grid-cell span-columns-4"><p>A Webflow content management system stores oral histories in one place and connects each narrative to people, media types, topics, and historical frames. This structure lets the team update the archive while generating consistent pages and cross-references automatically.</p></div>
+        </div>
+      </section>
+
+      <section class="project-regular-block" id="project-prototype" data-project-part="prototype" aria-labelledby="prototype-title" aria-hidden="true" inert>
+        <h2 id="prototype-title">Prototype</h2>
+        <div class="project-content-grid">
+          <div class="project-content-grid-cell span-columns-2 span-rows-2"><img src="../assets/design/still-surviving/Stillsurviving_Wireframe.png" alt="Wireframe for the I'm Still Surviving website" loading="lazy" decoding="async"></div>
+          <div class="project-content-grid-cell span-columns-2"><p>The wireframe translated the three-layer information architecture into an interaction model that helps visitors move between stories, themes, and media without losing context.</p></div>
+          <div class="project-content-grid-cell span-columns-2 span-rows-2"><img src="../assets/design/still-surviving/Stillsurviving_Prototype.png" alt="High-fidelity prototype and interaction flow" loading="lazy" decoding="async"></div>
+          <div class="project-content-grid-cell span-columns-2"><p>The working prototype was built in Webflow and tested through the final content structure, page flow, and scroll interactions.</p></div>
+        </div>
+      </section>
+
+      <section class="project-regular-block" id="project-outcome" data-project-part="outcome" aria-labelledby="outcome-title" aria-hidden="true" inert>
+        <h2 id="outcome-title">Launch</h2>
+        <div class="project-content-grid">
+          <div class="project-content-grid-cell span-columns-3 span-rows-3"><img src="../assets/design/still-surviving/ImStillSurvivingWebsite.png" alt="Launched I'm Still Surviving website" loading="lazy" decoding="async"></div>
+          <div class="project-content-grid-cell span-rows-2"><p>The final site presents oral-history excerpts through historical frames that visitors can see, hear, and read. The project was subsequently featured by WTTW’s Chicago Tonight.</p></div>
+          <div class="project-content-grid-cell media-contain"><img src="../assets/design/still-surviving/WTTWLogo.svg" alt="WTTW logo" loading="lazy" decoding="async"></div>
+        </div>
+      </section>
+
+      <section class="project-regular-block project-related-projects-block" id="project-related-projects" data-project-part="related-projects" data-project-related data-project-dark data-project-hold="300" aria-labelledby="related-projects-title" aria-hidden="true" inert>
+        <div class="project-related-experience">
+          <section class="project-related-scene project-related-content" data-related-scene data-start="-0.12" data-persist>
+            <h2 id="related-projects-title">Related Projects</h2>
+          </section>
+        </div>
+      </section>
+    </div>
   </main>
+
+  <aside class="site-overlay" aria-label="Site navigation and project information">
+    <div class="overlay-left">
+      <nav class="overlay-nav" aria-label="I'm Still Surviving sections">
+        <a href="#project-opening" data-project-nav="opening" aria-current="location">I’m Still Surviving</a>
+        <a href="#project-overview" data-project-nav="overview">Overview</a>
+        <a href="#project-goals" data-project-nav="goals">Goals</a>
+        <a href="#project-architecture" data-project-nav="architecture">Architecture</a>
+        <a href="#project-cms" data-project-nav="cms">Content System</a>
+        <a href="#project-prototype" data-project-nav="prototype">Prototype</a>
+        <a href="#project-outcome" data-project-nav="outcome">Launch</a>
+        <a href="#project-related-projects" data-project-nav="related-projects">Related Projects</a>
+      </nav>
+    </div>
+    <div class="overlay-right">
+      <header class="overlay-header project-overlay-header">
+        <a class="project-overlay-home" href="../index.html#design">Home</a>
+        <p class="overlay-name">Siyi Zhu</p>
+      </header>
+      <section class="overlay-info" aria-label="Current project information"></section>
+      <footer class="overlay-footer"><p>© Siyi Zhu</p></footer>
+    </div>
+  </aside>
 </body>
 </html>
