@@ -8,20 +8,26 @@
   <link rel="stylesheet" href="typography.css">
   <link rel="stylesheet" href="overlay.css">
   <link rel="stylesheet" href="layout.css">
+  <script src="galaxy-background.js" defer></script>
   <script src="overlay.js" defer></script>
   <script src="layout.js" defer></script>
 </head>
 <body>
+  <canvas class="galaxy-background" data-galaxy-background aria-hidden="true"></canvas>
+  <canvas class="galaxy-background galaxy-foreground" data-galaxy-foreground aria-hidden="true"></canvas>
   <main>
     <div class="block-stage">
-    <section class="layout-block" id="home" aria-label="Home">
+    <section class="layout-block" id="home" data-dark-block aria-label="Home">
     <h1>Siyi Zhu</h1>
     <p>Ph.D. Candidate in Human–computer interaction</p>
     <p>Place holder for my thesis statement and a short bio. Exploring how emerging technologies support sensemaking in scholarly research.</p>
 
     </section>
-    <section class="layout-block card-scroll-effects card-vertical-scroll" aria-labelledby="research">
-    <h2 id="research">Research</h2>
+    <section class="layout-block" aria-labelledby="featured-themes">
+    <h1 id="featured-themes">Featured Themes</h1>
+    </section>
+    <section class="layout-block card-scroll-effects card-vertical-scroll" data-dark-block aria-labelledby="research">
+    <h1 id="research">Research</h1>
     <div class="card-system">
     <div class="card-row" role="region" aria-label="Research projects" tabindex="0">
       <div class="card-track">
@@ -37,8 +43,8 @@
       <div class="card-indicator" aria-label="Research carousel position"></div>
     </div>
     </section>
-    <section class="layout-block card-scroll-effects card-vertical-scroll" aria-labelledby="design">
-    <h2 id="design">Design</h2>
+    <section class="layout-block card-scroll-effects card-vertical-scroll" data-dark-block aria-labelledby="design">
+    <h1 id="design">Design</h1>
     <div class="card-system">
     <div class="card-row" role="region" aria-label="Design projects" tabindex="0">
       <div class="card-track">
@@ -52,49 +58,81 @@
     </div>
 
     </section>
-    <section class="layout-block card-scroll-effects card-vertical-scroll" aria-labelledby="news">
-    <h2 id="news">News</h2>
+    <section class="layout-block card-scroll-effects card-vertical-scroll tall-carousel-cards news-carousel-cards" aria-labelledby="news">
+    <h1 id="news">News</h1>
     <div class="card-system">
     <div class="card-row" role="region" aria-label="News" tabindex="0">
       <div class="card-track">
       <div class="card-item">
       <p class="card-year">2026</p>
-      <article class="card" href="research/immersive-scholarly-sensemaking.html">
-        <p>11/2026</p>
-        <p>Demo presentation at UIST26</p>
-        <h3>Detriot, WI, United States</h3>
+      <article class="card">
+        <p class="news-card-date">November 2026</p>
+        <h3><a href="research/immersive-scholarly-sensemaking.html">Demo presentation at UIST 2026</a></h3>
+        <p class="news-card-location">Detroit, MI, United States</p>
       </article>
       </div>
       <div class="card-item">
       <p class="card-year">2025</p>
-      <article class="card" href="research/immersive-scholarly-sensemaking.html">
-        <p>05/2024</p>
-        <p>Paper presentation at C&C25</p>
-        <h3>London, United Kindom</h3>
+      <article class="card">
+        <p class="news-card-date">May 2025</p>
+        <h3><a href="research/future-immersive-environments.html">Paper presentation at C&amp;C 2025</a></h3>
+        <p class="news-card-location">London, United Kingdom</p>
       </article>
       </div>
       <div class="card-item">
       <p class="card-year">2024</p>
-      <article class="card" href="research/immersive-scholarly-sensemaking.html">
-        <p>10/2024</p>
-        <p>Paper presentation at UIST24</p>
-        <h3>Pittsburhg, PA, United States</h3>
+      <article class="card">
+        <p class="news-card-date">October 2024</p>
+        <h3><a href="research/hypertext-augmented-sensemaking.html">Paper presentation at UIST 2024</a></h3>
+        <p class="news-card-location">Pittsburgh, PA, United States</p>
       </article>
       </div>
       <div class="card-item">
       <p class="card-year">2024</p>
-      <article class="card" href="research/immersive-scholarly-sensemaking.html">
-        <p>05/2024</p>
-        <p>Workshop participation at CHI24</p>
-        <h3>Honolulu, HI, United States</h3>
+      <article class="card">
+        <p class="news-card-date">May 2024</p>
+        <h3><a href="research/immersive-scholarly-sensemaking.html">Workshop participation at CHI 2024</a></h3>
+        <p class="news-card-location">Honolulu, HI, United States</p>
+      </article>
+      </div>
+      <div class="card-item">
+      <p class="card-year">2024–Present</p>
+      <article class="card">
+        <p class="news-card-date">May 2024–Present</p>
+        <h3>Speaker Series Coordinator</h3>
+        <p class="news-card-location">Organizational Teams &amp; Technology Research Society · University of Maryland</p>
+      </article>
+      </div>
+      <div class="card-item">
+      <p class="card-year">2024</p>
+      <article class="card">
+        <p class="news-card-date">May 2024</p>
+        <h3>Summer Research Fellowship</h3>
+        <p class="news-card-location">Graduate School · University of Maryland</p>
+      </article>
+      </div>
+      <div class="card-item">
+      <p class="card-year">2022–2024</p>
+      <article class="card">
+        <p class="news-card-date">August 2022–May 2024</p>
+        <h3>Dean’s Fellowship</h3>
+        <p class="news-card-location">College of Information · University of Maryland</p>
       </article>
       </div>
       <div class="card-item">
       <p class="card-year">2023</p>
-      <article class="card" href="research/immersive-scholarly-sensemaking.html">
-        <p>10/2023</p>
-        <p>Poster presentation at CSCW23</p>
-        <h3>Minneapolis, MN, United States</h3>
+      <article class="card">
+        <p class="news-card-date">October 2023</p>
+        <h3><a href="research/synthesis-infrastructure-foundation.html">Poster presentation at CSCW 2023</a></h3>
+        <p class="news-card-location">Minneapolis, MN, United States</p>
+      </article>
+      </div>
+      <div class="card-item">
+      <p class="card-year">2020</p>
+      <article class="card">
+        <p class="news-card-date">September 2020</p>
+        <h3>The Judith Smith Koroscik Graduate Fellowship</h3>
+        <p class="news-card-location">College of Design, Architecture, Art, and Planning · University of Cincinnati</p>
       </article>
       </div>
 
@@ -104,36 +142,55 @@
     </div>
     </section>
 
-    <section class="layout-block card-vertical-scroll" aria-labelledby="about">
-    <h2 id="about">About</h2>
+    <section class="layout-block card-vertical-scroll tall-carousel-cards about-carousel-cards" id="about" aria-labelledby="experience">
+    <h1 id="experience">Experience</h1>
     <div class="card-system">
-    <div class="card-row" role="region" aria-label="About" tabindex="0">
+    <div class="card-row" role="region" aria-label="Experience" tabindex="0">
       <div class="card-track">
       <div class="card-item">
       <article class="card">
-        <h3>About my work</h3>
-        <p>My work brings together design and qualitative methods to explore how people navigate complex information spaces.</p>
+        <h3>Skills</h3>
+        <dl class="experience-skills">
+          <div><dt>Qualitative analysis</dt><dd>NVivo · Obsidian</dd></div>
+          <div><dt>Development</dt><dd>Python · HTML · CSS · Unity</dd></div>
+          <div><dt>2D design</dt><dd>Figma · Illustrator · Photoshop · InDesign · Adobe XD</dd></div>
+          <div><dt>3D design</dt><dd>SolidWorks · Rhino · KeyShot</dd></div>
+          <div><dt>Video &amp; animation</dt><dd>Premiere Pro · Cinema 4D</dd></div>
+        </dl>
       </article>
 
       </div>
+      <div class="card-item"><p class="card-year">Aug 2022–Present</p><article class="card"><h3>Ph.D. Candidate</h3><p>Human Computer Interaction</p><p class="experience-institution">University of Maryland</p><p class="experience-detail">Advisor: Joel Chan</p></article></div>
+      <div class="card-item"><p class="card-year">Fall 2024</p><article class="card"><h3>Teaching Assistant</h3><p>User-centered Design</p><p class="experience-institution">College of Information, University of Maryland</p></article></div>
+      <div class="card-item"><p class="card-year">Fall 2022 · Spring 2023</p><article class="card"><h3>Teaching Assistant</h3><p>Decision Making in Information Science</p><p class="experience-institution">College of Information, University of Maryland</p></article></div>
+      <div class="card-item"><p class="card-year">Aug 2021–May 2022</p><article class="card"><h3>UX/UI Designer</h3><p>Innovative Clinical Data Capture and Using Lab</p><p class="experience-institution">University of Cincinnati</p></article></div>
+      <div class="card-item"><p class="card-year">Aug 2019–Apr 2021</p><article class="card"><h3>Master of Design</h3><p>User Experience Design</p><p class="experience-institution">University of Cincinnati</p><p class="experience-detail">Committee: Peter Chamberlain (chair), Yong Gyun Ghim</p></article></div>
+      <div class="card-item"><p class="card-year">Sep 2015–Jun 2019</p><article class="card"><h3>Bachelor of Engineering</h3><p>Mechanical Design, Manufacturing, and Automation</p><p class="experience-institution">Chengdu University</p><p class="experience-detail">Advisor: Luping Gan</p></article></div>
+      <div class="card-item"><p class="card-year">Oct 2018–Mar 2019</p><article class="card"><h3>Industrial Design Intern</h3><p class="experience-institution">Chengdu Oii Design Co., Ltd.</p></article></div>
       </div>
     </div>
-    <div class="card-indicator" aria-label="About carousel position"></div>
+    <div class="card-indicator" aria-label="Experience carousel position"></div>
     </div>
     </section>
 
     <section class="layout-block homepage-contact-footer" data-home-contact data-dark-block aria-labelledby="contact">
       <div class="homepage-contact-content">
-        <h2 id="contact">Contact</h2>
+        <h1 id="contact">Per aspera </br>ad astra</h1>
         <div class="homepage-contact-links">
           <div class="homepage-contact-item">
-            <p>Email</p>
+            <!-- <p>Email</p> -->
             <a href="mailto:zhusy@umd.edu">zhusy@umd.edu</a>
           </div>
           <div class="homepage-contact-item">
-            <p>LinkedIn</p>
+            <!-- <p>LinkedIn</p> -->
             <a href="https://www.linkedin.com/in/siyi-zhu-b7590419b/">LinkedIn</a>
           </div>
+          <!-- <div class="homepage-contact-item">
+            <a href="https://www.linkedin.com/in/siyi-zhu-b7590419b/">X</a>
+          </div> -->
+          <!-- <div class="homepage-contact-item">
+            <a href="https://www.linkedin.com/in/siyi-zhu-b7590419b/">Bluesky</a>
+          </div> -->
         </div>
       </div>
     </section>
@@ -144,10 +201,11 @@
     <div class="overlay-left">
       <nav class="overlay-nav" aria-label="Portfolio sections">
         <a href="#home" aria-current="location">Home</a>
+        <a href="#featured-themes">Featured Themes</a>
         <a href="#research">Research</a>
         <a href="#design">Design</a>
         <a href="#news">News</a>
-        <a href="#about">About</a>
+        <a href="#experience">Experience</a>
         <a href="#contact">Contact</a>
       </nav>
     </div>

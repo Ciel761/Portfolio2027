@@ -13,6 +13,10 @@
   const contactBlock = document.querySelector('[data-home-contact]');
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   const cardControllers = new Map();
+  const initialUrl = location.href;
+  const initialHash = location.hash;
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+  if (initialHash) history.replaceState(null, '', initialUrl.slice(0, -initialHash.length));
   let hold, transition, step, viewport, frame, cardSnapTimer, cardSnapFrame, sectionNavFrame, activeBlock = blocks[0];
   const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
   const smoothstep = value => {
@@ -182,9 +186,9 @@
     });
     updateOverlayCardInfo();
   }
-  function restoreHash() {
+  function restoreHash(hash = location.hash) {
     let id;
-    try { id = decodeURIComponent(location.hash.slice(1)); } catch { return; }
+    try { id = decodeURIComponent(hash.slice(1)); } catch { return; }
     const index = blocks.findIndex(block => block.id === id || [...block.querySelectorAll('[id]')].some(el => el.id === id));
     if (index < 0 || !root.classList.contains('block-layout')) return;
     cancelSectionNavigation();
@@ -465,7 +469,15 @@
   addEventListener('keydown', cancelSectionNavigation);
   new ResizeObserver(measure).observe(stage);
   reduced.addEventListener('change', render);
-  addEventListener('hashchange', restoreHash);
-  addEventListener('popstate', restoreHash);
-  requestAnimationFrame(restoreHash);
+  addEventListener('hashchange', () => restoreHash());
+  addEventListener('popstate', () => restoreHash());
+  if (initialHash) {
+    history.replaceState(null, '', initialUrl);
+    requestAnimationFrame(() => restoreHash(initialHash));
+  } else {
+    requestAnimationFrame(() => {
+      scrollTo({ top: scrollY + main.getBoundingClientRect().top, behavior: 'auto' });
+      render();
+    });
+  }
 })();

@@ -8,7 +8,9 @@
   <link rel="stylesheet" href="../typography.css">
   <link rel="stylesheet" href="../overlay.css">
   <link rel="stylesheet" href="project-layout.css">
+  <link rel="stylesheet" href="../related-carousel.css">
   <script src="../overlay.js" defer></script>
+  <script src="../related-carousel.js" defer></script>
   <script src="project-layout.js" defer></script>
 </head>
 <body>
@@ -32,7 +34,7 @@
       </section>
 
       <section class="project-regular-block" id="project-context" data-project-part="context" aria-labelledby="context-title" aria-hidden="true" inert>
-        <h2 id="context-title">Context</h2>
+        <h1 id="context-title">Context</h1>
         <div class="project-content-grid" aria-label="Project context">
           <div class="project-content-grid-cell span-columns-2 span-rows-3"><p>Resident performance develops over years and is documented through many evaluations, ratings, milestones, and written observations. ResDash organizes this evidence into a longitudinal view that supports preparation, discussion, and decision-making during formal review sessions.</p></div>
           <div class="project-content-grid-cell span-columns-2"><p><strong>Setting</strong><br>UC Health Internal Medicine residency program in Cincinnati, Ohio.</p></div>
@@ -42,7 +44,7 @@
       </section>
 
       <section class="project-regular-block" id="project-performance" data-project-part="performance" aria-labelledby="performance-title" aria-hidden="true" inert>
-        <h2 id="performance-title">Performance View</h2>
+        <h1 id="performance-title">Performance View</h1>
         <div class="project-content-grid" aria-label="Resident performance view">
           <div class="project-content-grid-cell span-columns-2 span-rows-3"><p>The resident page combines milestone reviews, faculty and peer trendlines, heatmaps, spider graphs, rating counts, and narrative feedback. These coordinated views help reviewers move between a high-level performance pattern and the individual assessments behind it.</p></div>
           <div class="project-content-grid-cell span-columns-2"><p><strong>Longitudinal comparison</strong><br>Reviewers can examine the past six months, the full residency, or a custom time frame.</p></div>
@@ -52,7 +54,7 @@
       </section>
 
       <section class="project-regular-block" id="project-workflow" data-project-part="workflow" aria-labelledby="workflow-title" aria-hidden="true" inert>
-        <h2 id="workflow-title">Review Workflow</h2>
+        <h1 id="workflow-title">Review Workflow</h1>
         <div class="project-content-grid" aria-label="Resident review workflow">
           <div class="project-content-grid-cell span-columns-2 span-rows-3"><p>ResDash supports the work around a review as well as the review itself. Faculty can locate assigned residents, open a pre-review report, identify records that still require review, write committee comments, and return to previous review sessions.</p></div>
           <div class="project-content-grid-cell span-columns-2"><p><strong>Resident organization</strong><br>Resident lists can be viewed by reviewer assignment, program year, or alphabetical order.</p></div>
@@ -64,7 +66,17 @@
       <section class="project-regular-block project-related-projects-block" id="project-related-projects" data-project-part="related-projects" data-project-related data-project-dark data-project-hold="300" aria-labelledby="related-projects-title" aria-hidden="true" inert>
         <div class="project-related-experience">
           <section class="project-related-scene project-related-content" data-related-scene data-start="-0.12" data-persist>
-            <h2 id="related-projects-title">Related Projects</h2>
+            <h1 id="related-projects-title">Related Projects</h1>
+            <div class="related-card-system" data-related-carousel>
+              <div class="related-card-row" role="region" aria-label="Related projects" tabindex="0">
+                <div class="related-card-track">
+                  <div class="related-card-item"><p class="related-card-year">2021</p><article class="related-card"><h3><a href="future-work.html">Future Work</a></h3></article></div>
+                  <div class="related-card-item"><p class="related-card-year">2021</p><article class="related-card"><h3><a href="tangible-dial.html">Tangible Dial</a></h3></article></div>
+                  <div class="related-card-item"><p class="related-card-year">2020</p><article class="related-card"><h3><a href="still-surviving.html">I’m Still Surviving</a></h3></article></div>
+                </div>
+              </div>
+              <div class="related-card-indicator" aria-label="Related projects carousel position"></div>
+            </div>
           </section>
         </div>
       </section>
@@ -84,7 +96,7 @@
     </div>
     <div class="overlay-right">
       <header class="overlay-header project-overlay-header">
-        <a class="project-overlay-home" href="../index.html#design">Home</a>
+        <a class="project-overlay-home" href="../index.html#home">Home</a>
         <p class="overlay-name">Siyi Zhu</p>
       </header>
       <section class="overlay-info" aria-label="Current project information"></section>

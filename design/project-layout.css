@@ -56,7 +56,7 @@ body {
   padding-inline-start: 0;
   overflow: hidden;
   color: #fff;
-  background: #000;
+  background: transparent;
 }
 
 .project-related-experience,
@@ -103,7 +103,7 @@ body {
 
 .project-title-section h1,
 .project-title-section p,
-.project-regular-block h2 {
+.project-regular-block h1 {
   margin-block-start: 0;
 }
 
@@ -113,6 +113,10 @@ body {
 
 .project-overview-section {
   flex: 0 0 var(--project-overview-height);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
   box-sizing: border-box;
   min-height: 0;
 }
@@ -120,13 +124,15 @@ body {
 .project-overview-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-rows: repeat(2, minmax(0, 1fr));
   gap: 2rem;
   width: 100%;
-  height: 100%;
+  height: 50%;
 }
 
 .project-overview-summary {
   grid-column: span 2;
+  grid-row: span 2;
 }
 
 .project-overview-summary,
@@ -150,13 +156,13 @@ body {
 }
 
 .project-overview-summary {
-  padding: 1rem;
+  padding: 2rem;
 }
 
 .project-overview-fact {
   display: grid;
   place-items: center;
-  padding: 1rem;
+  padding: 2rem;
   text-align: center;
 }
 
@@ -172,7 +178,7 @@ body {
   overflow: hidden;
 }
 
-.project-regular-block h2 {
+.project-regular-block h1 {
   margin-block-end: 3vh;
 }
 

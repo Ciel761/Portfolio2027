@@ -42,6 +42,16 @@
   pointer-events: auto;
 }
 
+.project-overlay-nav {
+  max-height: 65vh;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.project-overlay-nav::-webkit-scrollbar {
+  display: none;
+}
+
 .overlay-nav a {
   font-size: calc(var(--overlay-text-size) + var(--nav-growth, 0rem));
   font-weight: var(--nav-weight, 400);

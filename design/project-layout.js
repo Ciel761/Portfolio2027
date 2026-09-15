@@ -153,6 +153,10 @@
       ? clamp((pageScroll - blockPosition(relatedIndex)) / hold, 0, 1)
       : 1;
 
+    relatedBlock.querySelector('[data-related-carousel]')?.dispatchEvent(
+      new CustomEvent('related-carousel-progress', { detail: { progress } })
+    );
+
     relatedScenes.forEach(scene => {
       const start = parseFloat(scene.dataset.start) || 0;
       const end = parseFloat(scene.dataset.end) || 1;
@@ -170,6 +174,15 @@
       scene.style.pointerEvents = opacity >= 0.5 ? 'auto' : 'none';
     });
   }
+
+  relatedBlock?.addEventListener('related-carousel-seek', event => {
+    const relatedIndex = blocks.indexOf(relatedBlock);
+    if (relatedIndex < 0) return;
+    const progress = clamp(event.detail?.progress || 0, 0, 1);
+    const target = pageTop() + blockPosition(relatedIndex) + progress * blockHold(relatedIndex);
+    scrollTo({ top: target, behavior: 'auto' });
+    render();
+  });
 
   function render() {
     frame = 0;

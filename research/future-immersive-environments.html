@@ -8,7 +8,9 @@
   <link rel="stylesheet" href="../typography.css">
   <link rel="stylesheet" href="../overlay.css">
   <link rel="stylesheet" href="project-layout.css">
+  <link rel="stylesheet" href="../related-carousel.css">
   <script src="../overlay.js" defer></script>
+  <script src="../related-carousel.js" defer></script>
   <script src="project-layout.js" defer></script>
 </head>
 <body>
@@ -35,7 +37,7 @@
       </section>
 
       <section class="project-regular-block" id="project-method" data-project-part="method" aria-labelledby="method-title" aria-hidden="true" inert>
-        <h2 id="method-title">From Information to Form</h2>
+        <h1 id="method-title">From Information to Form</h1>
         <div class="project-content-grid">
           <div class="project-content-grid-cell span-columns-3 span-rows-3 media-contain">
             <figure>
@@ -50,7 +52,7 @@
       </section>
 
       <section class="project-regular-block" id="project-toolkit" data-project-part="toolkit" aria-labelledby="toolkit-title" aria-hidden="true" inert>
-        <h2 id="toolkit-title">A Design Toolkit for Senseability</h2>
+        <h1 id="toolkit-title">A Design Toolkit for Senseability</h1>
         <div class="project-content-grid">
           <div class="project-content-grid-cell span-columns-2 span-rows-3 has-copy"><p>The review distinguishes materialized information objects - including documents, citations, data, summaries, notes, reviews, and concepts - from immaterial objects such as research directions, contributions, assertions, theories, and evidence. The distinction exposes how much scholarly work remains trapped in text or informal mental models.</p></div>
           <div class="project-content-grid-cell span-columns-2 has-copy"><p><strong>Properties</strong><br>Position, accessibility, quantity, connections, similarity, context, evocativeness, structure, timeliness, quality, fairness, explicitness, truthlikeness, and completeness.</p></div>
@@ -60,7 +62,7 @@
       </section>
 
       <section class="project-regular-block" id="project-city" data-project-part="city" aria-labelledby="city-title" aria-hidden="true" inert>
-        <h2 id="city-title">City of Information</h2>
+        <h1 id="city-title">City of Information</h1>
         <div class="project-content-grid">
           <div class="project-content-grid-cell span-columns-3 span-rows-3 media-contain"><img src="../assets/research/sense-and-senseability/city-of-information.jpg" alt="Storyboard showing a scholar constructing and navigating a city made from blocks of scholarly information" loading="lazy" decoding="async"></div>
           <div class="project-content-grid-cell has-copy"><p>Assertions, evidence, and questions become typed building blocks in a persistent virtual city. Placement rules make semantic relationships tangible: for example, a claim can sit on evidence that supports it.</p></div>
@@ -70,7 +72,7 @@
       </section>
 
       <section class="project-regular-block" id="project-rusted" data-project-part="rusted" aria-labelledby="rusted-title" aria-hidden="true" inert>
-        <h2 id="rusted-title">Rusted Text</h2>
+        <h1 id="rusted-title">Rusted Text</h1>
         <div class="project-content-grid">
           <div class="project-content-grid-cell span-columns-3 span-rows-3 media-contain"><img src="../assets/research/sense-and-senseability/rusted-text.jpg" alt="Storyboard showing information objects changing from paper to metal, rust, and debris over time" loading="lazy" decoding="async"></div>
           <div class="project-content-grid-cell has-copy"><p>Rusted Text uses texture and material as a “digital patina” for timeliness. New information begins as paper; frequently revisited objects become thicker and more permanent.</p></div>
@@ -80,7 +82,7 @@
       </section>
 
       <section class="project-regular-block" id="project-unshaped" data-project-part="unshaped" aria-labelledby="unshaped-title" aria-hidden="true" inert>
-        <h2 id="unshaped-title">Unshaped Matter</h2>
+        <h1 id="unshaped-title">Unshaped Matter</h1>
         <div class="project-content-grid">
           <div class="project-content-grid-cell span-columns-3 span-rows-3 media-contain"><img src="../assets/research/sense-and-senseability/unshaped-matter.jpg" alt="Storyboard showing a scholar talking to and moving around an evolving cloud of ideas and mirrored information" loading="lazy" decoding="async"></div>
           <div class="project-content-grid-cell has-copy"><p>A shifting, gas-like form represents the incomplete and implicit state of an emerging research idea. Mirrors around it surface papers and notes from different perspectives.</p></div>
@@ -92,7 +94,17 @@
       <section class="project-regular-block project-related-projects-block" id="project-related-projects" data-project-part="related-projects" data-project-related data-project-dark data-project-hold="300" aria-labelledby="related-projects-title" aria-hidden="true" inert>
         <div class="project-related-experience">
           <section class="project-related-scene project-related-content" data-related-scene data-start="-0.12" data-persist>
-            <h2 id="related-projects-title">Related Projects</h2>
+            <h1 id="related-projects-title">Related Projects</h1>
+            <div class="related-card-system" data-related-carousel>
+              <div class="related-card-row" role="region" aria-label="Related projects" tabindex="0">
+                <div class="related-card-track">
+                  <div class="related-card-item"><p class="related-card-year">Ongoing</p><article class="related-card"><h3><a href="immersive-scholarly-sensemaking.html">Immersive and Sensible Scholarly Sensemaking</a></h3></article></div>
+                  <div class="related-card-item"><p class="related-card-year">2024</p><article class="related-card"><h3><a href="hypertext-augmented-sensemaking.html">Patterns of Hypertext-Augmented Sensemaking</a></h3></article></div>
+                  <div class="related-card-item"><p class="related-card-year">2023</p><article class="related-card"><h3><a href="metaverse-workspace.html">Metaverse-Based Workspace for Research</a></h3></article></div>
+                </div>
+              </div>
+              <div class="related-card-indicator" aria-label="Related projects carousel position"></div>
+            </div>
           </section>
         </div>
       </section>
@@ -114,7 +126,7 @@
     </div>
     <div class="overlay-right">
       <header class="overlay-header project-overlay-header">
-        <p><a class="project-overlay-home" href="../index.html#research">Home</a></p>
+        <p><a class="project-overlay-home" href="../index.html#home">Home</a></p>
         <p class="overlay-name">Siyi Zhu</p>
       </header>
       <section class="overlay-info" aria-label="Current project information"></section>

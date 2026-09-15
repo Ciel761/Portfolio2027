@@ -4,18 +4,54 @@
   --transition-height: 50;
   --content-left: 30vw;
   --card-size: 35vh;
-  --card-radius: calc(2 * var(--h1-font-size));
+  --card-height: var(--card-size);
+  --carousel-card-radius: calc(2 * var(--h1-font-size));
+  --card-radius: var(--carousel-card-radius);
   --card-gap-vw: -7;
   --card-gap-step-vw: 10;
   --card-snap-delay: 60;
   --card-snap-duration: 500;
   --section-nav-duration: 550;
   --section-nav-max-duration: 3500;
+  --block-title-card-offset: -5vh;
 }
 
 html,
 body {
   background: var(--document-background, #fff);
+}
+
+body {
+  isolation: isolate;
+}
+
+.galaxy-background {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  display: block;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  filter: blur(0);
+  transition: filter var(--overlay-focus-transition, 300ms) ease-in-out;
+}
+
+.galaxy-foreground {
+  z-index: 900;
+}
+
+html.focus-on-overlay .galaxy-background {
+  filter: blur(var(--content-overlay-focus-blur, 25px));
+}
+
+html.overlay-always-clear .galaxy-background {
+  filter: none;
+}
+
+main {
+  position: relative;
+  z-index: 1;
 }
 
 /* Layout only. Shared font settings live in typography.css.
@@ -27,7 +63,7 @@ html.block-layout body { margin-block: 0; }
   top: 0;
   height: 100dvh;
   overflow: hidden;
-  background: var(--document-background, #fff);
+  background: transparent;
 }
 .block-layout .layout-block {
   position: absolute;
@@ -45,12 +81,31 @@ html.block-layout body { margin-block: 0; }
 }
 .block-layout .layout-block[data-visible] { visibility: visible; }
 
+.block-layout .layout-block:has(.card-system) > h1 {
+  position: relative;
+  z-index: 1;
+  margin-block: 0 var(--block-title-card-offset);
+}
+
+.block-layout .layout-block[data-dark-block] {
+  color: #fff;
+}
+
+.block-layout .layout-block[data-dark-block] .card-indicator button {
+  background: #fff;
+}
+
+.block-layout .layout-block[data-dark-block] .card {
+  color: #000;
+  background: #fff;
+}
+
 .block-layout .homepage-contact-footer {
-  justify-content: flex-start;
+  justify-content: center;
   padding: 5vh 5vw 5vh var(--content-left);
   overflow: hidden;
   color: #fff;
-  background: #000;
+  background: transparent;
 }
 
 .homepage-contact-content {
@@ -60,7 +115,7 @@ html.block-layout body { margin-block: 0; }
   width: 100%;
 }
 
-.homepage-contact-content h2,
+.homepage-contact-content h1,
 .homepage-contact-item p {
   margin: 0;
 }
@@ -88,6 +143,100 @@ html.block-layout body { margin-block: 0; }
   max-width: none;
   margin-inline-start: calc(0px - var(--content-left));
   flex-shrink: 0;
+}
+.tall-carousel-cards {
+  --card-height: calc(var(--card-size) * 1.25);
+  --card-radius: calc(var(--carousel-card-radius) / 2);
+}
+.tall-carousel-cards .card-system {
+  height: 80vh;
+}
+.about-carousel-cards {
+  --card-height: calc(var(--card-size) * 1.5);
+}
+.about-carousel-cards .card-track {
+  gap: 5vw;
+}
+.about-carousel-cards .card {
+  gap: 1.25vh;
+  overflow-wrap: normal;
+  word-break: normal;
+}
+.about-carousel-cards .card h3 {
+  margin: 0 0 0.75vh;
+  font-size: clamp(1.125rem, 2.8vh, 2rem);
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+.about-carousel-cards .card p {
+  margin: 0;
+  font-size: clamp(0.8125rem, 1.65vh, 1.125rem);
+  font-weight: 400;
+  line-height: 1.4;
+  text-wrap: pretty;
+}
+.about-carousel-cards .card .experience-detail {
+  font-size: clamp(0.75rem, 1.4vh, 1rem);
+  color: #bdbdbd;
+}
+.about-carousel-cards .card .experience-institution {
+  font-weight: 600;
+}
+.about-carousel-cards .card-year {
+  max-width: calc(var(--card-size) - 2 * var(--card-radius));
+  font-size: clamp(0.75rem, 1.6vh, 1.125rem);
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: 0.04em;
+}
+.experience-skills {
+  display: grid;
+  gap: 1.3vh;
+  margin: 0;
+}
+.experience-skills dt {
+  margin-bottom: 0.3vh;
+  font-size: clamp(0.6875rem, 1.3vh, 0.875rem);
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: 0.06em;
+  color: #bdbdbd;
+}
+.experience-skills dd {
+  margin: 0;
+  font-size: clamp(0.8125rem, 1.55vh, 1.0625rem);
+  font-weight: 400;
+  line-height: 1.4;
+}
+.news-carousel-cards .card {
+  gap: 1.25vh;
+  overflow-wrap: normal;
+  word-break: normal;
+}
+.news-carousel-cards .card h3 {
+  margin: 0 0 0.75vh;
+  font-size: clamp(1.125rem, 2.8vh, 2rem);
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+.news-carousel-cards .card p {
+  margin: 0;
+  font-size: clamp(0.8125rem, 1.65vh, 1.125rem);
+  font-weight: 400;
+  line-height: 1.4;
+  text-wrap: pretty;
+}
+.news-carousel-cards .card .news-card-date {
+  font-size: clamp(0.75rem, 1.4vh, 1rem);
+  color: #bdbdbd;
+  letter-spacing: 0.04em;
+}
+.news-carousel-cards .card .news-card-location {
+  font-weight: 600;
 }
 .card-row {
   position: relative;
@@ -158,7 +307,7 @@ html.block-layout body { margin-block: 0; }
   flex-direction: column;
   justify-content: safe flex-end;
   width: var(--card-size);
-  height: var(--card-size);
+  height: var(--card-height);
   min-width: 0;
   padding: 4vh;
   text-transform: uppercase;
@@ -181,7 +330,7 @@ html.block-layout body { margin-block: 0; }
 }
 .card-year {
   position: absolute;
-  top: var(--card-year-top, calc(50% - var(--card-size) / 2 - 1vh));
+  top: var(--card-year-top, calc(50% - var(--card-height) / 2 - 1vh));
   left: var(--card-radius);
   margin: 0;
   font-size: 2vh;
@@ -198,7 +347,7 @@ html.block-layout body { margin-block: 0; }
 
 @media (min-width: 768px) and (max-width: 1600px) {
   :root {
-    --card-radius: var(--h1-font-size);
+    --carousel-card-radius: var(--h1-font-size);
   }
 }
 
@@ -206,6 +355,10 @@ html.block-layout body { margin-block: 0; }
   .card-row { scroll-behavior: auto; }
 }
 @media print {
+  .galaxy-background { display: none; }
+  .block-layout .layout-block:has(.card-system) > h1 {
+    margin-block: 0 1rem;
+  }
   .card-system {
     width: auto;
     height: auto;

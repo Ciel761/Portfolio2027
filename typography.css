@@ -1,10 +1,15 @@
+@import url("https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,100..900&display=swap");
+
 :root {
   --h1-font-size: 4rem;
 }
 
 h1 {
+  font-family: "Anybody", Helvetica, Arial, sans-serif;
   font-size: var(--h1-font-size);
+  font-stretch: 150%;
   font-weight: 900;
+  margin-bottom: 1rem;
 }
 
 h2 {
@@ -29,4 +34,14 @@ a:active {
 
 button, input, select, textarea {
   font-family: inherit;
+}
+
+@media (min-width: 768px) and (max-width: 1600px) {
+  :root {
+  --h1-font-size: 3rem;
+  }
+
+  p {
+    font-size: 1.125rem;
+  }
 }

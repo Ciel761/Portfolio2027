@@ -8,7 +8,9 @@
   <link rel="stylesheet" href="../typography.css">
   <link rel="stylesheet" href="../overlay.css">
   <link rel="stylesheet" href="project-layout.css">
+  <link rel="stylesheet" href="../related-carousel.css">
   <script src="../overlay.js" defer></script>
+  <script src="../related-carousel.js" defer></script>
   <script src="project-layout.js" defer></script>
 </head>
 <body>
@@ -32,7 +34,7 @@
       </section>
 
       <section class="project-regular-block" id="project-goals" data-project-part="goals" aria-labelledby="goals-title" aria-hidden="true" inert>
-        <h2 id="goals-title">Goals</h2>
+        <h1 id="goals-title">Goals</h1>
         <div class="project-content-grid">
           <div class="project-content-grid-cell span-columns-2 span-rows-2"><img src="../assets/design/still-surviving/Stillsurviving_Cover.png" alt="I'm Still Surviving exhibition cover" loading="lazy" decoding="async"></div>
           <div class="project-content-grid-cell span-columns-2"><p>The project set out to make public history participatory, center the voices of women living with HIV, and convert a large archive into an accessible digital exhibition.</p></div>
@@ -42,7 +44,7 @@
       </section>
 
       <section class="project-regular-block" id="project-architecture" data-project-part="architecture" aria-labelledby="architecture-title" aria-hidden="true" inert>
-        <h2 id="architecture-title">Information Architecture</h2>
+        <h1 id="architecture-title">Information Architecture</h1>
         <div class="project-content-grid">
           <div class="project-content-grid-cell span-columns-2 span-rows-2 media-contain"><img src="../assets/design/still-surviving/Stillsurviving_Flow.png" alt="Information architecture and visitor flow" loading="lazy" decoding="async"></div>
           <div class="project-content-grid-cell span-columns-2"><p>The team organized the exhibition around two questions: how visitors learn the history and what the history is about. People can navigate by media through SEE, HEAR, and READ, or explore recurring themes such as family dynamics and health care.</p></div>
@@ -53,7 +55,7 @@
       </section>
 
       <section class="project-regular-block" id="project-cms" data-project-part="cms" aria-labelledby="cms-title" aria-hidden="true" inert>
-        <h2 id="cms-title">Content System</h2>
+        <h1 id="cms-title">Content System</h1>
         <div class="project-content-grid">
           <div class="project-content-grid-cell span-columns-2 span-rows-2"><img src="../assets/design/still-surviving/Stillsurviving_CMSList.png" alt="Content records stored in the exhibition CMS" loading="lazy" decoding="async"></div>
           <div class="project-content-grid-cell span-columns-2 span-rows-2"><img src="../assets/design/still-surviving/Stillsurviving_CMSReferenceStructue.png" alt="Relationships between content categories in the CMS" loading="lazy" decoding="async"></div>
@@ -62,7 +64,7 @@
       </section>
 
       <section class="project-regular-block" id="project-prototype" data-project-part="prototype" aria-labelledby="prototype-title" aria-hidden="true" inert>
-        <h2 id="prototype-title">Prototype</h2>
+        <h1 id="prototype-title">Prototype</h1>
         <div class="project-content-grid">
           <div class="project-content-grid-cell span-columns-2 span-rows-2"><img src="../assets/design/still-surviving/Stillsurviving_Wireframe.png" alt="Wireframe for the I'm Still Surviving website" loading="lazy" decoding="async"></div>
           <div class="project-content-grid-cell span-columns-2"><p>The wireframe translated the three-layer information architecture into an interaction model that helps visitors move between stories, themes, and media without losing context.</p></div>
@@ -72,7 +74,7 @@
       </section>
 
       <section class="project-regular-block" id="project-outcome" data-project-part="outcome" aria-labelledby="outcome-title" aria-hidden="true" inert>
-        <h2 id="outcome-title">Launch</h2>
+        <h1 id="outcome-title">Launch</h1>
         <div class="project-content-grid">
           <div class="project-content-grid-cell span-columns-3 span-rows-3"><img src="../assets/design/still-surviving/ImStillSurvivingWebsite.png" alt="Launched I'm Still Surviving website" loading="lazy" decoding="async"></div>
           <div class="project-content-grid-cell span-rows-2"><p>The final site presents oral-history excerpts through historical frames that visitors can see, hear, and read. The project was subsequently featured by WTTW’s Chicago Tonight.</p></div>
@@ -83,7 +85,17 @@
       <section class="project-regular-block project-related-projects-block" id="project-related-projects" data-project-part="related-projects" data-project-related data-project-dark data-project-hold="300" aria-labelledby="related-projects-title" aria-hidden="true" inert>
         <div class="project-related-experience">
           <section class="project-related-scene project-related-content" data-related-scene data-start="-0.12" data-persist>
-            <h2 id="related-projects-title">Related Projects</h2>
+            <h1 id="related-projects-title">Related Projects</h1>
+            <div class="related-card-system" data-related-carousel>
+              <div class="related-card-row" role="region" aria-label="Related projects" tabindex="0">
+                <div class="related-card-track">
+                  <div class="related-card-item"><p class="related-card-year">2021</p><article class="related-card"><h3><a href="future-work.html">Future Work</a></h3></article></div>
+                  <div class="related-card-item"><p class="related-card-year">2021</p><article class="related-card"><h3><a href="resdash.html">ResDash</a></h3></article></div>
+                  <div class="related-card-item"><p class="related-card-year">2021</p><article class="related-card"><h3><a href="tangible-dial.html">Tangible Dial</a></h3></article></div>
+                </div>
+              </div>
+              <div class="related-card-indicator" aria-label="Related projects carousel position"></div>
+            </div>
           </section>
         </div>
       </section>
@@ -105,7 +117,7 @@
     </div>
     <div class="overlay-right">
       <header class="overlay-header project-overlay-header">
-        <a class="project-overlay-home" href="../index.html#design">Home</a>
+        <a class="project-overlay-home" href="../index.html#home">Home</a>
         <p class="overlay-name">Siyi Zhu</p>
       </header>
       <section class="overlay-info" aria-label="Current project information"></section>

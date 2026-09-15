@@ -45,6 +45,11 @@ body {
   transform: translateY(var(--project-block-offset, 0%));
 }
 
+.project-regular-block[data-project-dark] {
+  color: #fff;
+  background: transparent;
+}
+
 .project-regular-block {
   margin-top: 10vh;
   display: flex;
@@ -57,7 +62,7 @@ body {
   padding-inline-start: 0;
   overflow: hidden;
   color: #fff;
-  background: #000;
+  background: transparent;
 }
 
 .project-related-experience,
@@ -92,7 +97,7 @@ body {
   align-items: center;
   padding-inline-start: var(--project-content-left);
   color: #fff;
-  background: #000;
+  background: transparent;
 }
 
 .project-opening-block[data-visible],
@@ -119,6 +124,10 @@ body {
 
 .project-overview-section {
   flex: 0 0 var(--project-overview-height);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
   box-sizing: border-box;
   min-height: 0;
 }
@@ -126,13 +135,15 @@ body {
 .project-overview-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-rows: repeat(2, minmax(0, 1fr));
   gap: 2rem;
   width: 100%;
-  height: 100%;
+  height: 50%;
 }
 
 .project-overview-abstract {
   grid-column: span 2;
+  grid-row: span 2;
 }
 
 .project-overview-abstract,
@@ -140,7 +151,7 @@ body {
   box-sizing: border-box;
   min-width: 0;
   min-height: 0;
-  padding: 1rem;
+  padding: 2rem;
   overflow: auto;
   border-radius: var(--project-grid-card-radius);
 }
@@ -256,7 +267,7 @@ body {
   padding-inline-start: 0;
   overflow: hidden;
   color: #fff;
-  background: #000;
+  background: transparent;
 }
 
 .project-introduction-label {
@@ -293,6 +304,16 @@ body {
   will-change: transform, opacity, filter;
 }
 
+.project-introduction-video {
+  position: absolute;
+  display: block;
+  opacity: var(--intro-media-opacity, 0);
+  filter: brightness(0.72) blur(var(--intro-media-blur, 18px));
+  transform: translate3d(0, var(--intro-media-shift, 10vh), 0) scale(1.06);
+  transition: none;
+  will-change: transform, opacity, filter;
+}
+
 .project-introduction-image-tree {
   inset-block-start: 25vh;
   inset-inline-start: 4vw;
@@ -306,6 +327,14 @@ body {
   inset-inline-end: 8vw;
   width: 36vw;
   height: 84vh;
+  object-fit: cover;
+}
+
+.project-introduction-video-cutting-apple {
+  inset-block-start: 40vh;
+  inset-inline-end: 20vw;
+  width: 60vw;
+  height: 40vh;
   object-fit: cover;
 }
 
@@ -326,7 +355,7 @@ body {
   inset-block-start: 54%;
   inset-inline-start: var(--project-content-left);
   box-sizing: border-box;
-  width: min(42vw, 46rem);
+
   opacity: var(--intro-scene-opacity, 0);
   filter: blur(var(--intro-scene-blur, 14px));
   transform: translate3d(0, calc(-50% + var(--intro-scene-shift, 10vh)), 0);
@@ -337,10 +366,11 @@ body {
 .project-introduction-scene p {
   margin-block: 0 1em;
   line-height: 1.35;
+  width: min(35vw, 62rem);
 }
 
 .project-introduction-scene-display {
-  width: min(62vw, 70rem);
+  width: min(40vw, 100rem);
 }
 
 .project-introduction-scene-display > p:first-child,
@@ -355,7 +385,7 @@ body {
 }
 
 .project-introduction-scene-quote {
-  width: min(50vw, 62rem);
+  width: min(50vw, 120rem);
 }
 
 .project-introduction-scene-quote > p:last-child,
@@ -413,6 +443,7 @@ body {
 
   .project-overview-abstract {
     grid-column: 1 / -1;
+    grid-row: 2/-2;
   }
 
   .project-content-grid {
@@ -505,6 +536,10 @@ body {
   }
 
   .project-introduction-image {
+    display: none;
+  }
+
+  .project-introduction-video {
     display: none;
   }
 

@@ -8,7 +8,9 @@
   <link rel="stylesheet" href="../typography.css">
   <link rel="stylesheet" href="../overlay.css">
   <link rel="stylesheet" href="project-layout.css">
+  <link rel="stylesheet" href="../related-carousel.css">
   <script src="../overlay.js" defer></script>
+  <script src="../related-carousel.js" defer></script>
   <script src="project-layout.js" defer></script>
 </head>
 <body>
@@ -34,7 +36,7 @@
       </section>
 
       <section class="project-regular-block" id="project-challenge" data-project-part="challenge" aria-labelledby="challenge-title" aria-hidden="true" inert>
-        <h2 id="challenge-title">Challenge</h2>
+        <h1 id="challenge-title">Challenge</h1>
         <div class="project-content-grid">
           <div class="project-content-grid-cell span-columns-2 span-rows-2">
             <p>Distributed interfaces in cross-device interaction can increase cognitive load as people switch from one device to another. Physical affordances establish clear spatial references, but exposing every possible action at once can make a complex interface harder to understand.</p>
@@ -49,7 +51,7 @@
       </section>
 
       <section class="project-regular-block" id="project-process" data-project-part="process" aria-labelledby="process-title" aria-hidden="true" inert>
-        <h2 id="process-title">Process</h2>
+        <h1 id="process-title">Process</h1>
         <div class="project-content-grid">
           <div class="project-content-grid-cell span-columns-2 span-rows-2 media-contain"><img src="../assets/design/tangible-dial/TangibleDialProcess.png" alt="Tangible Dial research-through-design workflow" loading="lazy" decoding="async"></div>
           <div class="project-content-grid-cell span-columns-2">
@@ -61,7 +63,7 @@
       </section>
 
       <section class="project-regular-block" id="project-experience" data-project-part="experience" aria-labelledby="experience-title" aria-hidden="true" inert>
-        <h2 id="experience-title">Experience</h2>
+        <h1 id="experience-title">Experience</h1>
         <div class="project-content-grid">
           <div class="project-content-grid-cell span-columns-2 span-rows-2"><img src="../assets/design/tangible-dial/Storyboard.png" alt="Storyboard showing Tangible Dial controlling a washing machine" loading="lazy" decoding="async"></div>
           <div class="project-content-grid-cell span-columns-2"><p>A washing machine provided a demanding connected-home scenario: its controls combine physical and digital components, require detailed multistep settings, and often run while people use other devices.</p></div>
@@ -71,7 +73,7 @@
       </section>
 
       <section class="project-regular-block" id="project-prototype" data-project-part="prototype" aria-labelledby="prototype-title" aria-hidden="true" inert>
-        <h2 id="prototype-title">Prototype</h2>
+        <h1 id="prototype-title">Prototype</h1>
         <div class="project-content-grid">
           <div class="project-content-grid-cell span-columns-2 span-rows-2"><img src="../assets/design/tangible-dial/TangibleDial_Rendering.png" alt="Rendering of Tangible Dial and its base display" loading="lazy" decoding="async"></div>
           <div class="project-content-grid-cell span-columns-2"><p>The final concept combines a detachable dial, a round top display, and a base display. Self-actuated ribs change the dial’s silhouette to communicate pressing or rotation.</p></div>
@@ -82,7 +84,7 @@
       </section>
 
       <section class="project-regular-block" id="project-evaluation" data-project-part="evaluation" aria-labelledby="evaluation-title" aria-hidden="true" inert>
-        <h2 id="evaluation-title">Evaluation</h2>
+        <h1 id="evaluation-title">Evaluation</h1>
         <div class="project-content-grid">
           <div class="project-content-grid-cell span-columns-2 span-rows-2"><img src="../assets/design/tangible-dial/TangibleDial_FinalTest.jpg" alt="Participant evaluating a Tangible Dial prototype" loading="lazy" decoding="async"></div>
           <div class="project-content-grid-cell span-columns-2"><p>Two rounds of testing combined 3D-printed dial states with printed interface prototypes. The first round examined whether the physical forms communicated pressing and rotating; the second evaluated the complete tangible and graphical interaction.</p></div>
@@ -93,7 +95,7 @@
       </section>
 
       <section class="project-regular-block" id="project-outcome" data-project-part="outcome" aria-labelledby="outcome-title" aria-hidden="true" inert>
-        <h2 id="outcome-title">Outcome</h2>
+        <h1 id="outcome-title">Outcome</h1>
         <div class="project-content-grid">
           <div class="project-content-grid-cell span-columns-2 span-rows-3"><img src="../assets/design/tangible-dial/TangibleDial_Cover.png" alt="Tangible Dial final concept" loading="lazy" decoding="async"></div>
           <div class="project-content-grid-cell span-columns-2"><p>The study indicates that sequential physical affordances, paired with graphical guidance, can communicate complex interaction steps and support a clearer mental model across distributed devices.</p></div>
@@ -105,7 +107,17 @@
       <section class="project-regular-block project-related-projects-block" id="project-related-projects" data-project-part="related-projects" data-project-related data-project-dark data-project-hold="300" aria-labelledby="related-projects-title" aria-hidden="true" inert>
         <div class="project-related-experience">
           <section class="project-related-scene project-related-content" data-related-scene data-start="-0.12" data-persist>
-            <h2 id="related-projects-title">Related Projects</h2>
+            <h1 id="related-projects-title">Related Projects</h1>
+            <div class="related-card-system" data-related-carousel>
+              <div class="related-card-row" role="region" aria-label="Related projects" tabindex="0">
+                <div class="related-card-track">
+                  <div class="related-card-item"><p class="related-card-year">2021</p><article class="related-card"><h3><a href="resdash.html">ResDash</a></h3></article></div>
+                  <div class="related-card-item"><p class="related-card-year">2021</p><article class="related-card"><h3><a href="future-work.html">Future Work</a></h3></article></div>
+                  <div class="related-card-item"><p class="related-card-year">2020</p><article class="related-card"><h3><a href="still-surviving.html">I’m Still Surviving</a></h3></article></div>
+                </div>
+              </div>
+              <div class="related-card-indicator" aria-label="Related projects carousel position"></div>
+            </div>
           </section>
         </div>
       </section>
@@ -128,7 +140,7 @@
     </div>
     <div class="overlay-right">
       <header class="overlay-header project-overlay-header">
-        <a class="project-overlay-home" href="../index.html#design">Home</a>
+        <a class="project-overlay-home" href="../index.html#home">Home</a>
         <p class="overlay-name">Siyi Zhu</p>
       </header>
       <section class="overlay-info" aria-label="Current project information"></section>

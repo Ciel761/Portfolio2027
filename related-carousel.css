@@ -1,0 +1,225 @@
+:root {
+  --related-card-size: 35vh;
+  --related-card-radius: calc(2 * var(--h1-font-size));
+  --related-card-gap: 10vw;
+  --related-card-base-gap-vw: -7;
+  --related-card-gap-step-vw: 10;
+}
+
+html.standalone-related-page,
+html.standalone-related-page body {
+  transition: background-color 300ms ease-in-out;
+}
+
+.project-related-content,
+.project-related-projects-standalone {
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+  padding-inline-start: 0;
+}
+
+.project-related-content > h1,
+.project-related-projects-standalone > h1 {
+  box-sizing: border-box;
+  width: 100%;
+  margin-block: 0;
+  padding-inline-start: var(--project-content-left, 30vw);
+}
+
+.related-card-system {
+  position: relative;
+  width: 100vw;
+  height: 70vh;
+  flex: 0 0 auto;
+}
+
+.related-card-row {
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline-start: var(--project-content-left, 30vw);
+  overscroll-behavior-x: contain;
+  touch-action: pan-x pan-y;
+}
+
+.related-card-row::-webkit-scrollbar {
+  display: none;
+}
+
+.related-card-system[data-page-sync] .related-card-row {
+  scroll-snap-type: none;
+}
+
+.related-card-track {
+  display: flex;
+  align-items: stretch;
+  gap: var(--related-card-gap);
+  box-sizing: border-box;
+  width: max-content;
+  height: 100%;
+  padding-inline-start: var(--project-content-left, 30vw);
+  padding-inline-end: max(0px, calc(100vw - var(--project-content-left, 30vw) - var(--related-card-size)));
+}
+
+.related-card-item {
+  position: relative;
+  flex: 0 0 var(--related-card-size);
+  height: 100%;
+  filter: blur(var(--related-card-blur, 2px));
+  transform: translate3d(var(--related-card-x, 0px), var(--related-card-y, 0px), 0);
+  z-index: var(--related-card-layer, 1);
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+.related-card {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: safe flex-end;
+  width: var(--related-card-size);
+  height: var(--related-card-size);
+  min-width: 0;
+  padding: 4vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overflow-wrap: anywhere;
+  color: #000;
+  background: #fff;
+  border-radius: var(--related-card-radius);
+  text-transform: uppercase;
+  filter: brightness(var(--related-card-brightness, 80%));
+  transform: translateY(-50%) scale(var(--related-card-scale, 0.9));
+  transform-origin: left center;
+}
+
+.related-card[data-focused] {
+  --related-card-scale: 1.5;
+  --related-card-brightness: 100%;
+}
+
+.related-card a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.related-card > * {
+  flex-shrink: 0;
+}
+
+.related-card > :first-child {
+  margin-block-start: 0;
+}
+
+.related-card > :last-child {
+  margin-block-end: 0;
+}
+
+.related-card-year {
+  position: absolute;
+  top: var(--related-card-year-top, calc(50% - var(--related-card-size) / 2 - 1vh));
+  left: var(--related-card-radius);
+  margin: 0;
+  color: #fff;
+  font-size: 2vh;
+  font-weight: 700;
+  text-transform: uppercase;
+  transform: translateY(-100%);
+}
+
+.related-card-indicator {
+  position: absolute;
+  right: 2vw;
+  bottom: 2vh;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  pointer-events: auto;
+}
+
+.related-card-indicator button {
+  width: 0.5rem;
+  height: 0.5rem;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: #fff;
+  opacity: var(--related-dot-opacity, 0.25);
+  transform: scale(var(--related-dot-scale, 1));
+}
+
+@media (min-width: 768px) and (max-width: 1600px) {
+  :root {
+    --related-card-radius: var(--h1-font-size);
+  }
+}
+
+@media (max-width: 767px) {
+  :root {
+    --related-card-size: min(35vh, 70vw);
+  }
+
+  .project-related-content > h1,
+  .project-related-projects-standalone > h1 {
+    padding-inline-start: 5vw;
+  }
+
+  .related-card-row {
+    scroll-padding-inline-start: 5vw;
+  }
+
+  .related-card-track {
+    padding-inline-start: 5vw;
+    padding-inline-end: max(0px, calc(95vw - var(--related-card-size)));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .related-card-row {
+    scroll-behavior: auto;
+  }
+}
+
+@media print {
+  .project-related-content,
+  .project-related-projects-standalone {
+    display: block;
+  }
+
+  .related-card-system,
+  .related-card-row,
+  .related-card-track,
+  .related-card-item {
+    position: static;
+    display: block;
+    width: auto;
+    height: auto;
+    padding: 0;
+    overflow: visible;
+    filter: none;
+    transform: none;
+  }
+
+  .related-card,
+  .related-card-year {
+    position: static;
+    margin-block-end: 1rem;
+    filter: none;
+    transform: none;
+  }
+
+  .related-card-indicator {
+    display: none;
+  }
+}

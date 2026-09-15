@@ -8,7 +8,9 @@
   <link rel="stylesheet" href="../typography.css">
   <link rel="stylesheet" href="../overlay.css">
   <link rel="stylesheet" href="project-layout.css">
+  <link rel="stylesheet" href="../related-carousel.css">
   <script src="../overlay.js" defer></script>
+  <script src="../related-carousel.js" defer></script>
   <script src="project-layout.js" defer></script>
 </head>
 <body>
@@ -35,7 +37,7 @@
       </section>
 
       <section class="project-regular-block" id="project-fragmentation" data-project-part="fragmentation" aria-labelledby="fragmentation-title" aria-hidden="true" inert>
-        <h2 id="fragmentation-title">The Fragmentation Problem</h2>
+        <h1 id="fragmentation-title">The Fragmentation Problem</h1>
         <div class="project-content-grid">
           <div class="project-content-grid-cell span-columns-3 span-rows-3 media-contain"><img src="../assets/research/hypertext-augmented-sensemaking/patterns-overview.png" alt="Model of explicit note types and associative navigation structures found in the study" loading="lazy" decoding="async"></div>
           <div class="project-content-grid-cell has-copy"><p><strong>Temporal fragmentation</strong><br>Long projects are repeatedly interrupted. When scholars return, their context, questions, and interpretation may have changed.</p></div>
@@ -45,7 +47,7 @@
       </section>
 
       <section class="project-regular-block" id="project-study" data-project-part="study" aria-labelledby="study-title" aria-hidden="true" inert>
-        <h2 id="study-title">Guided Tours of Scholarly Work</h2>
+        <h1 id="study-title">Guided Tours of Scholarly Work</h1>
         <div class="project-content-grid">
           <div class="project-content-grid-cell span-columns-2 span-rows-3 media-contain"><img src="../assets/research/hypertext-augmented-sensemaking/active-sensemaking-canvas.png" alt="A participant's canvas connecting claims, questions, hypotheses, and evidence to source notes" loading="lazy" decoding="async"></div>
           <div class="project-content-grid-cell span-columns-2 has-copy"><p><strong>Participants</strong><br>The core sample included 16 scholars using newer hypertext notebooks. Seven scholars using mainstream tools such as Google Docs provided comparison cases.</p></div>
@@ -55,7 +57,7 @@
       </section>
 
       <section class="project-regular-block" id="project-note-types" data-project-part="note-types" aria-labelledby="note-types-title" aria-hidden="true" inert>
-        <h2 id="note-types-title">Explicit Note Types</h2>
+        <h1 id="note-types-title">Explicit Note Types</h1>
         <div class="project-content-grid">
           <div class="project-content-grid-cell span-columns-3 span-rows-3 media-contain"><img src="../assets/research/hypertext-augmented-sensemaking/explicit-note-types.png" alt="Examples showing source notes developing into summary notes and higher-level synthesis notes" loading="lazy" decoding="async"></div>
           <div class="project-content-grid-cell has-copy"><p><strong>Source notes</strong><br>Represent papers and other source material as referenceable, linkable objects with provenance and metadata.</p></div>
@@ -65,7 +67,7 @@
       </section>
 
       <section class="project-regular-block" id="project-navigation" data-project-part="navigation" aria-labelledby="navigation-title" aria-hidden="true" inert>
-        <h2 id="navigation-title">Hubs and Indices</h2>
+        <h1 id="navigation-title">Hubs and Indices</h1>
         <div class="project-content-grid">
           <div class="project-content-grid-cell span-columns-2 span-rows-2 media-contain"><img src="../assets/research/hypertext-augmented-sensemaking/hubs.png" alt="Examples of empty hub notes whose contextual backlinks gather related information" loading="lazy" decoding="async"></div>
           <div class="project-content-grid-cell span-columns-2 span-rows-2 media-contain"><img src="../assets/research/hypertext-augmented-sensemaking/indices.png" alt="Examples of manually and semi-automatically constructed indices" loading="lazy" decoding="async"></div>
@@ -75,7 +77,7 @@
       </section>
 
       <section class="project-regular-block" id="project-incubators" data-project-part="incubators" aria-labelledby="incubators-title" aria-hidden="true" inert>
-        <h2 id="incubators-title">Incubators</h2>
+        <h1 id="incubators-title">Incubators</h1>
         <div class="project-content-grid">
           <div class="project-content-grid-cell span-columns-2 span-rows-3 media-contain"><img src="../assets/research/hypertext-augmented-sensemaking/incubator-log.png" alt="A log-type incubator linking a research question to findings and alternative explanations over time" loading="lazy" decoding="async"></div>
           <div class="project-content-grid-cell span-columns-2 span-rows-2 media-contain"><img src="../assets/research/hypertext-augmented-sensemaking/incubator-query.png" alt="A group meeting incubator that retrieves recent work through a customizable structure search" loading="lazy" decoding="async"></div>
@@ -84,7 +86,7 @@
       </section>
 
       <section class="project-regular-block" id="project-implications" data-project-part="implications" aria-labelledby="implications-title" aria-hidden="true" inert>
-        <h2 id="implications-title">Design Implications</h2>
+        <h1 id="implications-title">Design Implications</h1>
         <div class="project-content-grid">
           <div class="project-content-grid-cell span-columns-2 span-rows-3 has-copy"><p>The observed patterns extend classic hypertext ideas through granular contextual backlinks, flexible many-to-many organization, formal note schemas, and dynamic structure searches. Together they show how hypertext can support the evolving state of thought rather than merely connect finished documents.</p></div>
           <div class="project-content-grid-cell span-columns-2 has-copy"><p><strong>Match the work</strong><br>Let people define information types that correspond to their own stages of sensemaking and provide actions that help each type move forward.</p></div>
@@ -96,7 +98,17 @@
       <section class="project-regular-block project-related-projects-block" id="project-related-projects" data-project-part="related-projects" data-project-related data-project-dark data-project-hold="300" aria-labelledby="related-projects-title" aria-hidden="true" inert>
         <div class="project-related-experience">
           <section class="project-related-scene project-related-content" data-related-scene data-start="-0.12" data-persist>
-            <h2 id="related-projects-title">Related Projects</h2>
+            <h1 id="related-projects-title">Related Projects</h1>
+            <div class="related-card-system" data-related-carousel>
+              <div class="related-card-row" role="region" aria-label="Related projects" tabindex="0">
+                <div class="related-card-track">
+                  <div class="related-card-item"><p class="related-card-year">Ongoing</p><article class="related-card"><h3><a href="immersive-scholarly-sensemaking.html">Immersive and Sensible Scholarly Sensemaking</a></h3></article></div>
+                  <div class="related-card-item"><p class="related-card-year">2025</p><article class="related-card"><h3><a href="future-immersive-environments.html">Sense and Senseability</a></h3></article></div>
+                  <div class="related-card-item"><p class="related-card-year">Ongoing</p><article class="related-card"><h3><a href="synthesis-infrastructure-foundation.html">Synthesis Infrastructure Foundation</a></h3></article></div>
+                </div>
+              </div>
+              <div class="related-card-indicator" aria-label="Related projects carousel position"></div>
+            </div>
           </section>
         </div>
       </section>
@@ -119,7 +131,7 @@
     </div>
     <div class="overlay-right">
       <header class="overlay-header project-overlay-header">
-        <p><a class="project-overlay-home" href="../index.html#research">Home</a></p>
+        <p><a class="project-overlay-home" href="../index.html#home">Home</a></p>
         <p class="overlay-name">Siyi Zhu</p>
       </header>
       <section class="overlay-info" aria-label="Current project information"></section>
