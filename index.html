@@ -8,8 +8,10 @@
   <link rel="stylesheet" href="typography.css">
   <link rel="stylesheet" href="overlay.css">
   <link rel="stylesheet" href="layout.css">
+  <link rel="stylesheet" href="featured-themes.css">
   <script src="galaxy-background.js" defer></script>
   <script src="overlay.js" defer></script>
+  <script src="featured-themes.js" defer></script>
   <script src="layout.js" defer></script>
 </head>
 <body>
@@ -23,8 +25,62 @@
     <p>Place holder for my thesis statement and a short bio. Exploring how emerging technologies support sensemaking in scholarly research.</p>
 
     </section>
-    <section class="layout-block" aria-labelledby="featured-themes">
+    <section class="layout-block featured-themes-block" data-featured-themes data-block-hold="500" aria-labelledby="featured-themes">
     <h1 id="featured-themes">Featured Themes</h1>
+    <div class="featured-theme-system" aria-label="Featured themes and related projects">
+      <div class="featured-theme-stage">
+        <section class="theme-group" data-theme-group aria-labelledby="theme-xr-title">
+          <button class="theme-parent-card" type="button"><h1 id="theme-xr-title">XR</br><span style="font-weight: 200; font-size: 1vw;">Extended</br>Reality</span></h1></button>
+          <div class="theme-projects">
+            <div class="theme-project-item">
+              <p class="theme-project-year">Ongoing</p>
+              <article class="theme-project-card"><h3><a href="research/immersive-scholarly-sensemaking.html">Immersive and Sensible Scholarly Sensemaking</a></h3></article>
+            </div>
+            <div class="theme-project-item">
+              <p class="theme-project-year">2025</p>
+              <article class="theme-project-card"><h3><a href="research/future-immersive-environments.html">Sense and Senseability</a></h3></article>
+            </div>
+          </div>
+        </section>
+
+        <section class="theme-group" data-theme-group aria-labelledby="theme-sensemaking-title">
+          <button class="theme-parent-card" type="button"><h1 id="theme-sensemaking-title">Sense</br>making</h1></button>
+          <div class="theme-projects">
+            <div class="theme-project-item">
+              <p class="theme-project-year">Ongoing</p>
+              <article class="theme-project-card"><h3><a href="research/immersive-scholarly-sensemaking.html">Immersive and Sensible Scholarly Sensemaking</a></h3></article>
+            </div>
+            <div class="theme-project-item">
+              <p class="theme-project-year">2025</p>
+              <article class="theme-project-card"><h3><a href="research/future-immersive-environments.html">Sense and Senseability</a></h3></article>
+            </div>
+            <div class="theme-project-item">
+              <p class="theme-project-year">Ongoing</p>
+              <article class="theme-project-card"><h3><a href="research/synthesis-infrastructure-foundation.html">Synthesis Infrastructure Foundation</a></h3></article>
+            </div>
+            <div class="theme-project-item">
+              <p class="theme-project-year">2024</p>
+              <article class="theme-project-card"><h3><a href="research/hypertext-augmented-sensemaking.html">Patterns of Hypertext-Augmented Sensemaking</a></h3></article>
+            </div>
+          </div>
+        </section>
+
+        <section class="theme-group" data-theme-group aria-labelledby="theme-remote-working-title">
+          <button class="theme-parent-card" type="button"><h1 id="theme-remote-working-title">Remote Working</h1></button>
+          <div class="theme-projects">
+            <div class="theme-project-item">
+              <p class="theme-project-year">2021</p>
+              <article class="theme-project-card"><h3><a href="design/future-work.html">Future Work</a></h3></article>
+            </div>
+            <div class="theme-project-item">
+              <p class="theme-project-year">2023</p>
+              <article class="theme-project-card"><h3><a href="research/metaverse-workspace.html">Metaverse-Based Workspace for Research</a></h3></article>
+            </div>
+          </div>
+        </section>
+      </div>
+      <div class="featured-theme-indicator" aria-label="Featured theme position"></div>
+    </div>
     </section>
     <section class="layout-block card-scroll-effects card-vertical-scroll" data-dark-block aria-labelledby="research">
     <h1 id="research">Research</h1>
@@ -177,6 +233,7 @@
       <div class="homepage-contact-content">
         <h1 id="contact">Per aspera </br>ad astra</h1>
         <div class="homepage-contact-links">
+          <p style="margin: 0; font-size: 1rem;">Contact with <strong>Siyi Zhu</strong> :</p>
           <div class="homepage-contact-item">
             <!-- <p>Email</p> -->
             <a href="mailto:zhusy@umd.edu">zhusy@umd.edu</a>

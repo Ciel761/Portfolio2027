@@ -1,11 +1,11 @@
 # Portfolio renovation specification
 
-Last updated: 2026-09-14.
-Status: Active local implementation with full-screen homepage and project-page timelines, a shared overlay, synchronized homepage card carousels, responsive project grids, and cinematic dark sections.
+Last updated: 2026-09-15.
+Status: Active local implementation with full-screen homepage and project-page timelines, a shared overlay, synchronized homepage card carousels, a focus-driven Featured Themes system, responsive project grids, and cinematic dark sections.
 
-## Current direction — 2026-09-14
+## Current direction — 2026-09-15
 
-The homepage and principal project pages share an active layout and interaction framework. The homepage uses full-screen sticky sections, a fixed overlay, and horizontal card systems controlled by native horizontal input and page scroll. Project pages use a content-driven sticky block timeline, overview and content grids, project-specific overlay navigation, and black cinematic sections. Visual refinement, the remaining two project-page conversions, and device-level responsive validation remain pending. The authoritative current implementation is recorded at the end of this document; earlier sections preserve the design history.
+The homepage and principal project pages share an active layout and interaction framework. The homepage uses full-screen sticky sections, a fixed overlay, horizontal card systems controlled by native horizontal input and page scroll, and a Featured Themes carousel whose focused theme separates into linked project cards. Homepage content blocks now reserve an entrance phase in which the section title yields the focus position directly to Card 0 while the carousel enters from outside the right edge. Project pages use a content-driven sticky block timeline, overview and content grids, project-specific overlay navigation, and cinematic dark sections. Visual refinement, the remaining two project-page conversions, and device-level responsive validation remain pending. The authoritative current implementation is recorded at the end of this document; earlier sections preserve the design history.
 
 ## Purpose and confirmed requirements
 
@@ -131,6 +131,9 @@ Visual direction, framework, final routes, and hosting are currently undecided. 
 
 | Date | Decision | Basis |
 | --- | --- | --- |
+| 2026-09-15 | Add Featured Themes as a homepage carousel with XR, Sensemaking, and Remote Working themes that split into linked project cards when focused. | Explicit user requirement. |
+| 2026-09-15 | Trigger a theme split 50ms after it reaches the exact focus anchor; clicking a theme moves it to focus, leaving focus immediately starts the reverse animation, and hover does not control splitting. | Explicit user refinement. |
+| 2026-09-15 | Treat the block title as the virtual focus before Card 0, then snap Card 0 directly to the shared `30vw` focus anchor without an intermediate offset. Apply the same No.0 entrance to regular homepage carousels. | Explicit user refinement. |
 | 2026-09-14 | Use content-driven sticky blocks for project pages, with 50vh of scroll space before and after regular block content. | Explicit user requirement. |
 | 2026-09-14 | Use black cinematic terminal blocks for Related Projects; keep Contact only on the homepage as its footer. | Explicit user clarification. |
 | 2026-09-14 | Fade the whole document background during transitions into and out of dark blocks. | Explicit user requirement. |
@@ -145,6 +148,8 @@ Visual direction, framework, final routes, and hosting are currently undecided. 
 | 2026-09-11 | Keep the structural prototype local. | Explicit user preference; no deployment. |
 
 ## Verification log
+
+- 2026-09-15: Confirmed `layout.js`, `featured-themes.js`, and `galaxy-background.js` parse successfully. Checked local HTML destinations and fragments, CSS brace balance, trailing whitespace, and `git diff --check`. Browser and physical-device validation remain pending.
 
 - 2026-09-13: Checked the plain HTML page has no stylesheet, scripts, navigation, buttons, or styling attributes; headings, lists, and existing content links remain.
 
@@ -247,9 +252,9 @@ This section is authoritative for the current prototype. Earlier implementation 
 
 ### Site and content structure
 
-- The project is a dependency-free static website using `index.html`, `layout.css`, `typography.css`, and `layout.js`.
-- The homepage order is Home → Research → Design → News → About → Contact.
-- All six homepage sections are children of one `.block-stage` inside `main`.
+- The project is a dependency-free static website. The homepage uses `index.html`, `layout.css`, `typography.css`, `overlay.css`, `featured-themes.css`, `galaxy-background.js`, `overlay.js`, `featured-themes.js`, and `layout.js`.
+- The homepage order is Home → Featured Themes → Research → Design → News → Experience → Contact.
+- All seven homepage sections are children of one `.block-stage` inside `main`.
 - Five standalone research pages live in `research/`; four standalone design pages live in `design/`.
 - Seven project pages use the project timeline framework. The Metaverse Workspace and Synthesis Infrastructure Foundation pages currently retain plain document flow with static Related Projects footers.
 - The legacy project snapshot and asset inventory remain under `reference/`.
@@ -258,9 +263,10 @@ This section is authoritative for the current prototype. Earlier implementation 
 
 - `.block-stage` is sticky at the top of the viewport and fills `100dvh`, with a `100vh` fallback.
 - Every `.layout-block` occupies the stage and is moved vertically according to native document scroll position.
-- `--block-height: 200` produces a `100vh` stationary hold because the visible `100vh` is subtracted from the configured block height.
+- `--block-height: 250` produces a default `150vh` stationary hold because the visible `100vh` is subtracted from the configured block height.
 - `--transition-height: 50` reserves `50vh` between adjacent holds for the vertical section transition.
-- Six blocks produce a `950vh` main container and `850vh` of total page travel: six `100vh` holds plus five `50vh` transitions and one visible viewport.
+- A block may override the default hold with `data-block-hold`. Featured Themes currently uses a `500vh` hold; the other six blocks use the default `150vh` hold.
+- The seven-block homepage produces an `1800vh` main container and `1700vh` of total page travel: `1400vh` of holds, six `50vh` transitions, and one visible viewport.
 - The final Contact block has a hold but no outgoing transition.
 - Section motion reverses naturally when the user scrolls upward.
 - Inactive blocks are `inert` and `aria-hidden`; the active block changes at the midpoint of a transition.
@@ -278,17 +284,24 @@ This section is authoritative for the current prototype. Earlier implementation 
 ### Fixed overlay
 
 - `.site-overlay` is fixed to all four viewport edges with a z-index above the page.
-- The overlay uses the same `30vw` division as the main layout: a `30vw` left column and a remaining-width right column.
+- The overlay grid uses `15vw 15vw 1fr`: navigation occupies the first `15vw`, the second `15vw` is open space, and the right section begins on the shared `30vw` content line.
 - The overlay itself ignores pointer input; interactive descendants opt back in so underlying cards remain usable.
-- The left column contains the vertical navigation for Home, Research, Design, News, About, and Contact.
+- The left column contains the vertical navigation for Home, Featured Themes, Research, Design, News, Experience, and Contact.
 - Navigation begins `30vh` from the top, sits `1vw` from the left edge, and uses a `5vh` gap between links.
 - During the `50vh` section transition, the outgoing navigation label interpolates from its enlarged bold state to its base state, while the incoming label performs the inverse. The interpolation follows scroll position.
 - The right column has three vertical regions: the name in the header, an empty information region in the middle, and a footer at the bottom.
 - The middle information region is reserved for later focused-card information. It is `30vw` wide, aligned toward the right, and has a `20vw` right margin.
 
+### Galaxy background
+
+- Two fixed canvas surfaces sit behind the content and in front of the content but below the overlay. Their short vertical lines use the current overlay foreground color, so they invert with cinematic document-background transitions.
+- The background surface uses three density/parallax layers with `1px` strokes. The sparse foreground surface uses one faster parallax layer with `3px` strokes.
+- Line movement runs opposite the page-scroll direction through the parallax offset. Directional stretch extends only in the direction implied by each layer's displacement, is capped at `220px`, and decays after input stops.
+- `focus-on-overlay` applies the same `25px` content blur to both galaxy surfaces. `overlay-always-clear` removes that blur. Reduced-motion mode disables parallax and directional stretching.
+
 ### Card system geometry and content
 
-- Research, Design, News, and About each use a `.card-system` wrapping a native horizontal `.card-row`, `.card-track`, and stationary dot indicator. Contact is a separate black homepage footer block.
+- Research, Design, News, and Experience each use a `.card-system` wrapping a native horizontal `.card-row`, `.card-track`, and stationary dot indicator. Featured Themes uses its own compatible full-width carousel. Contact is a separate cinematic homepage footer block.
 - The card system is `100vw` wide and `80vh` high. Its negative left margin aligns it to both viewport edges despite the block's `30vw` content offset.
 - Native horizontal overflow remains enabled; scrollbars are hidden.
 - Cards are `35vh × 35vh` with `4vh` internal padding, a black background, white uppercase content, and bottom-aligned text.
@@ -296,11 +309,13 @@ This section is authoritative for the current prototype. Earlier implementation 
 - Card links inherit the card's white text color.
 - Project cards have year text in their wrapper above the card. The year is bold, `2vh`, uppercase, and inset from the left by the card radius.
 - Cards have no shadow.
+- News cards are `1.25` times the base height and use half the default carousel radius. Experience cards are `1.5` times the base height, use a `5vw` native gap, and have typography tuned for roles, institutions, dates, and details.
+- Desktop and laptop widths from `768px` through `1600px` reduce the base carousel corner radius from twice the H1 size to one H1 size.
 
 ### Optional card effects
 
 - `card-scroll-effects` is a per-block class. Removing it leaves that block's carousel horizontally scrollable with static cards.
-- Research, Design, and News currently enable the effects. About and Contact currently leave them disabled.
+- Research, Design, and News currently enable the effects. Experience uses vertical-to-horizontal synchronization without the scale, blur, brightness, or layer effects. Contact is not a carousel.
 - The focused card is scaled to 150%.
 - At one card away, scale is 90%; subsequent distance steps reduce scale by 10 percentage points to a 10% minimum.
 - Brightness is 100% when focused, 80% one step away, and reduces by 10 percentage points per subsequent step to 0%.
@@ -322,12 +337,36 @@ This section is authoritative for the current prototype. Earlier implementation 
 ### Vertical and horizontal carousel synchronization
 
 - `card-vertical-scroll` is a per-block class that maps only that block's vertical hold progress to its horizontal carousel.
-- All current card blocks have vertical synchronization enabled. The single About card has no horizontal travel.
-- At the beginning of a block's `100vh` hold, its first card is focused. At the end, its last card is focused.
+- Research, Design, News, and Experience have vertical synchronization enabled.
+- Each applicable block reserves up to the first `125vh` of its hold for its entrance. The remaining hold distance maps continuously from the first card to the last card.
 - The outgoing carousel remains on its last card throughout the following `50vh` section transition. Scrolling elsewhere does not change it.
 - Scrolling upward reverses the carousel after the user re-enters its block timeline.
 - Direct horizontal scrolling, dot clicks, and keyboard card navigation update the matching vertical page position. Synchronization guards prevent feedback loops.
 - Vertically controlled rows disable native CSS scroll snapping so intermediate scroll positions remain continuous.
+
+### Homepage block entrance and No.0 focus
+
+- Every homepage block after Home and before Contact receives the shared entrance treatment. `--block-entrance-height: 125` budgets the first `125vh` of that block's hold for this phase.
+- The block title begins vertically centered as the first focused object and moves with cubic smoothstep easing to its normal position above the carousel.
+- At the same time, the full carousel begins one viewport width beyond the right edge and enters the viewport.
+- Card layout uses an internal virtual focus value from `-1` to `0`. The title occupies the focus anchor at the start, and the first card progressively takes over that same `30vw` anchor.
+- There is no separate `10vw` or other staging offset. When the entrance settles, Card 0 is directly at the normal focused position.
+- Pausing during the entrance snaps to one of its two endpoints: title focus at the block start or Card 0 focus at the end of the entrance. It never snaps to an intermediate staging position.
+- Reduced-motion mode resolves the entrance immediately at Card 0.
+
+### Featured Themes carousel and split interaction
+
+- Featured Themes contains three parent themes: XR, Sensemaking, and Remote Working. Metaverse-Based Workspace for Research belongs to Remote Working.
+- Before a split, parent themes use the same 150% focused scale, distance-based scale reduction, brightness, blur, layering, and left/right gap model as the regular animated carousels. Its base and distance-step gaps are both `10vw`.
+- Page scroll, horizontal wheel input, touch swipes, arrow/Home/End keys, theme clicks, and indicator controls can move the theme carousel. Clicking a nonfocused theme requests a smooth page-timeline move to its exact focus position.
+- A theme starts splitting 50ms after it reaches the exact focus position. Hover does not trigger or preserve the split.
+- Leaving the exact focus position immediately starts the existing `450ms` ease-in-out reverse split animation. Scrolling away from the block also exits the split. The reverse transition remains visible rather than removing the project cards instantly.
+- During a split, the parent card surface disappears while its H1 label remains. Linked project cards emerge around the theme's in-place position; the theme itself does not move to a separate split location.
+- Nonactive theme cards remain visible and are pushed horizontally away from the active theme. Project placement uses deterministic variation plus collision checks to avoid the block title, the other themes, the active label, sibling project cards, and viewport boundaries.
+- One SVG surface draws the active theme and project-card membranes with a Gaussian-blur/color-matrix metaball filter. HTML text and hit areas stay above the SVG, so foreground cards occlude text behind them and labels remain interactive.
+- Project cards are approximately 80% of the base card size, constrained by available stage height and width. Their year labels travel with them, and their project names are left aligned and vertically centered.
+- Project links become interactive only after the split is effectively complete. Escape starts the reverse animation and returns focus to the carousel region.
+- Reduced-motion mode removes the metaball interpolation and resolves state changes immediately.
 
 ### Card snapping
 
@@ -338,6 +377,7 @@ This section is authoritative for the current prototype. Earlier implementation 
 - The snap uses a symmetric cubic ease-in-out curve.
 - Wheel, touch, pointer, or keyboard input cancels an active snap.
 - Reduced-motion mode performs the snap immediately.
+- Featured Themes snaps to the nearest exact theme position after its entrance phase, then applies the same 50ms focus delay before opening the split.
 
 ### Current limitations and pending work
 

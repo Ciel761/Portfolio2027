@@ -6,6 +6,7 @@
   const surfaceSettings = [
     {
       selector: '[data-galaxy-background]',
+      lineWidth: 1,
       layers: [
         { density: 50, parallax: 0.2, opacity: 0.8 },
         { density: 100, parallax: 0.35, opacity: 0.6 },
@@ -14,6 +15,7 @@
     },
     {
       selector: '[data-galaxy-foreground]',
+      lineWidth: 3,
       layers: [
         { density: 10, parallax: 0.8, opacity: 1 }
       ]
@@ -23,7 +25,13 @@
   const surfaces = surfaceSettings.flatMap(surfaceSetting => {
     const canvas = document.querySelector(surfaceSetting.selector);
     const context = canvas?.getContext('2d');
-    return canvas && context ? [{ canvas, context, settings: surfaceSetting.layers, layers: [] }] : [];
+    return canvas && context ? [{
+      canvas,
+      context,
+      lineWidth: surfaceSetting.lineWidth,
+      settings: surfaceSetting.layers,
+      layers: []
+    }] : [];
   });
   if (!surfaces.length) return;
 
@@ -77,10 +85,10 @@
     const foreground = getComputedStyle(root).getPropertyValue('--overlay-foreground').trim() || '#000';
     let animationActive = false;
 
-    surfaces.forEach(({ context, layers }) => {
+    surfaces.forEach(({ context, lineWidth, layers }) => {
       context.clearRect(0, 0, width, height);
       context.strokeStyle = foreground;
-      context.lineWidth = 1;
+      context.lineWidth = lineWidth;
 
       layers.forEach(layer => {
         layer.stretch += (layer.targetStretch - layer.stretch) * 0.18;

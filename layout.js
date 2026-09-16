@@ -11,13 +11,19 @@
   const overlayCard = document.querySelector('[data-overlay-card]');
   const overlayYear = document.querySelector('[data-overlay-year]');
   const contactBlock = document.querySelector('[data-home-contact]');
+  const featuredThemesBlock = document.querySelector('[data-featured-themes]');
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   const cardControllers = new Map();
   const initialUrl = location.href;
   const initialHash = location.hash;
   if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
   if (initialHash) history.replaceState(null, '', initialUrl.slice(0, -initialHash.length));
-  let hold, transition, step, viewport, frame, cardSnapTimer, cardSnapFrame, sectionNavFrame, activeBlock = blocks[0];
+  let defaultHold, transition, entrance;
+  let viewport, frame, cardSnapTimer, cardSnapFrame, sectionNavFrame, activeBlock = blocks[0];
+  let blockHolds = [];
+  let blockStarts = [];
+  const entranceBlocks = blocks.filter((block, index) => index > 0 && block !== contactBlock);
+  const titleEntranceOffsets = new Map();
   const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
   const smoothstep = value => {
     const progress = clamp(value, 0, 1);
@@ -27,6 +33,24 @@
     const value = parseFloat(getComputedStyle(root).getPropertyValue(name));
     return Number.isFinite(value) ? value : fallback;
   };
+
+  const blockStart = index => blockStarts[index] || 0;
+  const blockHold = index => blockHolds[index] || 0;
+
+  function timelineState(distance) {
+    for (let index = 0; index < blocks.length - 1; index += 1) {
+      const transitionStart = blockStart(index) + blockHold(index);
+      const transitionEnd = transitionStart + transition;
+      if (distance < transitionStart) return { index, progress: 0 };
+      if (distance < transitionEnd) {
+        return {
+          index,
+          progress: transition > 0 ? clamp((distance - transitionStart) / transition, 0, 1) : 1
+        };
+      }
+    }
+    return { index: blocks.length - 1, progress: 0 };
+  }
 
   function cancelCardSnap() {
     clearTimeout(cardSnapTimer);
@@ -103,26 +127,43 @@
       return Number.isFinite(value) ? value : fallback;
     };
     viewport = stage.clientHeight || innerHeight;
-    hold = Math.max(0, number('--block-height', 150) - 100) * viewport / 100;
+    defaultHold = Math.max(0, number('--block-height', 150) - 100) * viewport / 100;
     transition = Math.max(0, number('--transition-height', 10)) * viewport / 100;
+    entrance = Math.max(0, number('--block-entrance-height', 20)) * viewport / 100;
+    blockHolds = blocks.map(block => {
+      const customHold = parseFloat(block.dataset.blockHold);
+      return Number.isFinite(customHold) ? Math.max(0, customHold) * viewport / 100 : defaultHold;
+    });
+    blockStarts = [];
+    blocks.forEach((block, index) => {
+      blockStarts[index] = index === 0
+        ? 0
+        : blockStarts[index - 1] + blockHolds[index - 1] + transition;
+    });
     // A zero-length sequence has no meaningful scroll positions; retain normal flow.
-    step = hold + transition;
-    if (!step) {
+    if (!blockHolds.some(Boolean) && !transition) {
       root.classList.remove('block-layout');
       blocks.forEach(block => { block.inert = false; block.removeAttribute('aria-hidden'); });
       return;
     }
     root.classList.add('block-layout');
-    main.style.setProperty('--layout-height', `${viewport + blocks.length * hold + (blocks.length - 1) * transition}px`);
+    const layoutScrollHeight = blockHolds.reduce((total, value) => total + value, 0)
+      + (blocks.length - 1) * transition;
+    main.style.setProperty('--layout-height', `${viewport + layoutScrollHeight}px`);
+    entranceBlocks.forEach(block => {
+      block.toggleAttribute('data-home-entrance', true);
+      const title = block.querySelector(':scope > h1');
+      if (!title) return;
+      const titleCenter = title.offsetTop + title.offsetHeight / 2;
+      titleEntranceOffsets.set(block, viewport / 2 - titleCenter);
+    });
     render();
   }
   function render() {
     frame = 0;
     if (!root.classList.contains('block-layout')) return;
     const distance = Math.max(0, -main.getBoundingClientRect().top);
-    const index = Math.min(blocks.length - 1, Math.floor(distance / step));
-    const progress = index < blocks.length - 1 && transition > 0
-      ? clamp((distance - index * step - hold) / transition, 0, 1) : 0;
+    const { index, progress } = timelineState(distance);
     const active = progress >= .5 ? index + 1 : index;
     const isDark = block => Number(block?.hasAttribute('data-dark-block'));
     const currentDarkness = isDark(blocks[index]);
@@ -148,13 +189,61 @@
       block.toggleAttribute('data-visible', visible);
       block.inert = i !== active;
       block.setAttribute('aria-hidden', String(i !== active));
+
+      if (block.hasAttribute('data-home-entrance')) {
+        const localDistance = distance - blockStart(i);
+        const blockEntrance = Math.min(blockHold(i), entrance);
+        const rawEntranceProgress = i < index
+          ? 1
+          : i > index
+            ? 0
+            : blockEntrance > 0
+              ? clamp(localDistance / blockEntrance, 0, 1)
+              : 1;
+        const entranceProgress = reduced.matches ? 1 : smoothstep(rawEntranceProgress);
+        const titleOffset = titleEntranceOffsets.get(block) || 0;
+        block.style.setProperty('--block-title-y', `${titleOffset * (1 - entranceProgress)}px`);
+        const carouselEntranceDistance = stage.clientWidth || innerWidth;
+        block.style.setProperty(
+          '--carousel-entry-x',
+          `${carouselEntranceDistance * (1 - entranceProgress)}px`
+        );
+        if (i === index && rawEntranceProgress < 1) {
+          cardControllers.get(block)?.syncEntrance(entranceProgress);
+        }
+      }
     });
 
     const cardController = cardControllers.get(blocks[index]);
-    const cardProgress = hold > 0
-      ? clamp((distance - index * step) / hold, 0, 1)
+    const currentEntrance = Math.min(blockHold(index), entrance);
+    const carouselDistance = Math.max(0, blockHold(index) - currentEntrance);
+    const cardProgress = carouselDistance > 0
+      ? clamp((distance - blockStart(index) - currentEntrance) / carouselDistance, 0, 1)
       : 1;
-    cardController?.syncFromPage(cardProgress);
+    if (distance - blockStart(index) >= currentEntrance) cardController?.syncFromPage(cardProgress);
+
+    if (featuredThemesBlock) {
+      const featuredIndex = blocks.indexOf(featuredThemesBlock);
+      const featuredEntrance = Math.min(blockHold(featuredIndex), entrance);
+      const featuredCarouselDistance = Math.max(0, blockHold(featuredIndex) - featuredEntrance);
+      const localDistance = distance - blockStart(featuredIndex);
+      const rawFeaturedEntrance = featuredEntrance > 0
+        ? clamp(localDistance / featuredEntrance, 0, 1)
+        : 1;
+      const entranceProgress = reduced.matches
+        ? 1
+        : smoothstep(rawFeaturedEntrance);
+      const themeProgress = featuredCarouselDistance > 0
+        ? clamp((localDistance - featuredEntrance) / featuredCarouselDistance, 0, 1)
+        : 1;
+      featuredThemesBlock.dispatchEvent(new CustomEvent('featured-theme-progress', {
+        detail: {
+          entranceProgress: reduced.matches ? 1 : entranceProgress,
+          progress: themeProgress,
+          active: blocks[active] === featuredThemesBlock
+        }
+      }));
+    }
 
     activeBlock = blocks[active];
     const labelledBy = activeBlock.getAttribute('aria-labelledby');
@@ -192,19 +281,62 @@
     const index = blocks.findIndex(block => block.id === id || [...block.querySelectorAll('[id]')].some(el => el.id === id));
     if (index < 0 || !root.classList.contains('block-layout')) return;
     cancelSectionNavigation();
-    scrollTo({ top: scrollY + main.getBoundingClientRect().top + index * step, behavior: 'auto' });
+    scrollTo({ top: scrollY + main.getBoundingClientRect().top + blockStart(index), behavior: 'auto' });
     render();
   }
+
+  featuredThemesBlock?.addEventListener('featured-theme-carousel-request', event => {
+    if (!root.classList.contains('block-layout')) return;
+    const index = blocks.indexOf(featuredThemesBlock);
+    if (index < 0) return;
+    const featuredEntrance = Math.min(blockHold(index), entrance);
+    const carouselDistance = Math.max(0, blockHold(index) - featuredEntrance);
+    const progress = clamp(Number(event.detail?.progress) || 0, 0, 1);
+    const mainTop = scrollY + main.getBoundingClientRect().top;
+    const target = mainTop + blockStart(index) + featuredEntrance + progress * carouselDistance;
+    if (event.detail?.smooth) animateCardSnap(target);
+    else {
+      cancelCardSnap();
+      scrollTo({ top: target, behavior: 'auto' });
+      render();
+    }
+  });
 
   function scheduleCardSnap() {
     clearTimeout(cardSnapTimer);
     cardSnapTimer = setTimeout(() => {
-      if (!root.classList.contains('block-layout') || hold <= 0) return;
+      if (!root.classList.contains('block-layout') || !blockHolds.length) return;
       const distance = Math.max(0, -main.getBoundingClientRect().top);
-      const index = Math.min(blocks.length - 1, Math.floor(distance / step));
-      const localDistance = distance - index * step;
-      if (localDistance < 0 || localDistance > hold) return;
-      cardControllers.get(blocks[index])?.snapToNearest(localDistance / hold);
+      const { index, progress } = timelineState(distance);
+      if (progress > 0) return;
+      const localDistance = distance - blockStart(index);
+      const blockEntrance = Math.min(blockHold(index), entrance);
+      if (localDistance < 0 || localDistance > blockHold(index)) return;
+      if (localDistance < blockEntrance && blocks[index].hasAttribute('data-home-entrance')) {
+        const snapPoints = [0, blockEntrance];
+        const nearestPoint = snapPoints.reduce((nearest, point) => (
+          Math.abs(point - localDistance) < Math.abs(nearest - localDistance) ? point : nearest
+        ), snapPoints[0]);
+        const mainTop = scrollY + main.getBoundingClientRect().top;
+        animateCardSnap(mainTop + blockStart(index) + nearestPoint);
+        return;
+      }
+      if (localDistance < blockEntrance) return;
+      const carouselDistance = Math.max(0, blockHold(index) - blockEntrance);
+      const carouselProgress = carouselDistance > 0
+        ? clamp((localDistance - blockEntrance) / carouselDistance, 0, 1)
+        : 1;
+      if (blocks[index] === featuredThemesBlock) {
+        const themeCount = featuredThemesBlock.querySelectorAll('[data-theme-group]').length;
+        const snappedProgress = themeCount > 1
+          ? Math.round(carouselProgress * (themeCount - 1)) / (themeCount - 1)
+          : 0;
+        featuredThemesBlock.dispatchEvent(new CustomEvent('featured-theme-carousel-request', {
+          detail: { progress: snappedProgress, smooth: true }
+        }));
+        return;
+      }
+      cardControllers.get(blocks[index])?.snapToNearest(carouselProgress);
     }, Math.max(0, rootNumber('--card-snap-delay', 60)));
   }
 
@@ -228,6 +360,7 @@
       });
       if (indicator) indicator.hidden = cards.length <= 1;
       let focused = -1;
+      let virtualFocus = null;
       let cardFrame = 0;
       let pageSyncFrame = 0;
       let syncingFromPage = false;
@@ -279,6 +412,15 @@
         const gapStep = innerWidth * (Number.isFinite(gapStepValue) ? gapStepValue : 5) / 100;
         const positions = Array(cards.length).fill(0);
 
+        if (focusIndex < 0) {
+          for (let i = 1; i < cards.length; i++) {
+            const previousDistance = i - 1 - focusIndex;
+            const gap = baseGap + previousDistance * gapStep;
+            positions[i] = positions[i - 1] + cardWidth * cardScale(previousDistance) + gap;
+          }
+          return positions;
+        }
+
         for (let i = focusIndex + 1; i < cards.length; i++) {
           const distance = i - focusIndex;
           const gap = baseGap + (distance - 1) * gapStep;
@@ -296,13 +438,16 @@
         cardFrame = 0;
         const firstOffset = items[0].offsetLeft;
         const stride = items.length > 1 ? items[1].offsetLeft - firstOffset : 1;
-        const scrollPosition = clamp(row.scrollLeft / stride, 0, cards.length - 1);
+        const scrollPosition = virtualFocus === null
+          ? clamp(row.scrollLeft / stride, 0, cards.length - 1)
+          : clamp(virtualFocus, -1, 0);
         const nearest = Math.round(scrollPosition);
+        const focusedIndex = scrollPosition < 0 ? -1 : nearest;
         dots.forEach((dot, index) => {
           const emphasis = Math.max(0, 1 - Math.abs(index - scrollPosition));
           dot.style.setProperty('--dot-opacity', 0.25 + emphasis * 0.75);
           dot.style.setProperty('--dot-scale', 1 + emphasis * 0.5);
-          dot.toggleAttribute('aria-current', index === nearest);
+          dot.toggleAttribute('aria-current', index === focusedIndex);
         });
         if (!effectsEnabled()) {
           resetCards();
@@ -329,39 +474,61 @@
           item.style.setProperty('--card-year-top', `${row.clientHeight / 2 - card.offsetHeight * scale / 2 - innerHeight * 0.01}px`);
           card.style.setProperty('--card-scale', scale);
           card.style.setProperty('--card-brightness', `${brightness(distance)}%`);
-          card.toggleAttribute('data-focused', index === nearest);
-          if (link) link.tabIndex = index === nearest ? 0 : -1;
+          card.toggleAttribute('data-focused', index === focusedIndex);
+          if (link) link.tabIndex = index === focusedIndex ? 0 : -1;
         });
 
-        if (nearest !== focused) {
-          focused = nearest;
-          const title = cards[focused].querySelector('h3')?.textContent.trim() || `Card ${focused + 1}`;
-          row.setAttribute('aria-label', `${originalLabel}. Focused: ${title}. Card ${focused + 1} of ${cards.length}`);
+        if (focusedIndex !== focused) {
+          focused = focusedIndex;
+          if (focused < 0) {
+            row.setAttribute('aria-label', `${originalLabel}. Section title focused.`);
+          } else {
+            const title = cards[focused].querySelector('h3')?.textContent.trim() || `Card ${focused + 1}`;
+            row.setAttribute('aria-label', `${originalLabel}. Focused: ${title}. Card ${focused + 1} of ${cards.length}`);
+          }
         }
         if (effectScope === activeBlock) updateOverlayCardInfo(effectScope);
       };
 
       const syncFromPage = progress => {
         if (!verticalEnabled() || syncingPageFromRow) return;
+        const wasVirtual = virtualFocus !== null;
+        virtualFocus = null;
         const target = scrollRange() * progress;
-        if (Math.abs(row.scrollLeft - target) < 0.5) return;
+        if (Math.abs(row.scrollLeft - target) < 0.5) {
+          if (wasVirtual) renderCards();
+          return;
+        }
         syncingFromPage = true;
         row.scrollLeft = target;
         renderCards();
         requestAnimationFrame(() => { syncingFromPage = false; });
       };
 
+      const syncEntrance = progress => {
+        if (!verticalEnabled()) return;
+        virtualFocus = -1 + clamp(progress, 0, 1);
+        if (row.scrollLeft !== 0) {
+          syncingFromPage = true;
+          row.scrollLeft = 0;
+          requestAnimationFrame(() => { syncingFromPage = false; });
+        }
+        renderCards();
+      };
+
       const syncPageFromRow = () => {
         pageSyncFrame = 0;
-        if (!verticalEnabled() || syncingFromPage || effectScope !== activeBlock || hold <= 0) return;
+        if (!verticalEnabled() || virtualFocus !== null || syncingFromPage || effectScope !== activeBlock) return;
         const range = scrollRange();
         if (!range) return;
         const blockIndex = blocks.indexOf(effectScope);
         if (blockIndex < 0) return;
+        const controllerEntrance = Math.min(blockHold(blockIndex), entrance);
         const progress = clamp(row.scrollLeft / range, 0, 1);
         const mainTop = scrollY + main.getBoundingClientRect().top;
         syncingPageFromRow = true;
-        scrollTo({ top: mainTop + blockIndex * step + progress * hold, behavior: 'auto' });
+        const carouselDistance = Math.max(0, blockHold(blockIndex) - controllerEntrance);
+        scrollTo({ top: mainTop + blockStart(blockIndex) + controllerEntrance + progress * carouselDistance, behavior: 'auto' });
         requestAnimationFrame(() => { syncingPageFromRow = false; });
       };
 
@@ -369,15 +536,17 @@
         if (!verticalEnabled() || cards.length <= 1) return;
         const blockIndex = blocks.indexOf(effectScope);
         if (blockIndex < 0) return;
+        const controllerEntrance = Math.min(blockHold(blockIndex), entrance);
         const snappedCard = Math.round(clamp(progress, 0, 1) * (cards.length - 1));
         const snappedProgress = snappedCard / (cards.length - 1);
         const mainTop = scrollY + main.getBoundingClientRect().top;
-        const target = mainTop + blockIndex * step + snappedProgress * hold;
+        const carouselDistance = Math.max(0, blockHold(blockIndex) - controllerEntrance);
+        const target = mainTop + blockStart(blockIndex) + controllerEntrance + snappedProgress * carouselDistance;
         if (Math.abs(scrollY - target) < 0.5) return;
         animateCardSnap(target);
       };
 
-      cardControllers.set(effectScope, { syncFromPage, snapToNearest });
+      cardControllers.set(effectScope, { syncEntrance, syncFromPage, snapToNearest });
 
       const scrollToFocus = (index, returnFocus = false) => {
         const next = clamp(index, 0, cards.length - 1);
@@ -451,7 +620,7 @@
       event.preventDefault();
       history.pushState(null, '', link.hash);
       const mainTop = scrollY + main.getBoundingClientRect().top;
-      animateSectionNavigation(mainTop + blockIndex * step);
+      animateSectionNavigation(mainTop + blockStart(blockIndex));
     });
   });
   addEventListener('scroll', () => {
@@ -468,6 +637,7 @@
   addEventListener('keydown', cancelCardSnap);
   addEventListener('keydown', cancelSectionNavigation);
   new ResizeObserver(measure).observe(stage);
+  document.fonts?.ready.then(measure);
   reduced.addEventListener('change', render);
   addEventListener('hashchange', () => restoreHash());
   addEventListener('popstate', () => restoreHash());

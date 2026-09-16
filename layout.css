@@ -1,7 +1,8 @@
 :root {
   /* Viewport percentages: adjust these two values to change scroll timing. */
-  --block-height: 200;
+  --block-height: 250;
   --transition-height: 50;
+  --block-entrance-height: 125;
   --content-left: 30vw;
   --card-size: 35vh;
   --card-height: var(--card-size);
@@ -81,7 +82,19 @@ html.block-layout body { margin-block: 0; }
 }
 .block-layout .layout-block[data-visible] { visibility: visible; }
 
-.block-layout .layout-block:has(.card-system) > h1 {
+.block-layout .layout-block[data-home-entrance] > h1 {
+  transform: translate3d(0, var(--block-title-y, 0px), 0);
+  will-change: transform;
+}
+
+.block-layout .layout-block[data-home-entrance] .card-system,
+.block-layout .layout-block[data-home-entrance] .featured-theme-system {
+  transform: translate3d(var(--carousel-entry-x, -5px), 0, 0);
+  will-change: transform;
+}
+
+.block-layout .layout-block:has(.card-system) > h1,
+.block-layout .layout-block:has(.featured-theme-system) > h1 {
   position: relative;
   z-index: 1;
   margin-block: 0 var(--block-title-card-offset);
@@ -356,7 +369,13 @@ html.block-layout body { margin-block: 0; }
 }
 @media print {
   .galaxy-background { display: none; }
-  .block-layout .layout-block:has(.card-system) > h1 {
+  .block-layout .layout-block[data-home-entrance] > h1,
+  .block-layout .layout-block[data-home-entrance] .card-system,
+  .block-layout .layout-block[data-home-entrance] .featured-theme-system {
+    transform: none;
+  }
+  .block-layout .layout-block:has(.card-system) > h1,
+  .block-layout .layout-block:has(.featured-theme-system) > h1 {
     margin-block: 0 1rem;
   }
   .card-system {
