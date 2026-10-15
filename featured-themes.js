@@ -44,7 +44,7 @@
   let animation = null, frame = 0, focusSplitTimer = 0;
   let source = 'carousel', entrance = 0, lastProgress = null, live = false;
   let carouselFocus = 0;
-  let width = 0, height = 0, anchor = 0, size = 0, radius = 0;
+  let width = 0, height = 0, anchor = 0, size = 0, radius = 0, splitInactiveBlur = 24;
   let titleObstacle = null;
   const copy = state => ({ split: [...state.split] });
   const same = (a, b) => a.split.every((v, i) => Math.abs(v - b.split[i]) < 0.0001);
@@ -169,6 +169,9 @@
     // Resolve percentage and calc() values through the parent's real layout position.
     anchor = groups[0].parent.offsetLeft;
     radius = parseFloat(getComputedStyle(groups[0].parent).borderTopLeftRadius) || 32;
+    splitInactiveBlur = parseFloat(
+      getComputedStyle(system).getPropertyValue('--theme-split-inactive-blur')
+    ) || 24;
     svg.setAttribute('viewBox', `0 0 ${width} ${height}`);
     svg.querySelector('feGaussianBlur').setAttribute('stdDeviation', Math.max(24, Math.min(48, size * 0.045)));
     updateTitleObstacle();
@@ -194,7 +197,7 @@
     );
   }
   function place(element, box, opacity, enabled) {
-    element.style.transform = `translate3d(${box.x - anchor}px, ${box.y - height / 2}px, 0) scale(${box.w / size}, ${box.h / size})`;
+    element.style.transform = `translate3d(${box.x - anchor}px, ${box.y - height / 2}px, 0) scale(${box.w / size}, ${box.h / size}) var(--jelly-transform, translate3d(0, 0, 0))`;
     element.style.opacity = opacity;
     element.style.pointerEvents = enabled ? 'auto' : 'none';
     element.tabIndex = enabled ? 0 : -1;
@@ -378,6 +381,10 @@
       const inactiveOpacity = 1;
       const distance = Math.abs(i - displayFocus);
       const brightness = mix(carouselBrightness(distance), 1, isActive ? opened : 0);
+      const baseBlur = carouselBlur(distance);
+      const splitBlur = isActive
+        ? mix(baseBlur, 0, ease(opened))
+        : baseBlur + splitInactiveBlur * ease(opened);
       const parentSurfaceOpacity = inactiveOpacity * (1 - ease(clamp((split - 0.08) / 0.82)));
       if (isActive && opened > 0.001 && parentSurfaceOpacity > 0.001) {
         mitosisSurfaces.push({
@@ -387,7 +394,7 @@
       }
       place(item.parent, parentBox, inactiveOpacity, live);
       item.parent.style.backgroundColor = isActive && opened > 0.001 ? 'transparent' : '#000';
-      item.parent.style.filter = `brightness(${brightness}) blur(${reduced.matches ? 0 : carouselBlur(distance) * (1 - opened)}px)`;
+      item.parent.style.filter = `brightness(${brightness}) blur(${reduced.matches ? 0 : splitBlur}px)`;
       item.parent.style.zIndex = String(Math.round(200 - distance * 10));
       const labelChannel = Math.round(255 * (1 - ease(split)));
       item.parent.style.color = `rgb(${labelChannel} ${labelChannel} ${labelChannel})`;
@@ -427,12 +434,14 @@
         const enabled = live && split > 0.95;
         const card = project.querySelector('.theme-project-card');
         project.style.opacity = labelOpacity;
-        project.style.zIndex = '100';
-        project.style.pointerEvents = enabled ? 'auto' : 'none';
+        project.style.zIndex = String(400 + j);
+        project.style.pointerEvents = 'none';
         project.style.filter = 'none';
         place(card, box, 1, false);
         card.removeAttribute('tabindex');
         card.style.pointerEvents = enabled ? 'auto' : 'none';
+        card.style.zIndex = String(400 + j);
+        card.style.backgroundColor = enabled ? '#000' : 'transparent';
         const year = project.querySelector('.theme-project-year');
         year.style.left = `${box.x - anchor + Math.min(radius, box.w / 3)}px`;
         year.style.top = `${box.y - 10}px`;
@@ -440,7 +449,7 @@
         link.tabIndex = enabled ? 0 : -1;
         project.inert = !enabled;
         project.toggleAttribute('data-theme-project-focused', enabled);
-        if (split > 0.001) {
+        if (split > 0.001 && !enabled) {
           // Opaque cells join before their labels appear; thresholding makes the neck pinch off.
           mitosisSurfaces.push({
             layer: 300 + j,
@@ -448,11 +457,11 @@
           });
         }
       });
+      const dotEmphasis = Math.max(0, 1 - Math.abs(i - displayFocus));
+      dots[i].style.setProperty('--dot-opacity', 0.25 + dotEmphasis * 0.75);
+      dots[i].style.setProperty('--dot-scale', 1 + dotEmphasis * 0.5);
       dots[i].setAttribute('aria-pressed', String(split > 0.5));
-      dots[i].toggleAttribute(
-        'aria-current',
-        entrance >= 0.999 && Math.round(carouselFocus) === i && opened < 0.5
-      );
+      dots[i].toggleAttribute('aria-current', entrance >= 0.999 && Math.round(carouselFocus) === i);
     });
     membrane.innerHTML = mitosisSurfaces
       .sort((a, b) => a.layer - b.layer)

@@ -99,7 +99,7 @@ html.standalone-related-page body {
   border-radius: var(--related-card-radius);
   text-transform: uppercase;
   filter: brightness(var(--related-card-brightness, 80%));
-  transform: translateY(-50%) scale(var(--related-card-scale, 0.9));
+  transform: translateY(-50%) scale(var(--related-card-scale, 0.9)) var(--jelly-transform, translate3d(0, 0, 0));
   transform-origin: left center;
 }
 

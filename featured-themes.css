@@ -1,6 +1,7 @@
 .featured-theme-system {
   --theme-card-gap-vw: 1;
   --theme-card-gap-step-vw: 5;
+  --theme-split-inactive-blur: 24px;
   position: relative;
   flex: 0 0 auto;
   width: 100vw;
@@ -47,7 +48,7 @@
 .theme-parent-card[aria-expanded="true"] {
   align-items: center;
   justify-content: center;
-  text-align: center;
+  text-align: left;
 }
 .theme-parent-card h1,
 .theme-project-card h3 {
@@ -76,19 +77,26 @@
   position: absolute;
   right: 2vw; bottom: 2vh;
   z-index: 300;
-  display: flex; gap: 1rem;
-  flex-wrap: wrap;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 .featured-theme-indicator button {
-  font: inherit;
-  font-size: 0.875rem;
-  color: inherit;
-  background: transparent;
+  width: 0.5rem;
+  height: 0.5rem;
+  padding: 0;
   border: 0;
-  padding: 0.5rem;
+  border-radius: 50%;
+  background: #000;
+  color: transparent;
+  font-size: 0;
+  line-height: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  opacity: var(--dot-opacity, 0.25);
+  transform: scale(var(--dot-scale, 1));
   cursor: pointer;
 }
-.featured-theme-indicator button[aria-pressed="true"] { font-weight: 700; }
 .theme-parent-card:focus-visible,
 .theme-project-card:has(a:focus-visible) { outline: 2px solid currentColor; outline-offset: 4px; }
 @media (max-width: 767px) {
@@ -96,7 +104,7 @@
   .theme-parent-card { padding: 2vh; }
   .theme-parent-card h1 { font-size: 1rem; overflow-wrap: anywhere; }
   .theme-project-card h3 { font-size: 1.5rem; }
-  .featured-theme-indicator { gap: 0.25rem; }
+  .featured-theme-indicator { gap: 0.5rem; }
 }
 @media print {
   .theme-mitosis-layer, .featured-theme-indicator { display: none; }

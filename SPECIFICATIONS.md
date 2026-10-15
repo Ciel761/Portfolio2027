@@ -1,6 +1,6 @@
 # Portfolio renovation specification
 
-Last updated: 2026-09-15.
+Last updated: 2026-10-15.
 Status: Active local implementation with full-screen homepage and project-page timelines, a shared overlay, synchronized homepage card carousels, a focus-driven Featured Themes system, responsive project grids, and cinematic dark sections.
 
 ## Current direction — 2026-09-15
@@ -460,3 +460,67 @@ This section is authoritative for project pages. Research pages load `research/p
 - Related Projects currently provides the terminal scene structure but does not yet contain project recommendations or links.
 - The duplicated research and design layout files should remain behaviorally aligned until a later refactor consolidates them.
 - Mobile overlay composition, short-screen grid density, media loading, text zoom, keyboard traversal, and real touch behavior need device-level validation.
+
+## Dissertation content integration — 2026-10-15
+
+Integrated the prepared kit at `reference/Raw Material/dissertation-portfolio-kit/` into the existing local website. Source copy, inert integration templates, originals, and review artifacts remain unchanged in the reference folder. Changes build on the working directory's pre-existing uncommitted implementation.
+
+### Content and naming
+
+- `research/immersive-scholarly-sensemaking.html` now presents **Sense-able Scholarly Sensemaking**. Its overview and eight previously empty research/design blocks contain the Chapter 5 narrative, figures, researcher role, formative participant insights, final interaction workflow, and provisional design contributions. Chapter 6 is a new **Future work** block between Discussion and Related Projects, with a matching timeline navigation entry. The proposed field study and companion web interface are identified as future work.
+- `research/hypertext-augmented-sensemaking.html` combines the new Chapter 3 framing with the existing Study and Incubators content. The sample is described as 16 core hypertext users plus seven supplementary participants. The implications block includes the researcher's role.
+- `research/future-immersive-environments.html` combines the Chapter 4 method and toolkit with the existing detailed speculative concept descriptions and a new concluding Contribution block. The artwork exploration is distinguished from the systematic literature review, and speculative concepts are distinguished from validated system benefits.
+- At the user's request, the 2025 project is displayed as **Sense and Sense-ability**. This overrides the content kit's spelling guideline for site copy. Reference sources and original publication files retain their original wording.
+- The homepage placeholder bio is replaced with the supplied research bio. The three research cards include the kit summaries; Featured Themes and related-project labels use the same project names. The duplicate 2023 card pointing to the 2025 speculative project is removed. Existing routes remain stable.
+- The immersive venue now states `UIST 2026 demo · Accepted in dissertation proposal`; this is source-snapshot metadata, not a fresh verification of publication status. No missing DOI or author list was invented.
+
+### Media and reading layout
+
+- Copied the kit's 32 full-size WebP images and their smaller variants to `assets/dissertation/`. The accompanying `source-manifest.json` preserves the package's provenance, captions, dimensions, checksums, and credit information. Its paths remain relative to the reference kit. No new license is assigned.
+- Used selected figures with intrinsic dimensions, responsive `srcset`, meaningful alt text, lazy loading, captions in document flow, and links to full-size media. Additional representation and interaction explorations appear under native disclosure controls.
+- Added `research/dissertation-content.css`, loaded only by the three case studies. It provides two-column desktop reading areas, a single-column mobile layout, bounded content scrolling, visible keyboard focus, uncropped figures, and print styles. Existing cinematic selectors and the shared timeline implementation were not edited.
+- During active reading sections on mobile, the overlay navigation becomes a horizontally scrollable bottom bar and the Home link stays at the top. The cinematic introduction retains its original overlay layout. Mobile spacing reserves room for these controls and safe-area insets.
+
+### Preservation and verification
+
+- Compared the immersive cinematic region against a snapshot of the working file taken immediately before integration. It is identical except for the two requested project-name spelling corrections in its existing project link and citation. Text scenes, quotations, media paths, timing attributes, hold duration, and Introduction navigation entry otherwise remain unchanged.
+- `research/project-layout.css` and `research/project-layout.js` are byte-identical to the pre-integration working files. Future work and Contribution use the existing dynamic section registration pattern.
+- Static checks across the homepage and all nine project pages passed: HTML nesting, unique IDs, local resource paths, local fragment destinations, navigation registration, heading references for edited content, image dimensions, alt text, and lazy loading. The pre-existing cinematic `aria-labelledby` reference to its commented-out title was deliberately preserved.
+- All 32 full-size WebP copies match the reference kit byte-for-byte. Reference kit contents were not modified.
+- Browser visual, interaction, reduced-motion, touch, and text-zoom checks remain **unverified**: the in-app browser was unavailable, and Safari Computer Use access was denied because Accessibility/Screen Recording permissions were not granted. Responsive CSS has been implemented and inspected statically; it is not a claim of device-tested acceptance.
+
+### Follow-up: content height for the methods section — 2026-10-15
+
+At the user's request, the immersive page's `#project-section-four` now hugs its content through an opt-in `data-project-content-height` attribute. The section uses `height: auto` with its bottom inset released; its heading and content area have no internal scrolling or height cap. Other dissertation sections retain their existing sizing.
+
+The shared research timeline now measures overflow only for sections carrying that attribute and moves their content upward through the clipped viewport during the section hold. Incoming and outgoing offsets use viewport pixels for these sections so shorter natural-height blocks do not appear early during transitions. Existing sections, including the cinematic introduction, retain their prior timeline behavior. Resizing remeasures the content travel using the existing resize observer. Mobile bottom padding reserves clearance for navigation.
+
+Validation: JavaScript syntax passed. Executed the actual timeline script in a simulated DOM for short and tall desktop content, tall mobile content, reduced motion, content resizing, navigation to the next section, and a section without the new attribute; all assertions passed. This checks timeline logic, not browser rendering; the visual-verification limitation above still applies.
+
+### Follow-up: section separation and idle snapping — 2026-10-15
+
+Research project timelines now expose two independent settings in `research/project-layout.css`: `--project-section-gap: 10` (a minimum visual separation of 10vh between moving section boxes) and `--project-section-snap-delay: 500` (milliseconds without page scrolling before settling a transition). The existing 50vh transition scroll distance and 50vh hold padding are unchanged. Short content may produce more than the minimum gap to keep inactive sections outside the viewport. Setting the gap to zero restores the previous displacement behavior.
+
+After a 500ms pause strictly within a section transition, the timeline animates to its nearest endpoint. Before the midpoint it returns to the outgoing section's hold end, preserving the reader's place; at or after the midpoint it advances to the incoming section's hold start. Section holds, the opening reveal, content reading, and cinematic scene progress do not snap. Snapping reuses the existing navigation easing, with immediate settling in reduced-motion mode after the idle delay. Programmatic navigation cannot start another snap. New scrolling resets the countdown; wheel, keyboard, pointer, and touch input cancel pending/active snapping. Active touch or pointer contact suppresses snapping until release, with subsequent momentum restarting the countdown. Resize cancels stale timers/animations and remeasures travel.
+
+Section movement now uses measured pixel distances when the gap is enabled, accounting for different section heights, top insets, and the methods section's content travel. This prevents content-height sections from overlapping adjacent sections. The cinematic markup, scene timing, and 900vh hold are unchanged. The design-page framework and homepage were not changed in this follow-up.
+
+Validation: `tests/project-layout.test.cjs` runs the production timeline in a controlled DOM/clock without external dependencies. All 19 checks passed, covering the 500ms threshold, midpoint direction, repeated pauses, snap completion, input cancellation, finger contact/momentum, reading/opening/cinematic exclusions, reduced motion, navigation, short and tall desktop/mobile sections, resizing, gap geometry, content reachability, and zero-gap compatibility. Run with `node tests/project-layout.test.cjs`. These checks do not replace browser/device verification; the Computer Use permission limitation remains.
+
+### Follow-up: text-only cards — 2026-10-15
+
+Text-only content cards, overview summaries, and fact cards across research and design project pages now have no background fill. Dissertation narrative cards also inherit their section's text color, keeping them readable in light and dark sections. Their existing spacing and layout remain in place. Removed the unused text-card background token; image treatments and media captions retain their existing styling. Verified the CSS changes and whitespace checks; browser visual verification remains unavailable as recorded above.
+
+## Shared content-sized project sections — 2026-10-15
+
+All five research and four design pages now load the same `project-page.js` runtime and final `project-page.css` stylesheet. The local project stylesheets remain visual foundations, while their older JavaScript files are retained as inactive legacy references. The shared files define the active behavior described here and supersede the earlier fixed-height and opening-reveal notes above.
+
+- Titles and overviews are separate timeline blocks with their existing `#project-opening` and `#project-overview` destinations. Each hugs its content; the previous viewport-height shrinking title reveal is removed.
+- Every ordinary content block and the Related Projects block carries `data-project-content-height`. Its height, grids, text cells, figures, and captions follow their contents without an inner vertical scrollbar or heading-height cap. Desktop column spans remain; mobile content grids stack. Text-only surfaces remain transparent.
+- Tall blocks move through the clipped sticky viewport using page scroll. The timeline measures title, overview, content, and related sections alike; expanding disclosures, image loading, fonts, and resizing trigger remeasurement. Changes above the reader preserve their current section and local scroll position, including transition progress.
+- The minimum moving-section gap remains 10vh and the idle snap delay remains 500ms, configured centrally in `project-page.css`. Snaps apply only between sections, including title/overview transitions. Reading, the cinematic hold, and direct content scrolling are not snapped. Input cancellation, touch-contact suppression, and reduced-motion handling apply across all nine pages.
+- Related Projects is now an ordinary content-height terminal section. Its wrappers, headings, years, and cards follow natural flow; the fixed 300vh hold and cinematic scene entrance are removed. The existing native horizontal carousel, arrow/Home/End keys, card selection, and indicator controls remain. Horizontal card movement no longer seeks the page timeline, and vertical page scrolling no longer drives card selection. Text-only recommendation cards are transparent and inherit the dark section's foreground color.
+- Metaverse-based Workspace for Research and Synthesis Infrastructure Foundation now use the same title/overview/related structure and overlay navigation. Their existing text, metadata, publication link, project links, and routes were retained; no missing project narrative was invented.
+- The immersive cinematic introduction is the sole full-screen exception. Its complete section markup, media references, scene timing, quotations, hold attributes, and renderer are identical to the pre-update snapshot. It retains its original mobile overlay composition while active. Its absolute position in the document timeline changes because title and overview are now separate blocks.
+
+Verification: all nine pages passed HTML nesting, unique-ID, navigation registration, local resource, and fragment checks. All 67 noncinematic timeline sections carry the content-height attribute; only the cinematic introduction retains a fixed hold. The complete cinematic HTML region and its scene renderer match the snapshot taken before this update. All 23 executable timeline checks passed, including natural title/overview navigation with and without a cinematic block, tall and short sections, idle timing, midpoint snapping, input cancellation, touch momentum, reduced motion, resizing, and late image/font changes. Browser visual/device verification remains unavailable because Computer Use permissions have not been granted; these results do not claim rendered or touch-device acceptance.

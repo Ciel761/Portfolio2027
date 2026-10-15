@@ -11,29 +11,32 @@
   <link rel="stylesheet" href="../related-carousel.css">
   <script src="../overlay.js" defer></script>
   <script src="../related-carousel.js" defer></script>
-  <script src="project-layout.js" defer></script>
+  <script src="../jelly-cards.js" defer></script>
+  <script src="../project-page.js" defer></script>
+  <link rel="stylesheet" href="../project-page.css">
 </head>
-<body>
+<body class="project-natural-layout">
   <main class="project-page" data-project-page>
     <div class="project-page-stage">
-      <section class="project-opening-block" id="project-opening" data-project-opening data-visible>
+      <section class="project-opening-block" id="project-opening" data-project-opening data-project-part="opening" data-project-content-height data-visible>
         <div class="project-opening-stage">
-          <section class="project-title-section" aria-labelledby="project-title">
+<section class="project-title-section" aria-labelledby="project-title">
             <h1 id="project-title">ResDash</h1>
             <p>2021</p>
             <p>Resident evaluation and progress tracking · UC Health · Cincinnati, Ohio</p>
           </section>
-          <section class="project-overview-section" id="project-overview" aria-label="Project overview">
+        </div>
+      </section>
+
+      <section class="project-regular-block project-overview-section" id="project-overview" data-project-part="overview" data-project-content-height aria-hidden="true" inert aria-label="Project overview">
             <div class="project-overview-grid">
               <div class="project-overview-summary"><p>ResDash is an internal evaluation system for UC Health's Internal Medicine residency program. It brings longitudinal assessment data, narrative feedback, and review workflows into one place so educators can understand each resident physician's performance and progress throughout training.</p></div>
               <div class="project-overview-fact"><p>Resident evaluation<br>Progress tracking</p></div>
               <div class="project-overview-fact"><p>Healthcare information design<br>Interaction design</p></div>
             </div>
           </section>
-        </div>
-      </section>
 
-      <section class="project-regular-block" id="project-context" data-project-part="context" aria-labelledby="context-title" aria-hidden="true" inert>
+      <section class="project-regular-block" id="project-context" data-project-part="context" aria-labelledby="context-title" aria-hidden="true" inert data-project-content-height>
         <h1 id="context-title">Context</h1>
         <div class="project-content-grid" aria-label="Project context">
           <div class="project-content-grid-cell span-columns-2 span-rows-3"><p>Resident performance develops over years and is documented through many evaluations, ratings, milestones, and written observations. ResDash organizes this evidence into a longitudinal view that supports preparation, discussion, and decision-making during formal review sessions.</p></div>
@@ -43,7 +46,7 @@
         </div>
       </section>
 
-      <section class="project-regular-block" id="project-performance" data-project-part="performance" aria-labelledby="performance-title" aria-hidden="true" inert>
+      <section class="project-regular-block" id="project-performance" data-project-part="performance" aria-labelledby="performance-title" aria-hidden="true" inert data-project-content-height>
         <h1 id="performance-title">Performance View</h1>
         <div class="project-content-grid" aria-label="Resident performance view">
           <div class="project-content-grid-cell span-columns-2 span-rows-3"><p>The resident page combines milestone reviews, faculty and peer trendlines, heatmaps, spider graphs, rating counts, and narrative feedback. These coordinated views help reviewers move between a high-level performance pattern and the individual assessments behind it.</p></div>
@@ -53,7 +56,7 @@
         </div>
       </section>
 
-      <section class="project-regular-block" id="project-workflow" data-project-part="workflow" aria-labelledby="workflow-title" aria-hidden="true" inert>
+      <section class="project-regular-block" id="project-workflow" data-project-part="workflow" aria-labelledby="workflow-title" aria-hidden="true" inert data-project-content-height>
         <h1 id="workflow-title">Review Workflow</h1>
         <div class="project-content-grid" aria-label="Resident review workflow">
           <div class="project-content-grid-cell span-columns-2 span-rows-3"><p>ResDash supports the work around a review as well as the review itself. Faculty can locate assigned residents, open a pre-review report, identify records that still require review, write committee comments, and return to previous review sessions.</p></div>
@@ -63,7 +66,7 @@
         </div>
       </section>
 
-      <section class="project-regular-block project-related-projects-block" id="project-related-projects" data-project-part="related-projects" data-project-related data-project-dark data-project-hold="300" aria-labelledby="related-projects-title" aria-hidden="true" inert>
+      <section class="project-regular-block project-related-projects-block" id="project-related-projects" data-project-part="related-projects" data-project-related data-project-dark aria-labelledby="related-projects-title" aria-hidden="true" inert data-project-content-height>
         <div class="project-related-experience">
           <section class="project-related-scene project-related-content" data-related-scene data-start="-0.12" data-persist>
             <h1 id="related-projects-title">Related Projects</h1>
@@ -85,7 +88,7 @@
 
   <aside class="site-overlay" aria-label="Site navigation and project information">
     <div class="overlay-left">
-      <nav class="overlay-nav" aria-label="ResDash sections">
+      <nav class="overlay-nav project-overlay-nav" aria-label="ResDash sections">
         <a href="#project-opening" data-project-nav="opening" aria-current="location">ResDash</a>
         <a href="#project-overview" data-project-nav="overview">Overview</a>
         <a href="#project-context" data-project-nav="context">Context</a>

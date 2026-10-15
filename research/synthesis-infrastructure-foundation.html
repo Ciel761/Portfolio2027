@@ -6,27 +6,53 @@
   <title>Synthesis Infrastructure Foundation — Siyi Zhu</title>
   <link rel="stylesheet" href="../typography.css">
   <link rel="stylesheet" href="project-layout.css">
+  <link rel="stylesheet" href="../overlay.css">
   <link rel="stylesheet" href="../related-carousel.css">
+  <script src="../overlay.js" defer></script>
   <script src="../related-carousel.js" defer></script>
+  <script src="../jelly-cards.js" defer></script>
+  <script src="../project-page.js" defer></script>
+  <link rel="stylesheet" href="../project-page.css">
 </head>
-<body>
-  <main>
-    <p><a href="../index.html#research">Back to research</a></p>
-    <h1>Synthesis Infrastructure Foundation</h1>
-    <p>Research project</p>
-    <section class="project-related-projects-standalone" aria-labelledby="related-projects-title">
+<body class="project-natural-layout">
+  <main class="project-page" data-project-page>
+    <div class="project-page-stage">
+      <section class="project-opening-block" id="project-opening" data-project-opening data-project-part="opening" data-project-content-height data-visible>
+        <div class="project-opening-stage"><section class="project-title-section" aria-labelledby="project-title">
+          <h1 id="project-title">Synthesis Infrastructure Foundation</h1>
+        </section></div>
+      </section>
+      <section class="project-regular-block project-overview-section" id="project-overview" data-project-part="overview" data-project-content-height aria-label="Project overview" aria-hidden="true" inert>
+        <div class="project-overview-grid"><div class="project-overview-abstract"><p>Research project</p></div></div>
+      </section>
+      <section class="project-regular-block project-related-projects-block" id="project-related-projects" data-project-part="related-projects" data-project-related data-project-dark data-project-content-height aria-labelledby="related-projects-title" aria-hidden="true" inert>
+        <div class="project-related-experience"><section class="project-related-scene project-related-content" data-related-scene>
       <h1 id="related-projects-title">Related Projects</h1>
       <div class="related-card-system" data-related-carousel>
         <div class="related-card-row" role="region" aria-label="Related projects" tabindex="0">
           <div class="related-card-track">
-            <div class="related-card-item"><p class="related-card-year">Ongoing</p><article class="related-card"><h3><a href="immersive-scholarly-sensemaking.html">Immersive and Sensible Scholarly Sensemaking</a></h3></article></div>
+            <div class="related-card-item"><p class="related-card-year">Ongoing</p><article class="related-card"><h3><a href="immersive-scholarly-sensemaking.html">Sense-able Scholarly Sensemaking</a></h3></article></div>
             <div class="related-card-item"><p class="related-card-year">2024</p><article class="related-card"><h3><a href="hypertext-augmented-sensemaking.html">Patterns of Hypertext-Augmented Sensemaking</a></h3></article></div>
-            <div class="related-card-item"><p class="related-card-year">2025</p><article class="related-card"><h3><a href="future-immersive-environments.html">Sense and Senseability</a></h3></article></div>
+            <div class="related-card-item"><p class="related-card-year">2025</p><article class="related-card"><h3><a href="future-immersive-environments.html">Sense and Sense-ability</a></h3></article></div>
           </div>
         </div>
         <div class="related-card-indicator" aria-label="Related projects carousel position"></div>
       </div>
-    </section>
+    </section></div>
+      </section>
+    </div>
   </main>
+  <aside class="site-overlay" aria-label="Site navigation and project information">
+    <div class="overlay-left"><nav class="overlay-nav project-overlay-nav" aria-label="Project sections">
+      <a href="#project-opening" data-project-nav="opening" aria-current="location">Project</a>
+      <a href="#project-overview" data-project-nav="overview">Overview</a>
+      <a href="#project-related-projects" data-project-nav="related-projects">Related Projects</a>
+    </nav></div>
+    <div class="overlay-right">
+      <header class="overlay-header project-overlay-header"><a class="project-overlay-home" href="../index.html#home">Home</a><p class="overlay-name">Siyi Zhu</p></header>
+      <section class="overlay-info" aria-label="Current project information"></section>
+      <footer class="overlay-footer"><p>© Siyi Zhu</p></footer>
+    </div>
+  </aside>
 </body>
 </html>

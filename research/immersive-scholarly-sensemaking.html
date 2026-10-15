@@ -3,37 +3,43 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Immersive and Sensible Scholarly Sensemaking — Siyi Zhu</title>
+  <meta name="description" content="Designing a mixed reality workspace where researchers can assemble hypotheses, explore evidence, and sense computed gaps in support through movement.">
+  <title>Sense-able Scholarly Sensemaking — Siyi Zhu</title>
   <link rel="stylesheet" href="../typography.css">
   <link rel="stylesheet" href="../overlay.css">
   <link rel="stylesheet" href="project-layout.css">
+  <link rel="stylesheet" href="dissertation-content.css">
   <link rel="stylesheet" href="../related-carousel.css">
   <script src="../overlay.js" defer></script>
   <script src="../related-carousel.js" defer></script>
-  <script src="project-layout.js" defer></script>
+  <script src="../jelly-cards.js" defer></script>
+  <script src="../project-page.js" defer></script>
+  <link rel="stylesheet" href="../project-page.css">
 </head>
-<body>
+<body class="project-natural-layout dissertation-page">
   <main class="project-page" data-project-page>
     <div class="project-page-stage">
-      <section class="project-opening-block" id="project-opening" data-project-opening data-visible>
+      <section class="project-opening-block" id="project-opening" data-project-opening data-project-part="opening" data-project-content-height data-visible>
         <div class="project-opening-stage">
-        <section class="project-title-section" aria-labelledby="project-title">
-          <h1 id="project-title">Immersive and Sensible Scholarly Sensemaking</h1>
-          <p class="project-year">Ongoing</p>
-          <p class="project-venue">Publication venue TBD</p>
-        </section>
-
-        <section class="project-overview-section" id="project-overview" aria-label="Project overview">
-          <div class="project-overview-grid">
-            <div class="project-overview-abstract">
-              <p>Scholarly sensemaking, such as in-depth literature reviewing and problem formulation, is essential for research, but it has traditionally been conducted through text-heavy interfaces like Google Docs, RoamResearch, and Zotero. Furthermore, abstract and qualitative scholarly information, such as quotes, claims, and evidence, is difficult to materialize in forms other than text. However, text does not inherently support the perception of abstract properties of information that researchers are particularly interested in (e.g., qualities, connections, fairness). In this demonstration, we present our design exploration of an extended reality (XR) system that enhances the “sense-ability” of immaterial properties of information to enhance scholarly sensemaking. This design proposes instability as a sensemaking affordance within an immersive sensemaking system, enabling users to quickly identify weaknesses in arguments.</p>
-            </div>
-            <div class="project-overview-custom project-overview-custom-one">Dissertation Project</div>
-            <div class="project-overview-custom project-overview-custom-two">System Design</div>
+<section class="project-title-section" aria-labelledby="project-title">
+          <h1 id="project-title">Sense-able Scholarly Sensemaking</h1>
+          <div class="project-meta-row">
+            <p class="project-year">Ongoing</p>
+            <p class="project-venue">UIST 2026 demo · Accepted in dissertation proposal</p>
           </div>
         </section>
         </div>
       </section>
+
+      <section class="project-regular-block project-overview-section" id="project-overview" data-project-part="overview" data-project-content-height aria-hidden="true" inert aria-label="Project overview">
+          <div class="project-overview-grid">
+            <div class="project-overview-abstract">
+              <p>How might researchers explore scholarly ideas through more than reading alone? I developed a mixed reality prototype that represents statements as connected entities and relations. Researchers can assemble hypotheses, inspect related evidence, and encounter oscillation that makes the system’s computed assessment of evidential support perceptible. Reflective prototyping and formative sessions with four researchers shaped a set of provisional design principles for sense-able scholarly work.</p>
+            </div>
+            <div class="project-overview-custom project-overview-custom-one"><p>Dissertation project<br>Mixed reality prototype</p></div>
+            <div class="project-overview-custom project-overview-custom-two"><p>Research through design<br>4 formative sessions<br>Field study proposed</p></div>
+          </div>
+        </section>
 
       <section class="project-regular-block project-introduction-block" id="project-section-three" data-project-part="section-three" data-project-intro data-project-dark data-project-hold="900" aria-labelledby="project-introduction-title" aria-hidden="true" inert>
         <!-- <h1 id="project-introduction-title" class="project-introduction-label">Introduction</h1> -->
@@ -41,8 +47,30 @@
           <div class="project-introduction-media" aria-hidden="true">
             <img class="project-introduction-image project-introduction-image-tree" src="../assets/immersive-scholarly-sensemaking/apple-tree.jpg" alt="" data-intro-media data-start="0.02" data-end="0.10">
             <img class="project-introduction-image project-introduction-image-close" src="../assets/immersive-scholarly-sensemaking/apple-close-up.jpg" alt="" data-intro-media data-start="0.20" data-end="0.30">
-            <video class="project-introduction-video project-introduction-video-cutting-apple" autoplay muted loop playsinline src="../assets/immersive-scholarly-sensemaking/cutting-apple_1920_1080_24fps.mp4" alt="" data-intro-media data-start="0.28" data-end="0.46">
+            <video class="project-introduction-video project-introduction-video-cutting-apple" autoplay muted loop playsinline src="../assets/immersive-scholarly-sensemaking/cutting-apple_1920_1080_24fps.mp4" data-intro-media data-start="0.28" data-end="0.46"></video>
             <img class="project-introduction-image project-introduction-image-toolkit" src="../assets/immersive-scholarly-sensemaking/toolkit.png" alt="" data-intro-media data-start="0.76" data-end="0.88">
+            <div class="project-introduction-quote-field" aria-hidden="true">
+              <blockquote class="project-introduction-ambient-quote quote-wikipedia" data-intro-media data-intro-quote data-drift="-10" data-start="0.38" data-end="0.53">
+                <p>“The groundcolor of ripe apples is yellow, green, yellow-green or whitish yellow. The overcolor can be orange-red, pink-red, red, purple-red or brown-red.”</p>
+                <cite>— Wikipedia, Apple</cite>
+              </blockquote>
+              <blockquote class="project-introduction-ambient-quote quote-bolles" data-intro-media data-intro-quote data-drift="13" data-start="0.40" data-end="0.57">
+                <p>“In the orchards piles of red and of yellow apples shone in the sunlight, and when one still depended from the tree it was as bright as a gilt ball on a Christmas-tree.”</p>
+                <cite>— Frank Bolles, At the North of Bearcamp Water</cite>
+              </blockquote>
+              <blockquote class="project-introduction-ambient-quote quote-woolf" data-intro-media data-intro-quote data-drift="-16" data-start="0.42" data-end="0.59">
+                <p>“The window panes reflected apples, reflected roses; all the leaves were green in the glass. If they moved in the drawing room, the apple only turned its yellow side.”</p>
+                <cite>— Virginia Woolf, A Haunted House</cite>
+              </blockquote>
+              <blockquote class="project-introduction-ambient-quote quote-thoreau" data-intro-media data-intro-quote data-drift="9" data-start="0.45" data-end="0.61">
+                <p>“Early apples begin to be ripe about the first of August; but I think that none of them are so good to eat as some to smell.”</p>
+                <cite>— Henry David Thoreau, Wild Apples</cite>
+              </blockquote>
+              <blockquote class="project-introduction-ambient-quote quote-bailey" data-intro-media data-intro-quote data-drift="-12" data-start="0.43" data-end="0.60">
+                <p>“The apple is a sturdy tree. Short of trunk and short of continuous limb, it is yet a stout and rugged object.”</p>
+                <cite>— L. H. Bailey, The Apple-Tree</cite>
+              </blockquote>
+            </div>
           </div>
 
           <div class="project-introduction-scenes">
@@ -79,7 +107,7 @@
 
             <div class="project-introduction-scene" data-intro-scene data-start="0.74" data-end="0.92">
               <p>We identified that not all qualitative scholarly information is materialized in a stable format through a systematic literature review, and not all critical properties of scholarly information are tangible enough for researchers to sense directly.</p>
-              <p style="font-style: italic;font-size: small;"><a style="color: orange;" href="future-immersive-environments.html">[Click Here to See "Sense and Senseability" project]</a></br>[1] Zhu, S. and Chan, J. 2025. Sense and Sensability: Exploring Future Immersive Environments for Scholarly Sensemaking. Proceedings of the 2025 Conference on Creativity and Cognition, 886–901. </p>
+              <p style="font-style: italic;font-size: small;"><a style="color: orange;" href="future-immersive-environments.html">[Click Here to See "Sense and Sense-ability" project]</a></br>[1] Zhu, S. and Chan, J. 2025. Sense and Sense-ability: Exploring Future Immersive Environments for Scholarly Sensemaking. Proceedings of the 2025 Conference on Creativity and Cognition, 886–901. </p>
 
               <p><strong>Structure</strong> describes relations between the internal elements of information objects.</p>
               <p><strong>Quality</strong> represents the strength of an information object.</p>
@@ -95,141 +123,129 @@
         </div>
       </section>
 
-      <section class="project-regular-block" id="project-section-four" data-project-part="section-four" aria-label="Project section four" aria-hidden="true" inert>
-        <h1 id="section-tilte">Research through Design</h1>
-        <p></p>
-        <div class="project-content-grid" aria-hidden="true">
-          <div class="project-content-grid-cell"></div>
-          <div class="project-content-grid-cell"></div>
-          <div class="project-content-grid-cell"></div>
-          <div class="project-content-grid-cell"></div>
-          <div class="project-content-grid-cell"></div>
-          <div class="project-content-grid-cell"></div>
-          <div class="project-content-grid-cell"></div>
-          <div class="project-content-grid-cell"></div>
-          <div class="project-content-grid-cell"></div>
-          <div class="project-content-grid-cell"></div>
-          <div class="project-content-grid-cell"></div>
-          <div class="project-content-grid-cell"></div>
+      <section class="project-regular-block dissertation-section" id="project-section-four" data-project-part="section-four" data-project-content-height aria-hidden="true" inert aria-labelledby="methods-title">
+        <h1 id="methods-title">Research through design</h1>
+        <div class="dissertation-content" role="region" aria-label="Research through design content">
+          <div class="dissertation-narrative"><p>I explored the design space in two completed phases. First, I used sketches, physical prototypes, and mixed reality experiments to investigate how scholarly information could take perceptible, manipulable forms. Second, I tested evolving prototypes with four HCI researchers and used their feedback to revise the design.</p><p>The formative sessions surfaced problems of interpretation as well as interaction: how to retain a statement’s meaning when breaking it into components, how to avoid overwhelming users with evidence, and how to let researchers formulate hypotheses in their own terms. These observations informed design decisions rather than claims of comparative effectiveness.</p><p class="dissertation-role"><strong>My role</strong><br>Researcher and prototype designer: conceptual exploration, physical and immersive prototyping, formative study, and synthesis of design insights.</p><ul><li>Explore alternative representations</li><li>Build and reflect on prototypes</li><li>Test with researchers</li><li>Translate observations into design decisions</li></ul></div>
+          <div class="dissertation-gallery"><figure class="dissertation-figure">
+              <a href="../assets/dissertation/sensemaking-lego-top.webp" target="_blank" rel="noopener" aria-label="Open full-size figure: Transparent statement strips and upright wooden pegs form a connected arrangement on a cutting mat."><img src="../assets/dissertation/sensemaking-lego-top.webp" srcset="../assets/dissertation/sensemaking-lego-top-800.webp 800w, ../assets/dissertation/sensemaking-lego-top.webp 2400w" sizes="(max-width: 767px) 90vw, 34vw" width="2400" height="1800" alt="Transparent statement strips and upright wooden pegs form a connected arrangement on a cutting mat." loading="lazy" decoding="async"></a>
+              <figcaption>Physical statement units connect through shared entities, making paths and loops of claims available for manipulation.</figcaption>
+            </figure></div>
         </div>
       </section>
 
-      <section class="project-regular-block" id="project-section-five" data-project-part="section-five" aria-label="Project section five" aria-hidden="true" inert>
-        <h1><span class="project-light-weight-title">Design Iteration:</span></br> Skeuomorphism</h1>
-        <div class="project-content-grid" aria-hidden="true">
-          <div class="project-content-grid-cell"></div>
-          <div class="project-content-grid-cell"></div>
-          <div class="project-content-grid-cell"></div>
-          <div class="project-content-grid-cell"></div>
-          <div class="project-content-grid-cell"></div>
-          <div class="project-content-grid-cell"></div>
-          <div class="project-content-grid-cell"></div>
-          <div class="project-content-grid-cell"></div>
-          <div class="project-content-grid-cell"></div>
-          <div class="project-content-grid-cell"></div>
-          <div class="project-content-grid-cell"></div>
-          <div class="project-content-grid-cell"></div>
+      <section class="project-regular-block dissertation-section" id="project-section-five" data-project-part="section-five" aria-hidden="true" inert aria-labelledby="analogies-title" data-project-content-height>
+        <h1 id="analogies-title">From familiar analogies to flexible structures</h1>
+        <div class="dissertation-content" role="region" aria-label="From familiar analogies to flexible structures content">
+          <div class="dissertation-narrative"><p>Information Garden imagined scholarly work as cultivation: source notes became roots, summaries became stems, and syntheses became fruit. Information Cake arranged a paper into layers, from its theoretical foundations to findings and discussion.</p><p>These familiar forms made relationships spatial, but also exposed constraints. Repeated garden forms could make distinct statements look alike. The cake’s layers privileged the organization of the source paper, making alternative relationships harder to explore. I shifted toward reusable units that researchers could connect and reorganize as their interpretations developed.</p></div>
+          <div class="dissertation-gallery"><figure class="dissertation-figure">
+              <a href="../assets/dissertation/information-garden.webp" target="_blank" rel="noopener" aria-label="Open full-size figure: An early mixed reality concept overlays green stems and red fruits on a physical room."><img src="../assets/dissertation/information-garden.webp" srcset="../assets/dissertation/information-garden-800.webp 800w, ../assets/dissertation/information-garden.webp 2400w" sizes="(max-width: 767px) 90vw, 34vw" width="2400" height="1350" alt="An early mixed reality concept overlays green stems and red fruits on a physical room." loading="lazy" decoding="async"></a>
+              <figcaption>Information Garden maps source notes to roots, summary notes to seedlings and stems, and synthesis notes to fruits.</figcaption>
+            </figure><figure class="dissertation-figure">
+              <a href="../assets/dissertation/information-cake.webp" target="_blank" rel="noopener" aria-label="Open full-size figure: A colorful layered cake-like model of a research paper appears in a room through mixed reality."><img src="../assets/dissertation/information-cake.webp" srcset="../assets/dissertation/information-cake-800.webp 800w, ../assets/dissertation/information-cake.webp 2400w" sizes="(max-width: 767px) 90vw, 34vw" width="2400" height="1350" alt="A colorful layered cake-like model of a research paper appears in a room through mixed reality." loading="lazy" decoding="async"></a>
+              <figcaption>Information Cake organizes a paper into layers, with theoretical foundations below the study, findings, and discussion.</figcaption>
+            </figure></div>
         </div>
       </section>
 
-      <section class="project-regular-block" id="project-section-six" data-project-part="section-six" aria-label="Project section six" aria-hidden="true" inert>
-        <h1><span class="project-light-weight-title">Design Iteration:</span></br> SenseEER Structure</h1>
-        <div class="project-content-grid" aria-hidden="true">
-          <div class="project-content-grid-cell"></div>
-          <div class="project-content-grid-cell"></div>
-          <div class="project-content-grid-cell"></div>
-          <div class="project-content-grid-cell"></div>
-          <div class="project-content-grid-cell"></div>
-          <div class="project-content-grid-cell"></div>
-          <div class="project-content-grid-cell"></div>
-          <div class="project-content-grid-cell"></div>
-          <div class="project-content-grid-cell"></div>
-          <div class="project-content-grid-cell"></div>
-          <div class="project-content-grid-cell"></div>
-          <div class="project-content-grid-cell"></div>
+      <section class="project-regular-block dissertation-section" id="project-section-six" data-project-part="section-six" aria-hidden="true" inert aria-labelledby="senseeer-title" data-project-content-height>
+        <h1 id="senseeer-title">A reusable structure for scholarly statements</h1>
+        <div class="dissertation-content" role="region" aria-label="A reusable structure for scholarly statements content">
+          <div class="dissertation-narrative"><p>The next iterations moved from overlapping cards to modular physical statement units and then to an immersive prototype. Each experiment asked how a small unit of information could remain meaningful while becoming part of a larger synthesis.</p><p>The resulting representation, SenseEER, connects a start entity to a target entity through a directed relation. It gives a declarative statement a structure that the system can compare with other statements and that a researcher can manipulate. Shared entities allow statements to connect into larger networks.</p><p>Decomposition alone was not enough. The design needed to preserve access to the whole statement and its source context, so researchers could understand what they were moving and why it mattered.</p></div>
+          <div class="dissertation-gallery"><figure class="dissertation-figure">
+              <a href="../assets/dissertation/senseeer-structure.webp" target="_blank" rel="noopener" aria-label="Open full-size figure: Diagram labeling a blue start entity, a gray target entity, and the directed relation between them."><img src="../assets/dissertation/senseeer-structure.webp" srcset="../assets/dissertation/senseeer-structure-800.webp 800w, ../assets/dissertation/senseeer-structure.webp 1392w" sizes="(max-width: 767px) 90vw, 34vw" width="1392" height="1060" alt="Diagram labeling a blue start entity, a gray target entity, and the directed relation between them." loading="lazy" decoding="async"></a>
+              <figcaption>A SenseEER represents a statement through a start entity, a directed relation, and a target entity.</figcaption>
+            </figure><figure class="dissertation-figure">
+              <a href="../assets/dissertation/statement-decomposition.webp" target="_blank" rel="noopener" aria-label="Open full-size figure: A flow diagram proceeds from a PDF to a statement and then to start entity, relation, and target entity fields."><img src="../assets/dissertation/statement-decomposition.webp" srcset="../assets/dissertation/statement-decomposition-800.webp 800w, ../assets/dissertation/statement-decomposition.webp 1298w" sizes="(max-width: 767px) 90vw, 34vw" width="1298" height="1264" alt="A flow diagram proceeds from a PDF to a statement and then to start entity, relation, and target entity fields." loading="lazy" decoding="async"></a>
+              <figcaption>The representation pipeline extracts a statement from a source paper and decomposes it into entities and a relation.</figcaption>
+            </figure><details class="dissertation-more"><summary>More design explorations</summary><figure class="dissertation-figure">
+              <a href="../assets/dissertation/sensemaking-cards-v1.webp" target="_blank" rel="noopener" aria-label="Open full-size figure: Translucent rectangular cards with outlined regions overlap in front of a window."><img src="../assets/dissertation/sensemaking-cards-v1.webp" srcset="../assets/dissertation/sensemaking-cards-v1-800.webp 800w, ../assets/dissertation/sensemaking-cards-v1.webp 2400w" sizes="(max-width: 767px) 90vw, 34vw" width="2400" height="1608" alt="Translucent rectangular cards with outlined regions overlap in front of a window." loading="lazy" decoding="async"></a>
+              <figcaption>An early card prototype explores how overlapping representations could connect claims and supporting evidence.</figcaption>
+            </figure><figure class="dissertation-figure">
+              <a href="../assets/dissertation/sensemaking-lego-top.webp" target="_blank" rel="noopener" aria-label="Open full-size figure: Transparent statement strips and upright wooden pegs form a connected arrangement on a cutting mat."><img src="../assets/dissertation/sensemaking-lego-top.webp" srcset="../assets/dissertation/sensemaking-lego-top-800.webp 800w, ../assets/dissertation/sensemaking-lego-top.webp 2400w" sizes="(max-width: 767px) 90vw, 34vw" width="2400" height="1800" alt="Transparent statement strips and upright wooden pegs form a connected arrangement on a cutting mat." loading="lazy" decoding="async"></a>
+              <figcaption>Physical statement units connect through shared entities, making paths and loops of claims available for manipulation.</figcaption>
+            </figure></details></div>
         </div>
       </section>
 
-      <section class="project-regular-block" id="project-section-seven" data-project-part="section-seven" aria-label="Project section seven" aria-hidden="true" inert>
-        <h1><span class="project-light-weight-title">Design Iteration:</span></br> Embodied Sensemaking</h1>
-        <div class="project-content-grid" aria-hidden="true">
-          <div class="project-content-grid-cell"></div>
-          <div class="project-content-grid-cell"></div>
-          <div class="project-content-grid-cell"></div>
-          <div class="project-content-grid-cell"></div>
-          <div class="project-content-grid-cell"></div>
-          <div class="project-content-grid-cell"></div>
-          <div class="project-content-grid-cell"></div>
-          <div class="project-content-grid-cell"></div>
-          <div class="project-content-grid-cell"></div>
-          <div class="project-content-grid-cell"></div>
-          <div class="project-content-grid-cell"></div>
-          <div class="project-content-grid-cell"></div>
+      <section class="project-regular-block dissertation-section" id="project-section-seven" data-project-part="section-seven" aria-hidden="true" inert aria-labelledby="embodied-title" data-project-content-height>
+        <h1 id="embodied-title">Making evidence relationships perceptible</h1>
+        <div class="dissertation-content" role="region" aria-label="Making evidence relationships perceptible content">
+          <div class="dissertation-narrative"><p>I explored orientation, patina, and containment as ways to express relationships and properties through embodied interaction. Polarization oriented statements toward connected concepts. A patina-inspired experiment represented time and revisitation through color. Engulfing and expelling behaviors explored conceptual hierarchy and uncertainty.</p><p>These early effects were not retained as the final interaction workflow. They informed later mechanisms: polarization suggested evidence chaining, while oscillatory containment behaviors helped shape instability feedback.</p><p>In the resulting prototype, a hypothesis supported only through a longer qualifying evidence chain exhibits greater instability. A shorter chain produces less instability. The motion makes the computed indirectness of support noticeable so a researcher can inspect the evidence and reconsider the hypothesis. It is a cue for investigation, not a verdict on whether a claim is true.</p></div>
+          <div class="dissertation-gallery"><figure class="dissertation-figure">
+              <a href="../assets/dissertation/instability-mapping.webp" target="_blank" rel="noopener" aria-label="Open full-size figure: A horizontal sequence of hypothesis and evidence structures progresses from more stable to more unstable."><img src="../assets/dissertation/instability-mapping.webp" srcset="../assets/dissertation/instability-mapping-800.webp 800w, ../assets/dissertation/instability-mapping.webp 2197w" sizes="(max-width: 767px) 90vw, 34vw" width="2197" height="499" alt="A horizontal sequence of hypothesis and evidence structures progresses from more stable to more unstable." loading="lazy" decoding="async"></a>
+              <figcaption>The prototype maps more indirect evidential support to greater instability in a hypothesis SenseEER.</figcaption>
+            </figure><figure class="dissertation-figure">
+              <a href="../assets/dissertation/containment-exploration.webp" target="_blank" rel="noopener" aria-label="Open full-size figure: Annotated multi-step diagram shows entities moving into and out of enclosing shapes."><img src="../assets/dissertation/containment-exploration.webp" srcset="../assets/dissertation/containment-exploration-800.webp 800w, ../assets/dissertation/containment-exploration.webp 2400w" sizes="(max-width: 767px) 90vw, 34vw" width="2400" height="2133" alt="Annotated multi-step diagram shows entities moving into and out of enclosing shapes." loading="lazy" decoding="async"></a>
+              <figcaption>Engulfing, expelling, and oscillation explore how containment could communicate conceptual hierarchy and uncertainty.</figcaption>
+            </figure><details class="dissertation-more"><summary>More design explorations</summary><figure class="dissertation-figure">
+              <a href="../assets/dissertation/polarization-exploration.webp" target="_blank" rel="noopener" aria-label="Open full-size figure: A controller and connected statement units appear in a gray immersive workspace."><img src="../assets/dissertation/polarization-exploration.webp" srcset="../assets/dissertation/polarization-exploration-800.webp 800w, ../assets/dissertation/polarization-exploration.webp 1727w" sizes="(max-width: 767px) 90vw, 34vw" width="1727" height="1064" alt="A controller and connected statement units appear in a gray immersive workspace." loading="lazy" decoding="async"></a>
+              <figcaption>Polarization explores orienting connected statements toward a selected concept; the exploration informed later evidence chaining.</figcaption>
+            </figure><figure class="dissertation-figure">
+              <a href="../assets/dissertation/timeliness-exploration.webp" target="_blank" rel="noopener" aria-label="Open full-size figure: Green-tinted statement entities and a floating information panel appear beside a controller."><img src="../assets/dissertation/timeliness-exploration.webp" srcset="../assets/dissertation/timeliness-exploration-800.webp 800w, ../assets/dissertation/timeliness-exploration.webp 1570w" sizes="(max-width: 767px) 90vw, 34vw" width="1570" height="986" alt="Green-tinted statement entities and a floating information panel appear beside a controller." loading="lazy" decoding="async"></a>
+              <figcaption>A patina-inspired exploration uses green coloration to represent the time since an entity was created or revisited.</figcaption>
+            </figure></details></div>
         </div>
       </section>
 
-      <section class="project-regular-block" id="iterating-with-participants" data-project-part="iterating-with-participants" aria-labelledby="iterating-with-participants-title" aria-hidden="true" inert>
-        <h1 id="iterating-with-participants-title">Iterating with Participants</h1>
-        <div class="project-content-grid" aria-hidden="true">
-          <div class="project-content-grid-cell"></div>
-          <div class="project-content-grid-cell"></div>
-          <div class="project-content-grid-cell"></div>
-          <div class="project-content-grid-cell"></div>
-          <div class="project-content-grid-cell"></div>
-          <div class="project-content-grid-cell"></div>
-          <div class="project-content-grid-cell"></div>
-          <div class="project-content-grid-cell"></div>
-          <div class="project-content-grid-cell"></div>
-          <div class="project-content-grid-cell"></div>
-          <div class="project-content-grid-cell"></div>
-          <div class="project-content-grid-cell"></div>
+      <section class="project-regular-block dissertation-section" id="iterating-with-participants" data-project-part="iterating-with-participants" aria-hidden="true" inert aria-labelledby="participants-title" data-project-content-height>
+        <h1 id="participants-title">What changed through participant feedback</h1>
+        <div class="dissertation-content dissertation-content-text" role="region" aria-label="What changed through participant feedback content">
+          <div class="dissertation-narrative"><p>Four formative sessions revealed tensions that were difficult to see while designing alone. Participants differed in their familiarity with the dataset and in how they preferred to approach synthesis.</p><p>Some wanted to see whole statements rather than isolated components. Others valued distinct, graspable entities. Participants also needed definitions and source context, less information at the start, and the freedom to express a hypothesis beyond the vocabulary already present in the evidence.</p><p>These encounters led to an integrated statement view alongside decomposed components, a contextual information panel, a lighter starting workspace, and user-authored hypothetical entities. The design began to accommodate different entry points into sensemaking rather than requiring everyone to follow the same sequence.</p><ul><li>Whole statements alongside components — retain an integrated view while keeping entities available for manipulation.</li><li>Context at hand — expose the source paper, original statement, definitions, and supporting quotations.</li><li>Gradual evidence discovery — introduce relevant evidence around a hypothesis instead of loading everything at once.</li><li>Room for researchers’ own language — allow hypothetical entities that are not limited to those extracted from existing evidence.</li></ul></div>
+
         </div>
       </section>
 
-      <section class="project-regular-block" id="final-design" data-project-part="final-design" data-project-dark aria-labelledby="final-design-title" aria-hidden="true" inert>
-        <h1 id="final-design-title">Final Design</h1>
-        <div class="project-content-grid" aria-hidden="true">
-          <div class="project-content-grid-cell"></div>
-          <div class="project-content-grid-cell"></div>
-          <div class="project-content-grid-cell"></div>
-          <div class="project-content-grid-cell"></div>
-          <div class="project-content-grid-cell"></div>
-          <div class="project-content-grid-cell"></div>
-          <div class="project-content-grid-cell"></div>
-          <div class="project-content-grid-cell"></div>
-          <div class="project-content-grid-cell"></div>
-          <div class="project-content-grid-cell"></div>
-          <div class="project-content-grid-cell"></div>
-          <div class="project-content-grid-cell"></div>
+      <section class="project-regular-block dissertation-section" id="final-design" data-project-part="final-design" data-project-dark aria-hidden="true" inert aria-labelledby="final-design-title" data-project-content-height>
+        <h1 id="final-design-title">Build. Explore. Reconsider.</h1>
+        <div class="dissertation-content" role="region" aria-label="Build. Explore. Reconsider. content">
+          <div class="dissertation-narrative"><p>Users create hypothetical entities and draw connections between them with a controller. Each connection becomes a hypothesis SenseEER; a network of connected hypotheses represents a hypothetical theory. Related evidence can then appear around the hypothesis for inspection.</p><p>At different scales, researchers can examine entities, read integrated statements, and inspect larger arrangements. Contextual information remains available when a concept requires explanation. Researchers can also arrange statements spatially to support their own interpretation.</p><p>Embedding-based matching suggests relationships between entities. Intentional merging gives the researcher a way to calibrate a match when the model’s estimate does not reflect their understanding. Instability connects these computed relationships to perceptible motion, inviting further inspection and revision.</p><ul><li>Create entities and connect them into hypotheses.</li><li>Inspect evidence and its source context.</li><li>Use movement and spatial arrangement to notice relationships worth examining.</li><li>Revise hypotheses, add evidence, or calibrate an entity match.</li></ul></div>
+          <div class="dissertation-gallery"><figure class="dissertation-figure">
+              <a href="../assets/dissertation/prototype-overview.webp" target="_blank" rel="noopener" aria-label="Open full-size figure: Side-by-side prototype views labeled Micro Scale and Macro Scale, showing linked entities and a larger network of statements."><img src="../assets/dissertation/prototype-overview.webp" srcset="../assets/dissertation/prototype-overview-800.webp 800w, ../assets/dissertation/prototype-overview.webp 2197w" sizes="(max-width: 767px) 90vw, 34vw" width="2197" height="702" alt="Side-by-side prototype views labeled Micro Scale and Macro Scale, showing linked entities and a larger network of statements." loading="lazy" decoding="async"></a>
+              <figcaption>Two views of the research prototype show individual SenseEER components and a broader arrangement of scholarly statements.</figcaption>
+            </figure><figure class="dissertation-figure">
+              <a href="../assets/dissertation/hypothesis-construction.webp" target="_blank" rel="noopener" aria-label="Open full-size figure: Three-step diagram shows a controller connecting two entities, a hypothesis SenseEER, and a network representing a hypothetical theory."><img src="../assets/dissertation/hypothesis-construction.webp" srcset="../assets/dissertation/hypothesis-construction-800.webp 800w, ../assets/dissertation/hypothesis-construction.webp 1359w" sizes="(max-width: 767px) 90vw, 34vw" width="1359" height="465" alt="Three-step diagram shows a controller connecting two entities, a hypothesis SenseEER, and a network representing a hypothetical theory." loading="lazy" decoding="async"></a>
+              <figcaption>Users connect pairs of entities to create hypothesis SenseEERs. Connected hypotheses form a hypothetical theory.</figcaption>
+            </figure><details class="dissertation-more"><summary>More design explorations</summary><figure class="dissertation-figure">
+              <a href="../assets/dissertation/senseeer-structure.webp" target="_blank" rel="noopener" aria-label="Open full-size figure: Diagram labeling a blue start entity, a gray target entity, and the directed relation between them."><img src="../assets/dissertation/senseeer-structure.webp" srcset="../assets/dissertation/senseeer-structure-800.webp 800w, ../assets/dissertation/senseeer-structure.webp 1392w" sizes="(max-width: 767px) 90vw, 34vw" width="1392" height="1060" alt="Diagram labeling a blue start entity, a gray target entity, and the directed relation between them." loading="lazy" decoding="async"></a>
+              <figcaption>A SenseEER represents a statement through a start entity, a directed relation, and a target entity.</figcaption>
+            </figure><figure class="dissertation-figure">
+              <a href="../assets/dissertation/instability-mapping.webp" target="_blank" rel="noopener" aria-label="Open full-size figure: A horizontal sequence of hypothesis and evidence structures progresses from more stable to more unstable."><img src="../assets/dissertation/instability-mapping.webp" srcset="../assets/dissertation/instability-mapping-800.webp 800w, ../assets/dissertation/instability-mapping.webp 2197w" sizes="(max-width: 767px) 90vw, 34vw" width="2197" height="499" alt="A horizontal sequence of hypothesis and evidence structures progresses from more stable to more unstable." loading="lazy" decoding="async"></a>
+              <figcaption>The prototype maps more indirect evidential support to greater instability in a hypothesis SenseEER.</figcaption>
+            </figure></details></div>
         </div>
       </section>
 
-      <section class="project-regular-block" id="discussion" data-project-part="discussion" aria-labelledby="discussion-title" aria-hidden="true" inert>
-        <h1 id="discussion-title">Discussion</h1>
-        <div class="project-content-grid" aria-hidden="true">
-          <div class="project-content-grid-cell"></div>
-          <div class="project-content-grid-cell"></div>
-          <div class="project-content-grid-cell"></div>
-          <div class="project-content-grid-cell"></div>
-          <div class="project-content-grid-cell"></div>
-          <div class="project-content-grid-cell"></div>
-          <div class="project-content-grid-cell"></div>
-          <div class="project-content-grid-cell"></div>
-          <div class="project-content-grid-cell"></div>
-          <div class="project-content-grid-cell"></div>
-          <div class="project-content-grid-cell"></div>
-          <div class="project-content-grid-cell"></div>
+      <section class="project-regular-block dissertation-section" id="discussion" data-project-part="discussion" aria-hidden="true" inert aria-labelledby="discussion-title" data-project-content-height>
+        <h1 id="discussion-title">Design knowledge from the prototype</h1>
+        <div class="dissertation-content dissertation-content-text" role="region" aria-label="Design knowledge from the prototype content">
+          <div class="dissertation-narrative"><p>The project contributes three connected design ideas: reusable statement structures, a hypothesis–evidence interaction loop, and instability as perceptual feedback for computed support relationships.</p><p>The formative work suggests that making information sense-able requires more than turning text into objects. Researchers still need readable statements, source context, flexible entry points, and a responsive workspace. Motion must remain distinguishable from system lag, and objects should be steady enough to inspect and manipulate.</p><p>These are provisional design insights grounded in prototype development and four formative sessions. The next study will investigate how they hold up during sustained use in researchers’ own work.</p></div>
+
         </div>
       </section>
 
-      <section class="project-regular-block project-related-projects-block" id="project-related-projects" data-project-part="related-projects" data-project-related data-project-dark data-project-hold="300" aria-labelledby="related-projects-title" aria-hidden="true" inert>
+      <section class="project-regular-block dissertation-section" id="project-future-work" data-project-part="future-work" aria-labelledby="future-work-title" aria-hidden="true" inert data-project-content-height>
+        <h1 id="future-work-title">Future work</h1>
+        <div class="dissertation-content" role="region" aria-label="Future work content">
+          <div class="dissertation-narrative"><p>The next phase is a proposed field study in which researchers use the prototype with literature relevant to their own ongoing projects. Multiple sessions will make it possible to examine resumption, changing hypotheses, and integration with everyday research practices.</p><p>A proposed companion web interface will support preparing evidence and reviewing synthesis reports between immersive sessions. A remote backend will preserve information spaces and support semantic processing beyond the headset’s local resources.</p><p>The study will combine pre-session surveys, post-session diaries, interviews, interaction logs, and session recordings. It will look for concrete episodes in which researchers notice a connection, revise a hypothesis, or develop an insight, tracing temporal and descriptive links to sense-able interactions.</p><p>The goal is to refine design guidance and understand use over time. The planned study does not directly measure the system’s effectiveness or establish that an interaction caused a research insight.</p></div>
+          <div class="dissertation-gallery"><figure class="dissertation-figure">
+              <a href="../assets/dissertation/planned-hybrid-workflow.webp" target="_blank" rel="noopener" aria-label="Open full-size figure: A diagram links a conventional two-dimensional interface and a sense-able immersive interface."><img src="../assets/dissertation/planned-hybrid-workflow.webp" srcset="../assets/dissertation/planned-hybrid-workflow-800.webp 800w, ../assets/dissertation/planned-hybrid-workflow.webp 2400w" sizes="(max-width: 767px) 90vw, 34vw" width="2400" height="1040" alt="A diagram links a conventional two-dimensional interface and a sense-able immersive interface." loading="lazy" decoding="async"></a>
+              <figcaption>The proposed workflow connects conventional research activities with immersive exploration and hypothesis refinement.</figcaption>
+            </figure><figure class="dissertation-figure">
+              <a href="../assets/dissertation/planned-web-interface.webp" target="_blank" rel="noopener" aria-label="Open full-size figure: Grayscale wireframes show paper and statement entry forms, evidence lists, and a synthesis report."><img src="../assets/dissertation/planned-web-interface.webp" srcset="../assets/dissertation/planned-web-interface-800.webp 800w, ../assets/dissertation/planned-web-interface.webp 1440w" sizes="(max-width: 767px) 90vw, 34vw" width="1440" height="2133" alt="Grayscale wireframes show paper and statement entry forms, evidence lists, and a synthesis report." loading="lazy" decoding="async"></a>
+              <figcaption>A proposed companion web interface supports preparing evidence and reviewing synthesis reports between immersive sessions.</figcaption>
+            </figure></div>
+        </div>
+      </section>
+
+      <section class="project-regular-block project-related-projects-block" id="project-related-projects" data-project-part="related-projects" data-project-related data-project-dark aria-labelledby="related-projects-title" aria-hidden="true" inert data-project-content-height>
         <div class="project-related-experience">
           <section class="project-related-scene project-related-content" data-related-scene data-start="-0.12" data-persist>
             <h1 id="related-projects-title">Related Projects</h1>
             <div class="related-card-system" data-related-carousel>
               <div class="related-card-row" role="region" aria-label="Related projects" tabindex="0">
                 <div class="related-card-track">
-                  <div class="related-card-item"><p class="related-card-year">2025</p><article class="related-card"><h3><a href="future-immersive-environments.html">Sense and Senseability</a></h3></article></div>
+                  <div class="related-card-item"><p class="related-card-year">2025</p><article class="related-card"><h3><a href="future-immersive-environments.html">Sense and Sense-ability</a></h3></article></div>
                   <div class="related-card-item"><p class="related-card-year">2024</p><article class="related-card"><h3><a href="hypertext-augmented-sensemaking.html">Patterns of Hypertext-Augmented Sensemaking</a></h3></article></div>
                   <div class="related-card-item"><p class="related-card-year">Ongoing</p><article class="related-card"><h3><a href="synthesis-infrastructure-foundation.html">Synthesis Infrastructure Foundation</a></h3></article></div>
                 </div>
@@ -249,12 +265,13 @@
         <a href="#project-overview" data-project-nav="overview">Project Overview</a>
         <a href="#project-section-three" data-project-nav="section-three">Introduction</a>
         <a href="#project-section-four" data-project-nav="section-four">Methods</a>
-        <a href="#project-section-five" data-project-nav="section-five">Skeuomorphism</a>
+        <a href="#project-section-five" data-project-nav="section-five">Early concepts</a>
         <a href="#project-section-six" data-project-nav="section-six">SenseEER</a>
-        <a href="#project-section-seven" data-project-nav="section-seven">Embodied Sensemaking</a>
+        <a href="#project-section-seven" data-project-nav="section-seven">Embodied feedback</a>
         <a href="#iterating-with-participants" data-project-nav="iterating-with-participants">Iterating with Participants</a>
         <a href="#final-design" data-project-nav="final-design">Final Design</a>
         <a href="#discussion" data-project-nav="discussion">Discussion</a>
+        <a href="#project-future-work" data-project-nav="future-work">Future work</a>
         <a href="#project-related-projects" data-project-nav="related-projects">Related Projects</a>
       </nav>
     </div>

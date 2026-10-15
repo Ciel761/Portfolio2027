@@ -8,6 +8,8 @@
   const title = openingBlock?.querySelector('.project-title-section');
   const regularBlocks = [...(page?.querySelectorAll('.project-regular-block') || [])];
   const blocks = openingBlock ? [openingBlock, ...regularBlocks] : [];
+  const contentHeightBlocks = regularBlocks.filter(block => block.hasAttribute('data-project-content-height'));
+  const contentTravel = new Map();
   const introBlock = page?.querySelector('[data-project-intro]');
   const introScenes = [...(introBlock?.querySelectorAll('[data-intro-scene]') || [])];
   const introMedia = [...(introBlock?.querySelectorAll('[data-intro-media]') || [])];
@@ -23,12 +25,17 @@
 
   let frame = 0;
   let navigationFrame = 0;
+  let sectionSnapTimer = 0;
+  let pointerActive = false;
+  let touchActive = false;
   let viewport = 0;
   let revealDistance = 0;
   let openingHold = 0;
   let blockTransition = 0;
   let blockScrollPadding = 0;
   let regularHolds = [];
+  let sectionGap = 0;
+  let transitionTravel = [];
   const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
 
   function rootNumber(name, fallback) {
@@ -66,12 +73,31 @@
   }
 
   function measure() {
+    cancelNavigation();
     viewport = stage.clientHeight || innerHeight;
     revealDistance = Math.max(0, rootNumber('--project-reveal-distance', 10)) * viewport / 100;
     openingHold = Math.max(0, rootNumber('--project-opening-height', 140) - 100) * viewport / 100;
     blockTransition = Math.max(0, rootNumber('--project-block-transition-height', 20)) * viewport / 100;
     blockScrollPadding = Math.max(0, rootNumber('--project-block-scroll-padding', 50)) * viewport / 100;
+    sectionGap = Math.max(0, rootNumber('--project-section-gap', 10)) * viewport / 100;
     regularHolds = regularBlocks.map(block => contentHeight(block) + blockScrollPadding * 2);
+    contentHeightBlocks.forEach(block => {
+      const style = getComputedStyle(block);
+      const topSpace = parseFloat(style.marginTop) || 0;
+      contentTravel.set(block, Math.max(0, block.offsetHeight + topSpace - viewport));
+    });
+    transitionTravel = blocks.slice(0, -1).map((block, index) => {
+      const outgoingTop = parseFloat(getComputedStyle(block).marginTop) || 0;
+      const incomingTop = parseFloat(getComputedStyle(blocks[index + 1]).marginTop) || 0;
+      const outgoingBottom = outgoingTop + block.offsetHeight - (contentTravel.get(block) || 0);
+      // Hidden endpoints stay outside the viewport. Shared travel adds at
+      // least the configured gap, including for content-height sections.
+      return Math.max(
+        viewport - incomingTop,
+        outgoingBottom,
+        outgoingBottom - incomingTop + sectionGap
+      );
+    });
     page.style.setProperty('--project-page-height', `${viewport + maximumScroll()}px`);
     render();
   }
@@ -108,9 +134,33 @@
     return progress * progress * (3 - 2 * progress);
   }
 
+  function cancelSectionSnap() {
+    clearTimeout(sectionSnapTimer);
+    sectionSnapTimer = 0;
+  }
+
   function cancelNavigation() {
+    cancelSectionSnap();
     if (navigationFrame) cancelAnimationFrame(navigationFrame);
     navigationFrame = 0;
+  }
+
+  function scheduleSectionSnap() {
+    cancelSectionSnap();
+    if (navigationFrame || pointerActive || touchActive) return;
+    sectionSnapTimer = setTimeout(() => {
+      sectionSnapTimer = 0;
+      if (navigationFrame || pointerActive || touchActive) return;
+      const pageScroll = clamp(scrollY - pageTop(), 0, maximumScroll());
+      const { index, progress } = timelineState(pageScroll);
+      // Leave reading, content scrolling, opening reveals, and cinematic
+      // scene progress at the user's position. Only settle transitions.
+      if (progress <= 0 || progress >= 1) return;
+      const boundary = progress < 0.5
+        ? blockPosition(index) + blockHold(index)
+        : blockPosition(index + 1);
+      animateNavigation(pageTop() + boundary);
+    }, Math.max(0, rootNumber('--project-section-snap-delay', 500)));
   }
 
   function animateNavigation(target) {
@@ -195,7 +245,12 @@
       const localProgress = clamp((progress - start) / Math.max(0.001, end - start), 0, 1);
       media.style.setProperty('--intro-media-opacity', opacity.toFixed(3));
       media.style.setProperty('--intro-media-shift', `${((0.5 - localProgress) * 18).toFixed(2)}vh`);
-      media.style.setProperty('--intro-media-blur', `${((1 - opacity) * 18).toFixed(2)}px`);
+      const blurRange = media.hasAttribute('data-intro-quote') ? 7 : 18;
+      media.style.setProperty('--intro-media-blur', `${((1 - opacity) * blurRange).toFixed(2)}px`);
+      if (media.hasAttribute('data-intro-quote')) {
+        const drift = parseFloat(media.dataset.drift) || 0;
+        media.style.setProperty('--intro-quote-drift', `${((0.5 - localProgress) * drift).toFixed(2)}vw`);
+      }
     });
   }
 
@@ -230,6 +285,7 @@
   }
 
   relatedBlock?.addEventListener('related-carousel-seek', event => {
+    cancelNavigation();
     const relatedIndex = blocks.indexOf(relatedBlock);
     if (relatedIndex < 0) return;
     const progress = clamp(event.detail?.progress || 0, 0, 1);
@@ -260,7 +316,15 @@
       if (reduced.matches) offset = blockIndex === activeIndex ? 0 : 100;
       const visible = reduced.matches ? blockIndex === activeIndex : Math.abs(offset) < 100;
       const active = blockIndex === activeIndex;
-      block.style.setProperty('--project-block-offset', `${offset}%`);
+      if (contentTravel.has(block)) {
+        const travel = contentTravel.get(block);
+        const contentOffset = clamp(pageScroll - blockPosition(blockIndex) - blockScrollPadding, 0, travel);
+        block.style.setProperty('--project-content-offset', `${contentOffset}px`);
+      }
+      const offsetValue = sectionGap > 0
+        ? `${offset * (transitionTravel[index] || viewport + sectionGap) / 100}px`
+        : contentTravel.has(block) ? `${offset * viewport / 100}px` : `${offset}%`;
+      block.style.setProperty('--project-block-offset', offsetValue);
       block.toggleAttribute('data-visible', visible);
       block.inert = !active;
       block.setAttribute('aria-hidden', String(!active));
@@ -332,17 +396,39 @@
 
   addEventListener('scroll', () => {
     if (!frame) frame = requestAnimationFrame(render);
+    scheduleSectionSnap();
   }, { passive: true });
   addEventListener('wheel', cancelNavigation, { passive: true });
-  addEventListener('touchstart', cancelNavigation, { passive: true });
-  addEventListener('pointerdown', cancelNavigation, { passive: true });
+  addEventListener('touchstart', () => {
+    touchActive = true;
+    cancelNavigation();
+  }, { passive: true });
+  const finishTouch = event => {
+    touchActive = event.touches.length > 0;
+    scheduleSectionSnap();
+  };
+  addEventListener('touchend', finishTouch, { passive: true });
+  addEventListener('touchcancel', finishTouch, { passive: true });
+  addEventListener('pointerdown', () => {
+    pointerActive = true;
+    cancelNavigation();
+  }, { passive: true });
+  const finishPointer = () => {
+    pointerActive = false;
+    scheduleSectionSnap();
+  };
+  addEventListener('pointerup', finishPointer, { passive: true });
+  addEventListener('pointercancel', finishPointer, { passive: true });
   addEventListener('keydown', cancelNavigation);
   addEventListener('resize', measure);
   addEventListener('popstate', () => {
     navigateTo(partFromHash(), 'auto');
     render();
   });
-  reduced.addEventListener('change', render);
+  reduced.addEventListener('change', () => {
+    cancelNavigation();
+    render();
+  });
   const resizeObserver = new ResizeObserver(measure);
   resizeObserver.observe(stage);
   regularBlocks.forEach(block => {

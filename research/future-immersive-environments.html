@@ -3,102 +3,113 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Sense and Senseability explores how immersive environments can make abstract scholarly information directly perceivable and manipulable.">
-  <title>Sense and Senseability — Siyi Zhu</title>
+  <meta name="description" content="A research and design toolkit connecting scholarly information with visual strategies from modern art to imagine alternatives to text-heavy sensemaking.">
+  <title>Sense and Sense-ability — Siyi Zhu</title>
   <link rel="stylesheet" href="../typography.css">
   <link rel="stylesheet" href="../overlay.css">
   <link rel="stylesheet" href="project-layout.css">
+  <link rel="stylesheet" href="dissertation-content.css">
   <link rel="stylesheet" href="../related-carousel.css">
   <script src="../overlay.js" defer></script>
   <script src="../related-carousel.js" defer></script>
-  <script src="project-layout.js" defer></script>
+  <script src="../jelly-cards.js" defer></script>
+  <script src="../project-page.js" defer></script>
+  <link rel="stylesheet" href="../project-page.css">
 </head>
-<body>
+<body class="project-natural-layout dissertation-page">
   <main class="project-page" data-project-page>
     <div class="project-page-stage">
-      <section class="project-opening-block" id="project-opening" data-project-opening data-visible>
+      <section class="project-opening-block" id="project-opening" data-project-opening data-project-part="opening" data-project-content-height data-visible>
         <div class="project-opening-stage">
-          <section class="project-title-section" aria-labelledby="project-title">
-            <h1 id="project-title">Sense and Senseability: Exploring Future Immersive Environments for Scholarly Sensemaking</h1>
+<section class="project-title-section" aria-labelledby="project-title">
+            <h1 id="project-title">Sense and Sense-ability: Exploring Future Immersive Environments for Scholarly Sensemaking</h1>
             <p class="project-year">2025</p>
             <p class="project-venue">Creativity &amp; Cognition 2025 · Pictorial · Siyi Zhu and Joel Chan</p>
           </section>
+        </div>
+      </section>
 
-          <section class="project-overview-section" id="project-overview" aria-label="Project overview">
+      <section class="project-regular-block project-overview-section" id="project-overview" data-project-part="overview" data-project-content-height aria-hidden="true" inert aria-label="Project overview">
             <div class="project-overview-grid">
               <div class="project-overview-abstract">
-                <p>Scholars work with questions, concepts, assertions, evidence, and theories whose important qualities are usually discovered through effortful reading and reasoning. This project asks how immersive environments might make that abstract information more “senseable.” A systematic review of scholarly sensemaking systems and an analysis of visual strategies in modern art produced a design toolkit and three conceptual environments for embodied scholarly work.</p>
+                <p>Research questions, claims, and theories carry properties that often require substantial interpretation to uncover. We reviewed scholarly sensemaking research and studied visual strategies in modern art to explore how these qualities might take sense-able forms. The result is a design toolkit and three speculative concepts for immersive scholarly work.</p>
               </div>
               <div class="project-overview-custom"><p>38 HCI papers<br>113 artworks<br>6 visual patterns</p></div>
               <div class="project-overview-custom"><p><a class="project-publication-link" href="https://doi.org/10.1145/3698061.3726952">Read the publication</a><br>CC BY 4.0</p></div>
             </div>
           </section>
+
+      <section class="project-regular-block dissertation-section" id="project-method" data-project-part="method" aria-hidden="true" inert aria-labelledby="method-title" data-project-content-height>
+        <h1 id="method-title">From information to form</h1>
+        <div class="dissertation-content" role="region" aria-label="From information to form content">
+          <div class="dissertation-narrative"><p>A search of the ACM Digital Library returned 949 records. Screening retained 83 papers about scholarly sensemaking and then 38 focused on abstract, qualitative information. We extracted information objects and their properties from these studies.</p><p>I also explored 113 artworks across three museums and collected 365 photographs. The artwork selection was exploratory rather than systematic. These observations informed visual strategies that could be combined with the literature findings.</p><p class="dissertation-role"><strong>My role</strong><br>First author and designer; scholarly-information review, artwork exploration, and conceptual design work with Joel Chan.</p></div>
+          <div class="dissertation-gallery"><figure class="dissertation-figure">
+              <a href="../assets/dissertation/senseability-toolkit.webp" target="_blank" rel="noopener" aria-label="Open full-size figure: Flow diagram links information objects and properties to space, repetition, composition, texture, fidelity, cross-section, and three designs."><img src="../assets/dissertation/senseability-toolkit.webp" srcset="../assets/dissertation/senseability-toolkit-800.webp 800w, ../assets/dissertation/senseability-toolkit.webp 2400w" sizes="(max-width: 767px) 90vw, 34vw" width="2400" height="1393" alt="Flow diagram links information objects and properties to space, repetition, composition, texture, fidelity, cross-section, and three designs." loading="lazy" decoding="async"></a>
+              <figcaption>A design toolkit connects scholarly information objects and properties with six visual strategies and three speculative concepts.</figcaption>
+            </figure></div>
         </div>
       </section>
 
-      <section class="project-regular-block" id="project-method" data-project-part="method" aria-labelledby="method-title" aria-hidden="true" inert>
-        <h1 id="method-title">From Information to Form</h1>
-        <div class="project-content-grid">
-          <div class="project-content-grid-cell span-columns-3 span-rows-3 media-contain">
-            <figure>
-              <img src="../assets/research/sense-and-senseability/design-toolkit.jpg" alt="Design toolkit connecting scholarly information objects and properties to visual patterns and three immersive concepts" loading="lazy" decoding="async">
-              <figcaption>The toolkit links scholarly information, its properties, and visual patterns from modern art.</figcaption>
-            </figure>
-          </div>
-          <div class="project-content-grid-cell has-copy"><p><strong>Systematic review</strong><br>949 ACM Digital Library records were screened to 83 studies of scholarly sensemaking and then to 38 studies focused on abstract, qualitative scholarly information.</p></div>
-          <div class="project-content-grid-cell has-copy"><p><strong>Art exploration</strong><br>Three modern art museums yielded observations of 113 artworks and 365 photographs, which were synthesized into reusable visual strategies.</p></div>
-          <div class="project-content-grid-cell has-copy"><p><strong>Concept generation</strong><br>Information properties and visual strategies were combined like design cards to generate immersive sensemaking concepts.</p></div>
+      <section class="project-regular-block dissertation-section" id="project-toolkit" data-project-part="toolkit" aria-hidden="true" inert aria-labelledby="toolkit-title" data-project-content-height>
+        <h1 id="toolkit-title">A toolkit for sense-ability</h1>
+        <div class="dissertation-content" role="region" aria-label="A toolkit for sense-ability content">
+          <div class="dissertation-narrative"><p>The review distinguishes familiar information artifacts, such as papers and notes, from objects such as theories, assertions, and research directions whose forms are less standardized. It also identifies properties including context, structure, timeliness, quality, and truthlikeness.</p><p>Six visual strategies offer material for design: space, composition, fidelity, texture, cross-section, and repetition. Combining these strategies with scholarly information properties opens possibilities beyond presenting more text.</p></div>
+          <div class="dissertation-gallery"><figure class="dissertation-figure">
+              <a href="../assets/dissertation/senseability-toolkit.webp" target="_blank" rel="noopener" aria-label="Open full-size figure: Flow diagram links information objects and properties to space, repetition, composition, texture, fidelity, cross-section, and three designs."><img src="../assets/dissertation/senseability-toolkit.webp" srcset="../assets/dissertation/senseability-toolkit-800.webp 800w, ../assets/dissertation/senseability-toolkit.webp 2400w" sizes="(max-width: 767px) 90vw, 34vw" width="2400" height="1393" alt="Flow diagram links information objects and properties to space, repetition, composition, texture, fidelity, cross-section, and three designs." loading="lazy" decoding="async"></a>
+              <figcaption>A design toolkit connects scholarly information objects and properties with six visual strategies and three speculative concepts.</figcaption>
+            </figure></div>
         </div>
       </section>
 
-      <section class="project-regular-block" id="project-toolkit" data-project-part="toolkit" aria-labelledby="toolkit-title" aria-hidden="true" inert>
-        <h1 id="toolkit-title">A Design Toolkit for Senseability</h1>
-        <div class="project-content-grid">
-          <div class="project-content-grid-cell span-columns-2 span-rows-3 has-copy"><p>The review distinguishes materialized information objects - including documents, citations, data, summaries, notes, reviews, and concepts - from immaterial objects such as research directions, contributions, assertions, theories, and evidence. The distinction exposes how much scholarly work remains trapped in text or informal mental models.</p></div>
-          <div class="project-content-grid-cell span-columns-2 has-copy"><p><strong>Properties</strong><br>Position, accessibility, quantity, connections, similarity, context, evocativeness, structure, timeliness, quality, fairness, explicitness, truthlikeness, and completeness.</p></div>
-          <div class="project-content-grid-cell span-columns-2 has-copy"><p><strong>Visual patterns</strong><br>Space, repetition, composition, texture, fidelity, and cross-section offer ways to translate intangible properties into perceivable spatial behavior.</p></div>
-          <div class="project-content-grid-cell span-columns-2 has-copy"><p>The toolkit does not prescribe a single interface. It gives designers a vocabulary for pairing an information property with a visual behavior and asking how that behavior could support embodied reasoning.</p></div>
-        </div>
-      </section>
-
-      <section class="project-regular-block" id="project-city" data-project-part="city" aria-labelledby="city-title" aria-hidden="true" inert>
+      <section class="project-regular-block dissertation-section" id="project-city" data-project-part="city" aria-hidden="true" inert aria-labelledby="city-title" data-project-content-height>
         <h1 id="city-title">City of Information</h1>
-        <div class="project-content-grid">
-          <div class="project-content-grid-cell span-columns-3 span-rows-3 media-contain"><img src="../assets/research/sense-and-senseability/city-of-information.jpg" alt="Storyboard showing a scholar constructing and navigating a city made from blocks of scholarly information" loading="lazy" decoding="async"></div>
-          <div class="project-content-grid-cell has-copy"><p>Assertions, evidence, and questions become typed building blocks in a persistent virtual city. Placement rules make semantic relationships tangible: for example, a claim can sit on evidence that supports it.</p></div>
-          <div class="project-content-grid-cell has-copy"><p>Building height conveys evocativeness, proximity signals relevance, and repeated structures reveal patterns across a growing body of knowledge.</p></div>
-          <div class="project-content-grid-cell has-copy"><p>As the city expands, landmarks support retrieval and undeveloped regions suggest possible research directions.</p></div>
+        <div class="dissertation-content" role="region" aria-label="City of Information content">
+          <div class="dissertation-narrative"><p>Assertions, evidence, and questions become typed building blocks in a persistent virtual city. Placement rules make semantic relationships tangible: for example, a claim can sit on evidence that supports it.</p><p>Building height conveys evocativeness, proximity signals relevance, and repeated structures reveal patterns across a growing body of knowledge.</p><p>As the city expands, landmarks support retrieval and undeveloped regions suggest possible research directions.</p></div>
+          <div class="dissertation-gallery"><figure class="dissertation-figure">
+              <a href="../assets/dissertation/city-of-information.webp" target="_blank" rel="noopener" aria-label="Open full-size figure: Storyboard shows a researcher developing a virtual city from blocks representing scholarly information."><img src="../assets/dissertation/city-of-information.webp" srcset="../assets/dissertation/city-of-information-800.webp 800w, ../assets/dissertation/city-of-information.webp 2270w" sizes="(max-width: 767px) 90vw, 34vw" width="2270" height="2400" alt="Storyboard shows a researcher developing a virtual city from blocks representing scholarly information." loading="lazy" decoding="async"></a>
+              <figcaption>City of Information imagines constructing a research landscape from information blocks with distinct forms and relationships.</figcaption>
+            </figure></div>
         </div>
       </section>
 
-      <section class="project-regular-block" id="project-rusted" data-project-part="rusted" aria-labelledby="rusted-title" aria-hidden="true" inert>
+      <section class="project-regular-block dissertation-section" id="project-rusted" data-project-part="rusted" aria-hidden="true" inert aria-labelledby="rusted-title" data-project-content-height>
         <h1 id="rusted-title">Rusted Text</h1>
-        <div class="project-content-grid">
-          <div class="project-content-grid-cell span-columns-3 span-rows-3 media-contain"><img src="../assets/research/sense-and-senseability/rusted-text.jpg" alt="Storyboard showing information objects changing from paper to metal, rust, and debris over time" loading="lazy" decoding="async"></div>
-          <div class="project-content-grid-cell has-copy"><p>Rusted Text uses texture and material as a “digital patina” for timeliness. New information begins as paper; frequently revisited objects become thicker and more permanent.</p></div>
-          <div class="project-content-grid-cell has-copy"><p>Neglected objects wrinkle, stiffen, rust, crack, and eventually break into archived debris. Age and attention become qualities that scholars can perceive at a glance.</p></div>
-          <div class="project-content-grid-cell has-copy"><p>The concept replaces an abstract timestamp with an embodied material history of a scholar’s relationship to information.</p></div>
+        <div class="dissertation-content" role="region" aria-label="Rusted Text content">
+          <div class="dissertation-narrative"><p>Rusted Text uses texture and material as a “digital patina” for timeliness. New information begins as paper; frequently revisited objects become thicker and more permanent.</p><p>Neglected objects wrinkle, stiffen, rust, crack, and eventually break into archived debris. Age and attention become qualities that scholars can perceive at a glance.</p><p>The concept replaces an abstract timestamp with an embodied material history of a scholar’s relationship to information.</p></div>
+          <div class="dissertation-gallery"><figure class="dissertation-figure">
+              <a href="../assets/dissertation/rusted-text.webp" target="_blank" rel="noopener" aria-label="Open full-size figure: Storyboard shows a researcher encountering notes and information objects whose surfaces acquire rust-like textures."><img src="../assets/dissertation/rusted-text.webp" srcset="../assets/dissertation/rusted-text-800.webp 800w, ../assets/dissertation/rusted-text.webp 2400w" sizes="(max-width: 767px) 90vw, 34vw" width="2400" height="2292" alt="Storyboard shows a researcher encountering notes and information objects whose surfaces acquire rust-like textures." loading="lazy" decoding="async"></a>
+              <figcaption>Rusted Text imagines patina as a visual cue to information that has not been revisited recently.</figcaption>
+            </figure></div>
         </div>
       </section>
 
-      <section class="project-regular-block" id="project-unshaped" data-project-part="unshaped" aria-labelledby="unshaped-title" aria-hidden="true" inert>
+      <section class="project-regular-block dissertation-section" id="project-unshaped" data-project-part="unshaped" aria-hidden="true" inert aria-labelledby="unshaped-title" data-project-content-height>
         <h1 id="unshaped-title">Unshaped Matter</h1>
-        <div class="project-content-grid">
-          <div class="project-content-grid-cell span-columns-3 span-rows-3 media-contain"><img src="../assets/research/sense-and-senseability/unshaped-matter.jpg" alt="Storyboard showing a scholar talking to and moving around an evolving cloud of ideas and mirrored information" loading="lazy" decoding="async"></div>
-          <div class="project-content-grid-cell has-copy"><p>A shifting, gas-like form represents the incomplete and implicit state of an emerging research idea. Mirrors around it surface papers and notes from different perspectives.</p></div>
-          <div class="project-content-grid-cell has-copy"><p>Speaking about the idea records new notes and retrieves related information. As the idea becomes more explicit and complete, the matter shrinks and takes on a clearer form.</p></div>
-          <div class="project-content-grid-cell has-copy"><p>Moving around the object changes the angle of reflection, turning bodily position into a way to reveal different connections and possible interpretations.</p></div>
+        <div class="dissertation-content" role="region" aria-label="Unshaped Matter content">
+          <div class="dissertation-narrative"><p>A shifting, gas-like form represents the incomplete and implicit state of an emerging research idea. Mirrors around it surface papers and notes from different perspectives.</p><p>Speaking about the idea records new notes and retrieves related information. As the idea becomes more explicit and complete, the matter shrinks and takes on a clearer form.</p><p>Moving around the object changes the angle of reflection, turning bodily position into a way to reveal different connections and possible interpretations.</p></div>
+          <div class="dissertation-gallery"><figure class="dissertation-figure">
+              <a href="../assets/dissertation/unshaped-matter.webp" target="_blank" rel="noopener" aria-label="Open full-size figure: Storyboard depicts a researcher interacting with a bright cloud-like form and surrounding displays."><img src="../assets/dissertation/unshaped-matter.webp" srcset="../assets/dissertation/unshaped-matter-800.webp 800w, ../assets/dissertation/unshaped-matter.webp 821w" sizes="(max-width: 767px) 90vw, 34vw" width="821" height="945" alt="Storyboard depicts a researcher interacting with a bright cloud-like form and surrounding displays." loading="lazy" decoding="async"></a>
+              <figcaption>Unshaped Matter imagines a changing, cloud-like representation that helps a researcher explore emerging ideas and related notes.</figcaption>
+            </figure></div>
         </div>
       </section>
 
-      <section class="project-regular-block project-related-projects-block" id="project-related-projects" data-project-part="related-projects" data-project-related data-project-dark data-project-hold="300" aria-labelledby="related-projects-title" aria-hidden="true" inert>
+      <section class="project-regular-block dissertation-section" id="project-contribution" data-project-part="contribution" aria-labelledby="contribution-title" aria-hidden="true" inert data-project-content-height>
+        <h1 id="contribution-title">From possibilities to prototypes</h1>
+        <div class="dissertation-content dissertation-content-text" role="region" aria-label="From possibilities to prototypes content">
+          <div class="dissertation-narrative"><p>The contribution is a design vocabulary for imagining how abstract scholarly information could become perceptible and manipulable. The concepts illustrate possibilities rather than established performance benefits.</p><p>This work sets up the design and prototype chapter of my dissertation, where I move from speculative forms to reusable statement structures, embodied interactions, and formative work with researchers.</p></div>
+
+        </div>
+      </section>
+
+      <section class="project-regular-block project-related-projects-block" id="project-related-projects" data-project-part="related-projects" data-project-related data-project-dark aria-labelledby="related-projects-title" aria-hidden="true" inert data-project-content-height>
         <div class="project-related-experience">
           <section class="project-related-scene project-related-content" data-related-scene data-start="-0.12" data-persist>
             <h1 id="related-projects-title">Related Projects</h1>
             <div class="related-card-system" data-related-carousel>
               <div class="related-card-row" role="region" aria-label="Related projects" tabindex="0">
                 <div class="related-card-track">
-                  <div class="related-card-item"><p class="related-card-year">Ongoing</p><article class="related-card"><h3><a href="immersive-scholarly-sensemaking.html">Immersive and Sensible Scholarly Sensemaking</a></h3></article></div>
+                  <div class="related-card-item"><p class="related-card-year">Ongoing</p><article class="related-card"><h3><a href="immersive-scholarly-sensemaking.html">Sense-able Scholarly Sensemaking</a></h3></article></div>
                   <div class="related-card-item"><p class="related-card-year">2024</p><article class="related-card"><h3><a href="hypertext-augmented-sensemaking.html">Patterns of Hypertext-Augmented Sensemaking</a></h3></article></div>
                   <div class="related-card-item"><p class="related-card-year">2023</p><article class="related-card"><h3><a href="metaverse-workspace.html">Metaverse-Based Workspace for Research</a></h3></article></div>
                 </div>
@@ -113,14 +124,15 @@
 
   <aside class="site-overlay" aria-label="Site navigation and project information">
     <div class="overlay-left">
-      <nav class="overlay-nav project-overlay-nav" aria-label="Sense and Senseability sections">
-        <a href="#project-opening" data-project-nav="opening" aria-current="location">Sense and Senseability</a>
+      <nav class="overlay-nav project-overlay-nav" aria-label="Sense and Sense-ability sections">
+        <a href="#project-opening" data-project-nav="opening" aria-current="location">Sense and Sense-ability</a>
         <a href="#project-overview" data-project-nav="overview">Overview</a>
         <a href="#project-method" data-project-nav="method">Method</a>
         <a href="#project-toolkit" data-project-nav="toolkit">Toolkit</a>
         <a href="#project-city" data-project-nav="city">City of Information</a>
         <a href="#project-rusted" data-project-nav="rusted">Rusted Text</a>
         <a href="#project-unshaped" data-project-nav="unshaped">Unshaped Matter</a>
+        <a href="#project-contribution" data-project-nav="contribution">Contribution</a>
         <a href="#project-related-projects" data-project-nav="related-projects">Related Projects</a>
       </nav>
     </div>

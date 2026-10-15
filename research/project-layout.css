@@ -4,10 +4,12 @@
   --project-title-bottom-padding: 30vh;
   --project-overview-height: 40vh;
   --project-reveal-distance: 10;
-  --project-block-transition-height: 20;
+  --project-block-transition-height: 50;
   --project-block-scroll-padding: 50;
+  /* Minimum visual gap in vh; idle delay in milliseconds. */
+  --project-section-gap: 10;
+  --project-section-snap-delay: 500;
   --project-content-left: 30vw;
-  --project-grid-card-background: #e6e6e6;
   --project-grid-card-radius: 2vh;
   --project-nav-duration: 550;
   --project-nav-max-duration: 3500;
@@ -122,6 +124,17 @@ body {
   overflow: auto;
 }
 
+.project-meta-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 1rem 3rem;
+}
+
+.project-meta-row > * {
+  margin-block: 0;
+}
+
 .project-overview-section {
   flex: 0 0 var(--project-overview-height);
   display: flex;
@@ -157,7 +170,7 @@ body {
 }
 
 .project-overview-grid > :not(:has(img, picture, video, figure)) {
-  background: var(--project-grid-card-background);
+  background: none;
 }
 
 .project-overview-grid img,
@@ -200,7 +213,7 @@ body {
 }
 
 .project-content-grid-cell:not(:has(img, picture, video, figure)) {
-  background: var(--project-grid-card-background);
+  background: none;
 }
 
 .project-content-grid-cell.has-copy {
@@ -346,6 +359,48 @@ body {
   object-fit: contain;
 }
 
+.project-introduction-quote-field {
+  position: absolute;
+  inset: 0;
+}
+
+.project-introduction-ambient-quote {
+  position: absolute;
+  box-sizing: border-box;
+  width: min(24vw, 28rem);
+  margin: 0;
+  color: rgb(255 255 255 / 0.42);
+  font-family: "Courier New", Courier, monospace;
+  font-size: clamp(0.65rem, 0.85vw, 0.95rem);
+  line-height: 1.45;
+  opacity: var(--intro-media-opacity, 0);
+  filter: blur(var(--intro-media-blur, 18px));
+  transform: translate3d(
+    var(--intro-quote-drift, 0),
+    var(--intro-media-shift, 10vh),
+    0
+  ) rotate(var(--intro-quote-rotation, 0deg));
+  will-change: transform, opacity, filter;
+}
+
+.project-introduction-ambient-quote p {
+  margin: 0 0 0.65em;
+}
+
+.project-introduction-ambient-quote cite {
+  display: block;
+  color: rgb(255 255 255 / 0.65);
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 0.8em;
+  font-style: normal;
+}
+
+.quote-wikipedia { inset-block-start: 30vh; inset-inline-start: 8vw; --intro-quote-rotation: -2deg; }
+.quote-bolles { inset-block-start: 31vh; inset-inline-end: 7vw; --intro-quote-rotation: 1.5deg; }
+.quote-woolf { inset-block-start: 60vh; inset-inline-start: 9vw; --intro-quote-rotation: 1deg; }
+.quote-thoreau { inset-block-start: 61vh; inset-inline-end: 8vw; --intro-quote-rotation: -1.5deg; }
+.quote-bailey { inset-block-start: 22vh; inset-inline-start: 42vw; width: min(18vw, 22rem); --intro-quote-rotation: 0.5deg; }
+
 .project-introduction-scenes {
   z-index: 2;
 }
@@ -484,6 +539,17 @@ body {
     inset-inline-start: -30vw;
     width: 55vw;
   }
+
+  .project-introduction-ambient-quote {
+    width: 42vw;
+    font-size: 0.65rem;
+  }
+
+  .quote-wikipedia { inset-inline-start: 0; }
+  .quote-bolles { inset-inline-end: 0; }
+  .quote-woolf { inset-inline-start: 0; }
+  .quote-thoreau { inset-inline-end: 0; }
+  .quote-bailey { display: none; }
 }
 
 @media (min-width: 768px) {
@@ -540,6 +606,10 @@ body {
   }
 
   .project-introduction-video {
+    display: none;
+  }
+
+  .project-introduction-quote-field {
     display: none;
   }
 

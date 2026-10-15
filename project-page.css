@@ -1,0 +1,223 @@
+/* Shared content sizing for research and design pages. The cinematic intro
+   deliberately has no data-project-content-height attribute. */
+:root {
+  --project-section-gap: 10;
+  --project-section-snap-delay: 500;
+}
+
+.project-natural-layout {
+  --related-card-size: clamp(12rem, min(35vh, 70vw), 24rem);
+}
+
+.project-natural-layout [data-project-content-height] {
+  --project-content-bottom-space: max(5vh, calc(4rem + env(safe-area-inset-bottom)));
+  inset-block-end: auto;
+  height: auto;
+  min-height: 0;
+  max-height: none;
+  margin-top: max(10dvh, 4rem);
+  padding: 0 3vw var(--project-content-bottom-space) var(--project-content-left, 30vw);
+  justify-content: flex-start;
+  overflow: visible;
+  transform: translateY(calc(var(--project-block-offset, 100dvh) - var(--project-content-offset, 0px)));
+}
+
+.project-natural-layout [data-project-content-height] > h1 {
+  flex: 0 0 auto;
+  max-height: none;
+  margin-block: 0 1.25rem;
+  font-size: clamp(1.6rem, 3vw, 3rem);
+  line-height: 1.15;
+  overflow: visible;
+  overflow-wrap: anywhere;
+}
+
+.project-natural-layout .project-opening-stage,
+.project-natural-layout .project-title-section {
+  display: block;
+  height: auto;
+  min-height: 0;
+  padding: 0;
+  overflow: visible;
+}
+.project-natural-layout .project-title-section > h1 {
+  margin-block-start: 0;
+  font-size: clamp(1.8rem, 4vw, 4rem);
+  overflow-wrap: anywhere;
+}
+
+.project-natural-layout .project-overview-section { flex: 0 0 auto; }
+.project-natural-layout .project-overview-grid {
+  height: auto;
+  grid-template-rows: none;
+  grid-auto-rows: auto;
+  align-items: start;
+}
+.project-natural-layout .project-overview-grid:has(> :only-child) { grid-template-columns: 1fr; }
+.project-natural-layout .project-overview-grid > * {
+  grid-row: auto;
+  overflow: visible;
+}
+.project-natural-layout .project-overview-grid > :only-child { grid-column: 1 / -1; }
+
+.project-natural-layout .project-content-grid {
+  flex: 0 0 auto;
+  height: auto;
+  grid-template-rows: none;
+  grid-auto-rows: auto;
+  grid-auto-flow: row;
+  align-items: start;
+  overflow: visible;
+}
+.project-natural-layout .project-content-grid-cell {
+  height: auto;
+  grid-row: auto;
+  overflow: visible;
+}
+.project-natural-layout .project-content-grid-cell :is(figure, img, picture, video) {
+  max-width: 100%;
+  height: auto;
+}
+.project-natural-layout .project-content-grid-cell figcaption {
+  position: static;
+  padding-block: 0.6rem 0;
+  color: inherit;
+  background: none;
+  text-shadow: none;
+  line-height: 1.5;
+}
+.project-natural-layout .dissertation-content {
+  flex: 0 0 auto;
+  height: auto;
+  overflow: visible;
+  scrollbar-gutter: auto;
+}
+
+/* The terminal section and its carousel grow from their actual content.
+   Horizontal browsing remains native, with the existing keyboard/dot controls. */
+.project-natural-layout .project-related-projects-block {
+  padding-inline: 0;
+}
+.project-natural-layout .project-related-experience,
+.project-natural-layout .project-related-scene {
+  position: static;
+  display: block;
+  height: auto;
+  overflow: visible;
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+  will-change: auto;
+}
+.project-natural-layout .project-related-content { padding: 0; }
+.project-natural-layout .project-related-content > h1 {
+  padding-inline-end: 3vw;
+  font-size: clamp(1.6rem, 3vw, 3rem);
+}
+.project-natural-layout :is(.related-card-system, .related-card-row, .related-card-track, .related-card-item) {
+  height: auto;
+}
+.project-natural-layout .related-card-track {
+  align-items: flex-start;
+  padding-block: 1.5rem 3rem;
+}
+.project-natural-layout .related-card-item {
+  flex-basis: var(--related-card-size);
+  filter: none;
+  transform: none;
+}
+.project-natural-layout .related-card {
+  position: relative;
+  top: auto;
+  width: 100%;
+  height: auto;
+  min-height: 0;
+  padding: 1rem;
+  overflow: visible;
+  color: inherit;
+  background: none;
+  filter: none;
+  transform: var(--jelly-transform, translate3d(0, 0, 0));
+}
+.project-natural-layout .related-card-year {
+  position: static;
+  margin-block: 0 0.5rem;
+  padding-inline: 1rem;
+  font-size: 1rem;
+  transform: none;
+}
+.project-natural-layout .related-card-indicator { bottom: 0.5rem; }
+
+@media (max-width: 767px) {
+  .project-natural-layout [data-project-content-height] { padding-inline: 5vw; }
+  .project-natural-layout .project-title-section { padding: 0; }
+  .project-natural-layout .project-title-section > h1 {
+    font-size: clamp(1.7rem, 6vw, 2.75rem);
+  }
+  .project-natural-layout .project-content-grid,
+  .project-natural-layout .dissertation-content { grid-template-columns: minmax(0, 1fr); }
+  .project-natural-layout .project-content-grid-cell { grid-column: 1 / -1; }
+  .project-natural-layout .project-overview-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .project-natural-layout .project-overview-grid > :is(.project-overview-summary, .project-overview-abstract) {
+    grid-column: 1 / -1;
+  }
+  .project-natural-layout .project-related-projects-block { padding-inline: 0; }
+
+  /* Keep the cinematic introduction's original overlay composition. */
+  html:not([data-project-intro-active]) .project-natural-layout .site-overlay { grid-template-columns: 1fr; }
+  html:not([data-project-intro-active]) .project-natural-layout .overlay-left {
+    grid-area: 1 / 1;
+    align-self: end;
+    min-width: 0;
+  }
+  html:not([data-project-intro-active]) .project-natural-layout .overlay-right {
+    grid-area: 1 / 1;
+    padding-inline: 5vw;
+  }
+  html:not([data-project-intro-active]) .project-natural-layout .overlay-nav {
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+    max-height: none;
+    margin: 0;
+    padding: 0.75rem 5vw max(0.75rem, env(safe-area-inset-bottom));
+    overflow-x: auto;
+    overflow-y: hidden;
+    color: #fff;
+    background: #171717;
+  }
+  html:not([data-project-intro-active]) .project-natural-layout .overlay-nav a {
+    flex: 0 0 auto;
+    font-size: 0.9rem;
+    white-space: nowrap;
+  }
+  html:not([data-project-intro-active]) .project-natural-layout .project-overlay-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  html:not([data-project-intro-active]) .project-natural-layout .project-overlay-header p {
+    margin-block: 0.75rem;
+    font-size: 1rem;
+  }
+  html:not([data-project-intro-active]) .project-natural-layout .project-overlay-home {
+    position: static;
+    font-size: 1rem;
+  }
+  html:not([data-project-intro-active]) .project-natural-layout .overlay-footer { display: none; }
+}
+
+@media print {
+  .project-natural-layout [data-project-content-height] {
+    position: static;
+    height: auto;
+    margin-block: 2rem;
+    padding: 0;
+    overflow: visible;
+    visibility: visible;
+    transform: none;
+  }
+  .project-natural-layout .project-page-stage { overflow: visible; }
+  .project-natural-layout .related-card-item { width: auto; }
+  .project-natural-layout .related-card-track { padding: 0; }
+}

@@ -11,19 +11,24 @@
   <link rel="stylesheet" href="../related-carousel.css">
   <script src="../overlay.js" defer></script>
   <script src="../related-carousel.js" defer></script>
-  <script src="project-layout.js" defer></script>
+  <script src="../jelly-cards.js" defer></script>
+  <script src="../project-page.js" defer></script>
+  <link rel="stylesheet" href="../project-page.css">
 </head>
-<body>
+<body class="project-natural-layout">
   <main class="project-page" data-project-page>
     <div class="project-page-stage">
-      <section class="project-opening-block" id="project-opening" data-project-opening data-visible>
+      <section class="project-opening-block" id="project-opening" data-project-opening data-project-part="opening" data-project-content-height data-visible>
         <div class="project-opening-stage">
-          <section class="project-title-section" aria-labelledby="project-title">
+<section class="project-title-section" aria-labelledby="project-title">
             <h1 id="project-title">Tangible Dial</h1>
             <p>2021</p>
             <p>Master of Design · AHFE 2021</p>
           </section>
-          <section class="project-overview-section" id="project-overview" aria-label="Project overview">
+        </div>
+      </section>
+
+      <section class="project-regular-block project-overview-section" id="project-overview" data-project-part="overview" data-project-content-height aria-hidden="true" inert aria-label="Project overview">
             <div class="project-overview-grid">
               <div class="project-overview-summary">
                 <p>Tangible Dial is an integrated control interface with a detachable, shape-changing dial and digital displays. It explores how spatial references and sequential physical affordances can reduce cognitive effort when people move between interfaces on connected devices.</p>
@@ -32,10 +37,8 @@
               <div class="project-overview-fact"><p>Shape-changing tangible interface</p></div>
             </div>
           </section>
-        </div>
-      </section>
 
-      <section class="project-regular-block" id="project-challenge" data-project-part="challenge" aria-labelledby="challenge-title" aria-hidden="true" inert>
+      <section class="project-regular-block" id="project-challenge" data-project-part="challenge" aria-labelledby="challenge-title" aria-hidden="true" inert data-project-content-height>
         <h1 id="challenge-title">Challenge</h1>
         <div class="project-content-grid">
           <div class="project-content-grid-cell span-columns-2 span-rows-2">
@@ -50,7 +53,7 @@
         </div>
       </section>
 
-      <section class="project-regular-block" id="project-process" data-project-part="process" aria-labelledby="process-title" aria-hidden="true" inert>
+      <section class="project-regular-block" id="project-process" data-project-part="process" aria-labelledby="process-title" aria-hidden="true" inert data-project-content-height>
         <h1 id="process-title">Process</h1>
         <div class="project-content-grid">
           <div class="project-content-grid-cell span-columns-2 span-rows-2 media-contain"><img src="../assets/design/tangible-dial/TangibleDialProcess.png" alt="Tangible Dial research-through-design workflow" loading="lazy" decoding="async"></div>
@@ -62,7 +65,7 @@
         </div>
       </section>
 
-      <section class="project-regular-block" id="project-experience" data-project-part="experience" aria-labelledby="experience-title" aria-hidden="true" inert>
+      <section class="project-regular-block" id="project-experience" data-project-part="experience" aria-labelledby="experience-title" aria-hidden="true" inert data-project-content-height>
         <h1 id="experience-title">Experience</h1>
         <div class="project-content-grid">
           <div class="project-content-grid-cell span-columns-2 span-rows-2"><img src="../assets/design/tangible-dial/Storyboard.png" alt="Storyboard showing Tangible Dial controlling a washing machine" loading="lazy" decoding="async"></div>
@@ -72,7 +75,7 @@
         </div>
       </section>
 
-      <section class="project-regular-block" id="project-prototype" data-project-part="prototype" aria-labelledby="prototype-title" aria-hidden="true" inert>
+      <section class="project-regular-block" id="project-prototype" data-project-part="prototype" aria-labelledby="prototype-title" aria-hidden="true" inert data-project-content-height>
         <h1 id="prototype-title">Prototype</h1>
         <div class="project-content-grid">
           <div class="project-content-grid-cell span-columns-2 span-rows-2"><img src="../assets/design/tangible-dial/TangibleDial_Rendering.png" alt="Rendering of Tangible Dial and its base display" loading="lazy" decoding="async"></div>
@@ -83,7 +86,7 @@
         </div>
       </section>
 
-      <section class="project-regular-block" id="project-evaluation" data-project-part="evaluation" aria-labelledby="evaluation-title" aria-hidden="true" inert>
+      <section class="project-regular-block" id="project-evaluation" data-project-part="evaluation" aria-labelledby="evaluation-title" aria-hidden="true" inert data-project-content-height>
         <h1 id="evaluation-title">Evaluation</h1>
         <div class="project-content-grid">
           <div class="project-content-grid-cell span-columns-2 span-rows-2"><img src="../assets/design/tangible-dial/TangibleDial_FinalTest.jpg" alt="Participant evaluating a Tangible Dial prototype" loading="lazy" decoding="async"></div>
@@ -94,7 +97,7 @@
         </div>
       </section>
 
-      <section class="project-regular-block" id="project-outcome" data-project-part="outcome" aria-labelledby="outcome-title" aria-hidden="true" inert>
+      <section class="project-regular-block" id="project-outcome" data-project-part="outcome" aria-labelledby="outcome-title" aria-hidden="true" inert data-project-content-height>
         <h1 id="outcome-title">Outcome</h1>
         <div class="project-content-grid">
           <div class="project-content-grid-cell span-columns-2 span-rows-3"><img src="../assets/design/tangible-dial/TangibleDial_Cover.png" alt="Tangible Dial final concept" loading="lazy" decoding="async"></div>
@@ -104,7 +107,7 @@
         </div>
       </section>
 
-      <section class="project-regular-block project-related-projects-block" id="project-related-projects" data-project-part="related-projects" data-project-related data-project-dark data-project-hold="300" aria-labelledby="related-projects-title" aria-hidden="true" inert>
+      <section class="project-regular-block project-related-projects-block" id="project-related-projects" data-project-part="related-projects" data-project-related data-project-dark aria-labelledby="related-projects-title" aria-hidden="true" inert data-project-content-height>
         <div class="project-related-experience">
           <section class="project-related-scene project-related-content" data-related-scene data-start="-0.12" data-persist>
             <h1 id="related-projects-title">Related Projects</h1>
@@ -126,7 +129,7 @@
 
   <aside class="site-overlay" aria-label="Site navigation and project information">
     <div class="overlay-left">
-      <nav class="overlay-nav" aria-label="Tangible Dial sections">
+      <nav class="overlay-nav project-overlay-nav" aria-label="Tangible Dial sections">
         <a href="#project-opening" data-project-nav="opening" aria-current="location">Tangible Dial</a>
         <a href="#project-overview" data-project-nav="overview">Overview</a>
         <a href="#project-challenge" data-project-nav="challenge">Challenge</a>

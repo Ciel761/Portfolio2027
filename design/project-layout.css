@@ -4,10 +4,9 @@
   --project-title-bottom-padding: 30vh;
   --project-overview-height: 40vh;
   --project-reveal-distance: 10;
-  --project-block-transition-height: 20;
+  --project-block-transition-height: 50;
   --project-block-scroll-padding: 50;
   --project-content-left: 30vw;
-  --project-grid-card-background: #e6e6e6;
   --project-grid-card-radius: 2vh;
   --project-nav-duration: 550;
   --project-nav-max-duration: 3500;
@@ -145,7 +144,7 @@ body {
 }
 
 .project-overview-grid > :not(:has(img, picture, video, figure)) {
-  background: var(--project-grid-card-background);
+  background: none;
 }
 
 .project-overview-grid img,
@@ -203,7 +202,7 @@ body {
 }
 
 .project-content-grid-cell:not(:has(img, picture, video, figure)) {
-  background: var(--project-grid-card-background);
+  background: none;
 }
 
 .project-content-grid-cell > :first-child {

@@ -1,0 +1,233 @@
+/* Reading layouts for the dissertation case studies. Cinematic selectors and
+   the shared project timeline stay in project-layout.css and project-layout.js. */
+.dissertation-page .project-title-section > h1 {
+  font-size: clamp(1.8rem, 4vw, 4rem);
+  overflow-wrap: anywhere;
+}
+
+.dissertation-page .project-overview-grid {
+  height: 100%;
+  gap: 1rem;
+}
+
+.dissertation-page .project-overview-abstract,
+.dissertation-page .project-overview-custom {
+  padding: 1rem;
+}
+
+.dissertation-page .project-overview-grid p {
+  font-size: clamp(0.95rem, 1.2vw, 1.15rem);
+  line-height: 1.5;
+}
+
+.dissertation-page .project-overview-custom {
+  grid-row: span 2;
+}
+
+.dissertation-section {
+  height: 85dvh;
+  padding-inline-end: 3vw;
+  padding-block-end: 2vh;
+}
+
+.dissertation-section > h1 {
+  flex: 0 0 auto;
+  max-height: 30dvh;
+  overflow: auto;
+  margin-block: 0 1.25rem;
+  font-size: clamp(1.6rem, 3vw, 3rem);
+  line-height: 1.12;
+  overflow-wrap: anywhere;
+}
+
+.dissertation-content {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+  align-items: start;
+  gap: clamp(1rem, 2vw, 2rem);
+  min-height: 0;
+  overflow: auto;
+  scrollbar-gutter: stable;
+  padding: 0.25rem 0.5rem 1rem 0.25rem;
+}
+
+/* Opt-in content height. The page timeline carries tall sections through the
+   viewport so their content does not need a separate scrollbar. */
+.dissertation-section[data-project-content-height] {
+  --project-content-bottom-space: 5vh;
+  inset-block-end: auto;
+  height: auto;
+  padding-block-end: var(--project-content-bottom-space);
+  transform: translateY(calc(var(--project-block-offset, 100dvh) - var(--project-content-offset, 0px)));
+}
+
+.dissertation-section[data-project-content-height] > h1 {
+  max-height: none;
+  overflow: visible;
+}
+
+.dissertation-section[data-project-content-height] > .dissertation-content {
+  flex-shrink: 0;
+  overflow: visible;
+  scrollbar-gutter: auto;
+}
+
+.dissertation-content-text {
+  grid-template-columns: minmax(0, 1fr);
+  max-width: 65rem;
+}
+
+.dissertation-narrative {
+  padding: clamp(1rem, 2vw, 1.75rem);
+  color: inherit;
+  background: none;
+  border-radius: var(--project-grid-card-radius);
+}
+
+.dissertation-narrative p,
+.dissertation-narrative li {
+  font-size: clamp(1rem, 1.3vw, 1.2rem);
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+.dissertation-narrative > :first-child { margin-block-start: 0; }
+.dissertation-narrative > :last-child { margin-block-end: 0; }
+.dissertation-narrative ul { padding-inline-start: 1.25rem; }
+.dissertation-narrative li + li { margin-block-start: 0.6rem; }
+.dissertation-narrative .dissertation-role { font-size: 0.95rem; }
+
+.dissertation-gallery {
+  display: grid;
+  min-width: 0;
+  gap: 1.5rem;
+}
+
+.dissertation-figure { margin: 0; }
+.dissertation-figure a { display: block; }
+.dissertation-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  background: #f4f4f4;
+  border-radius: var(--project-grid-card-radius);
+}
+
+.dissertation-figure figcaption {
+  position: static;
+  padding-block: 0.6rem 0;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.dissertation-more summary {
+  cursor: pointer;
+  padding-block: 0.75rem;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+.dissertation-more .dissertation-figure { margin-block: 1rem; }
+
+.dissertation-content:focus-visible,
+.dissertation-figure a:focus-visible,
+.dissertation-more summary:focus-visible {
+  outline: 3px solid #7776dc;
+  outline-offset: -3px;
+}
+
+@media (max-width: 767px) {
+  .dissertation-page .project-title-section > h1 {
+    font-size: clamp(1.7rem, 6vw, 2.75rem);
+  }
+  .dissertation-page .project-overview-grid {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: minmax(0, 2fr) minmax(0, 1fr);
+    gap: 0.5rem;
+  }
+  .dissertation-page .project-overview-abstract {
+    grid-row: 1;
+    grid-column: 1 / -1;
+  }
+  .dissertation-page .project-overview-custom {
+    grid-row: 2;
+    padding: 0.5rem;
+  }
+  .dissertation-page .project-overview-grid p {
+    font-size: 0.9rem;
+    line-height: 1.4;
+  }
+  .dissertation-section {
+    margin-top: max(10dvh, 3.5rem);
+    height: calc(100dvh - max(10dvh, 3.5rem) - 4rem - env(safe-area-inset-bottom));
+    padding-inline-end: 5vw;
+  }
+  .dissertation-section[data-project-content-height] {
+    --project-content-bottom-space: calc(4rem + env(safe-area-inset-bottom));
+  }
+  .dissertation-content { grid-template-columns: minmax(0, 1fr); }
+
+  /* Keep the reading area clear on narrow screens. The cinematic introduction
+     retains its original overlay layout. */
+  .dissertation-page:has(.dissertation-section[aria-hidden="false"]) .site-overlay {
+    grid-template-columns: 1fr;
+  }
+  .dissertation-page:has(.dissertation-section[aria-hidden="false"]) .overlay-left {
+    grid-column: 1;
+    grid-row: 1;
+    align-self: end;
+    min-width: 0;
+  }
+  .dissertation-page:has(.dissertation-section[aria-hidden="false"]) .overlay-right {
+    grid-column: 1;
+    grid-row: 1;
+    padding-inline: 5vw;
+  }
+  .dissertation-page:has(.dissertation-section[aria-hidden="false"]) .project-overlay-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .dissertation-page:has(.dissertation-section[aria-hidden="false"]) .project-overlay-header p {
+    margin-block: 0.75rem;
+    font-size: 1rem;
+  }
+  .dissertation-page:has(.dissertation-section[aria-hidden="false"]) .project-overlay-home {
+    position: static;
+    font-size: 1rem;
+  }
+  .dissertation-page:has(.dissertation-section[aria-hidden="false"]) .project-overlay-nav {
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+    max-height: none;
+    margin: 0;
+    padding: 0.75rem 5vw max(0.75rem, env(safe-area-inset-bottom));
+    overflow-x: auto;
+    overflow-y: hidden;
+    color: #fff;
+    background: #171717;
+  }
+  .dissertation-page:has(.dissertation-section[aria-hidden="false"]) .project-overlay-nav a {
+    flex: 0 0 auto;
+    font-size: 0.9rem;
+    white-space: nowrap;
+  }
+  .dissertation-page:has(.dissertation-section[aria-hidden="false"]) .overlay-footer {
+    display: none;
+  }
+}
+
+@media print {
+  .dissertation-section,
+  .dissertation-content {
+    display: block;
+    height: auto;
+    overflow: visible;
+  }
+  .dissertation-section { break-before: page; }
+  .dissertation-section > h1 { max-height: none; overflow: visible; }
+  .dissertation-section[data-project-content-height] { transform: none; }
+  .dissertation-narrative { background: none; }
+  .dissertation-figure { margin-block: 1rem; break-inside: avoid; }
+}

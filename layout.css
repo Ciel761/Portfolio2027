@@ -331,10 +331,10 @@ html.block-layout body { margin-block: 0; }
   overflow-y: auto;
   overflow-wrap: anywhere;
   transform-origin: left center;
-  transform: translateY(-50%);
+  transform: translateY(-50%) var(--jelly-transform, translate3d(0, 0, 0));
 }
 .card-scroll-effects .card {
-  transform: translateY(-50%) scale(var(--card-scale, 0.9));
+  transform: translateY(-50%) scale(var(--card-scale, 0.9)) var(--jelly-transform, translate3d(0, 0, 0));
   filter: brightness(var(--card-brightness, 80%));
 }
 .card-scroll-effects .card[data-focused] {
@@ -354,6 +354,13 @@ html.block-layout body { margin-block: 0; }
 .card > * { flex-shrink: 0; }
 .card > :first-child { margin-block-start: 0; }
 .card > :last-child { margin-block-end: 0; }
+
+.card .research-card-summary {
+  margin-block: 0.75rem 0;
+  font-size: clamp(0.9rem, 1.8vh, 1.15rem);
+  line-height: 1.5;
+  text-transform: none;
+}
 @supports not (height: 100dvh) {
   .block-layout .block-stage { height: 100vh; }
 }

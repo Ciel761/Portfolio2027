@@ -11,29 +11,32 @@
   <link rel="stylesheet" href="../related-carousel.css">
   <script src="../overlay.js" defer></script>
   <script src="../related-carousel.js" defer></script>
-  <script src="project-layout.js" defer></script>
+  <script src="../jelly-cards.js" defer></script>
+  <script src="../project-page.js" defer></script>
+  <link rel="stylesheet" href="../project-page.css">
 </head>
-<body>
+<body class="project-natural-layout">
   <main class="project-page" data-project-page>
     <div class="project-page-stage">
-      <section class="project-opening-block" id="project-opening" data-project-opening data-visible>
+      <section class="project-opening-block" id="project-opening" data-project-opening data-project-part="opening" data-project-content-height data-visible>
         <div class="project-opening-stage">
-          <section class="project-title-section" aria-labelledby="project-title">
+<section class="project-title-section" aria-labelledby="project-title">
             <h1 id="project-title">I’m Still Surviving</h1>
             <p>2020</p>
             <p>Nonprofit group project</p>
           </section>
-          <section class="project-overview-section" id="project-overview" aria-label="Project overview">
+        </div>
+      </section>
+
+      <section class="project-regular-block project-overview-section" id="project-overview" data-project-part="overview" data-project-content-height aria-hidden="true" inert aria-label="Project overview">
             <div class="project-overview-grid">
               <div class="project-overview-summary"><p>I’m Still Surviving is a living women’s history of HIV/AIDS. The digital exhibition brings together hundreds of excerpts from oral-history narratives by 39 women across New York, Illinois, and North Carolina.</p></div>
               <div class="project-overview-fact"><p>Information Architecture<br>UX Design<br>Web Design</p></div>
               <div class="project-overview-fact"><p>Oral history<br>Digital public history</p></div>
             </div>
           </section>
-        </div>
-      </section>
 
-      <section class="project-regular-block" id="project-goals" data-project-part="goals" aria-labelledby="goals-title" aria-hidden="true" inert>
+      <section class="project-regular-block" id="project-goals" data-project-part="goals" aria-labelledby="goals-title" aria-hidden="true" inert data-project-content-height>
         <h1 id="goals-title">Goals</h1>
         <div class="project-content-grid">
           <div class="project-content-grid-cell span-columns-2 span-rows-2"><img src="../assets/design/still-surviving/Stillsurviving_Cover.png" alt="I'm Still Surviving exhibition cover" loading="lazy" decoding="async"></div>
@@ -43,7 +46,7 @@
         </div>
       </section>
 
-      <section class="project-regular-block" id="project-architecture" data-project-part="architecture" aria-labelledby="architecture-title" aria-hidden="true" inert>
+      <section class="project-regular-block" id="project-architecture" data-project-part="architecture" aria-labelledby="architecture-title" aria-hidden="true" inert data-project-content-height>
         <h1 id="architecture-title">Information Architecture</h1>
         <div class="project-content-grid">
           <div class="project-content-grid-cell span-columns-2 span-rows-2 media-contain"><img src="../assets/design/still-surviving/Stillsurviving_Flow.png" alt="Information architecture and visitor flow" loading="lazy" decoding="async"></div>
@@ -54,7 +57,7 @@
         </div>
       </section>
 
-      <section class="project-regular-block" id="project-cms" data-project-part="cms" aria-labelledby="cms-title" aria-hidden="true" inert>
+      <section class="project-regular-block" id="project-cms" data-project-part="cms" aria-labelledby="cms-title" aria-hidden="true" inert data-project-content-height>
         <h1 id="cms-title">Content System</h1>
         <div class="project-content-grid">
           <div class="project-content-grid-cell span-columns-2 span-rows-2"><img src="../assets/design/still-surviving/Stillsurviving_CMSList.png" alt="Content records stored in the exhibition CMS" loading="lazy" decoding="async"></div>
@@ -63,7 +66,7 @@
         </div>
       </section>
 
-      <section class="project-regular-block" id="project-prototype" data-project-part="prototype" aria-labelledby="prototype-title" aria-hidden="true" inert>
+      <section class="project-regular-block" id="project-prototype" data-project-part="prototype" aria-labelledby="prototype-title" aria-hidden="true" inert data-project-content-height>
         <h1 id="prototype-title">Prototype</h1>
         <div class="project-content-grid">
           <div class="project-content-grid-cell span-columns-2 span-rows-2"><img src="../assets/design/still-surviving/Stillsurviving_Wireframe.png" alt="Wireframe for the I'm Still Surviving website" loading="lazy" decoding="async"></div>
@@ -73,7 +76,7 @@
         </div>
       </section>
 
-      <section class="project-regular-block" id="project-outcome" data-project-part="outcome" aria-labelledby="outcome-title" aria-hidden="true" inert>
+      <section class="project-regular-block" id="project-outcome" data-project-part="outcome" aria-labelledby="outcome-title" aria-hidden="true" inert data-project-content-height>
         <h1 id="outcome-title">Launch</h1>
         <div class="project-content-grid">
           <div class="project-content-grid-cell span-columns-3 span-rows-3"><img src="../assets/design/still-surviving/ImStillSurvivingWebsite.png" alt="Launched I'm Still Surviving website" loading="lazy" decoding="async"></div>
@@ -82,7 +85,7 @@
         </div>
       </section>
 
-      <section class="project-regular-block project-related-projects-block" id="project-related-projects" data-project-part="related-projects" data-project-related data-project-dark data-project-hold="300" aria-labelledby="related-projects-title" aria-hidden="true" inert>
+      <section class="project-regular-block project-related-projects-block" id="project-related-projects" data-project-part="related-projects" data-project-related data-project-dark aria-labelledby="related-projects-title" aria-hidden="true" inert data-project-content-height>
         <div class="project-related-experience">
           <section class="project-related-scene project-related-content" data-related-scene data-start="-0.12" data-persist>
             <h1 id="related-projects-title">Related Projects</h1>
@@ -104,7 +107,7 @@
 
   <aside class="site-overlay" aria-label="Site navigation and project information">
     <div class="overlay-left">
-      <nav class="overlay-nav" aria-label="I'm Still Surviving sections">
+      <nav class="overlay-nav project-overlay-nav" aria-label="I'm Still Surviving sections">
         <a href="#project-opening" data-project-nav="opening" aria-current="location">I’m Still Surviving</a>
         <a href="#project-overview" data-project-nav="overview">Overview</a>
         <a href="#project-goals" data-project-nav="goals">Goals</a>
