@@ -106,12 +106,16 @@ html.focus-on-overlay .project-overlay-home {
   filter: blur(0);
 }
 
-main {
+/* Keep filters off the document-height scroll container. Only the viewport
+   stage needs a composited surface, particularly with Safari's sticky layers. */
+.block-stage,
+.project-page-stage {
   filter: blur(0);
   transition: filter var(--overlay-focus-transition, 500ms) ease-in-out;
 }
 
-html.focus-on-overlay main {
+html.focus-on-overlay .block-stage,
+html.focus-on-overlay .project-page-stage {
   filter: blur(var(--content-overlay-focus-blur));
 }
 
@@ -124,7 +128,8 @@ html.overlay-always-clear .site-overlay .project-overlay-home {
   filter: none;
 }
 
-html.overlay-always-clear main {
+html.overlay-always-clear .block-stage,
+html.overlay-always-clear .project-page-stage {
   filter: none;
 }
 
@@ -155,7 +160,8 @@ html.overlay-always-clear main {
   .overlay-info > *,
   .overlay-footer > *,
   .project-overlay-home,
-  main {
+  .block-stage,
+  .project-page-stage {
     transition-duration: 0ms;
   }
 }

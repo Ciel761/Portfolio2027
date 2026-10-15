@@ -4,6 +4,7 @@
   const main = document.querySelector('main');
   const stage = document.querySelector('.block-stage');
   const blocks = [...document.querySelectorAll('.layout-block')];
+  if (!main || !stage || !blocks.length) return;
   const overlayLinks = [...document.querySelectorAll('.overlay-nav a[href^="#"]')];
   const overlayCurrent = document.querySelector('[data-overlay-current]');
   const overlayPosition = document.querySelector('[data-overlay-position]');
@@ -18,8 +19,11 @@
   const initialHash = location.hash;
   if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
   if (initialHash) history.replaceState(null, '', initialUrl.slice(0, -initialHash.length));
-  let defaultHold, transition, entrance;
-  let viewport, frame, cardSnapTimer, cardSnapFrame, sectionNavFrame, activeBlock = blocks[0];
+  let defaultHold = 0, transition = 0, entrance = 0;
+  let viewport = 0, frame = 0, cardSnapTimer = 0, cardSnapFrame = 0, sectionNavFrame = 0, activeBlock = blocks[0];
+  let layoutReady = false;
+  let startupInteracted = false;
+  let savedPageScroll = 0;
   let blockHolds = [];
   let blockStarts = [];
   const entranceBlocks = blocks.filter((block, index) => index > 0 && block !== contactBlock);
@@ -38,6 +42,8 @@
   const blockHold = index => blockHolds[index] || 0;
 
   function timelineState(distance) {
+    // An unmeasured timeline must never fall through to the terminal section.
+    if (!layoutReady || !Number.isFinite(distance)) return { index: 0, progress: 0 };
     for (let index = 0; index < blocks.length - 1; index += 1) {
       const transitionStart = blockStart(index) + blockHold(index);
       const transitionEnd = transitionStart + transition;
@@ -126,7 +132,9 @@
       const value = parseFloat(style.getPropertyValue(name));
       return Number.isFinite(value) ? value : fallback;
     };
-    viewport = stage.clientHeight || innerHeight;
+    const measuredViewport = stage.clientHeight || innerHeight;
+    if (!Number.isFinite(measuredViewport) || measuredViewport <= 0) return;
+    viewport = measuredViewport;
     defaultHold = Math.max(0, number('--block-height', 150) - 100) * viewport / 100;
     transition = Math.max(0, number('--transition-height', 10)) * viewport / 100;
     entrance = Math.max(0, number('--block-entrance-height', 20)) * viewport / 100;
@@ -142,6 +150,7 @@
     });
     // A zero-length sequence has no meaningful scroll positions; retain normal flow.
     if (!blockHolds.some(Boolean) && !transition) {
+      layoutReady = false;
       root.classList.remove('block-layout');
       blocks.forEach(block => { block.inert = false; block.removeAttribute('aria-hidden'); });
       return;
@@ -150,6 +159,7 @@
     const layoutScrollHeight = blockHolds.reduce((total, value) => total + value, 0)
       + (blocks.length - 1) * transition;
     main.style.setProperty('--layout-height', `${viewport + layoutScrollHeight}px`);
+    layoutReady = true;
     entranceBlocks.forEach(block => {
       block.toggleAttribute('data-home-entrance', true);
       const title = block.querySelector(':scope > h1');
@@ -161,7 +171,7 @@
   }
   function render() {
     frame = 0;
-    if (!root.classList.contains('block-layout')) return;
+    if (!layoutReady || !root.classList.contains('block-layout')) return;
     const distance = Math.max(0, -main.getBoundingClientRect().top);
     const { index, progress } = timelineState(distance);
     const active = progress >= .5 ? index + 1 : index;
@@ -304,6 +314,7 @@
 
   function scheduleCardSnap() {
     clearTimeout(cardSnapTimer);
+    if (!layoutReady) return;
     cardSnapTimer = setTimeout(() => {
       if (!root.classList.contains('block-layout') || !blockHolds.length) return;
       const distance = Math.max(0, -main.getBoundingClientRect().top);
@@ -367,7 +378,7 @@
       let syncingPageFromRow = false;
       const effectsEnabled = () => effectScope.classList.contains('card-scroll-effects');
       const verticalEnabled = () => effectScope.classList.contains('card-vertical-scroll');
-      const scrollRange = () => Math.max(0, items.at(-1).offsetLeft - items[0].offsetLeft);
+      const scrollRange = () => Math.max(0, items[items.length - 1].offsetLeft - items[0].offsetLeft);
 
       const resetCards = () => {
         focused = -1;
@@ -608,9 +619,9 @@
       renderCards();
     });
   }
-  root.classList.add('block-layout');
-  initializeCardRows();
   measure();
+  initializeCardRows();
+  render();
   overlayLinks.forEach(link => {
     link.addEventListener('click', event => {
       let target;
@@ -636,18 +647,43 @@
   addEventListener('pointerdown', cancelSectionNavigation, { passive: true });
   addEventListener('keydown', cancelCardSnap);
   addEventListener('keydown', cancelSectionNavigation);
+  const markStartupInteraction = () => { startupInteracted = true; };
+  ['wheel', 'touchstart', 'pointerdown', 'keydown'].forEach(type => {
+    addEventListener(type, markStartupInteraction, { passive: true });
+  });
   new ResizeObserver(measure).observe(stage);
   document.fonts?.ready.then(measure);
   reduced.addEventListener('change', render);
   addEventListener('hashchange', () => restoreHash());
   addEventListener('popstate', () => restoreHash());
-  if (initialHash) {
-    history.replaceState(null, '', initialUrl);
-    requestAnimationFrame(() => restoreHash(initialHash));
-  } else {
+  function restoreInitialPosition() {
+    if (startupInteracted) return;
     requestAnimationFrame(() => {
+      if (startupInteracted) return;
+      measure();
+      if (!layoutReady) return;
+      if (initialHash) {
+        history.replaceState(null, '', initialUrl);
+        restoreHash(initialHash);
+        return;
+      }
       scrollTo({ top: scrollY + main.getBoundingClientRect().top, behavior: 'auto' });
       render();
     });
   }
+  // Safari can restore a previous document offset after the first frame.
+  // Reconcile a fresh load at pageshow, but never reset after user input.
+  addEventListener('pagehide', () => {
+    savedPageScroll = scrollY;
+    cancelCardSnap();
+    cancelSectionNavigation();
+  });
+  addEventListener('pageshow', event => {
+    if (event.persisted) {
+      measure();
+      scrollTo({ top: savedPageScroll, behavior: 'auto' });
+      render();
+    } else restoreInitialPosition();
+  });
+  restoreInitialPosition();
 })();
