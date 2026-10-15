@@ -3,8 +3,10 @@
 A fresh, responsive redesign of Siyi Zhu’s portfolio.
 
 - [Living specification](SPECIFICATIONS.md): requirements, content inventory, decisions, delivery status, and verification.
-- [Legacy reference library](reference/README.md): preserved code and original-project location.
-- [Asset inventory](reference/ASSETS.md): media available for selective reuse.
+- Local reference library: `reference/README.md`, with preserved code and the original-project location.
+- Local asset inventory: `reference/ASSETS.md`, documenting media available for selective reuse.
+
+The `reference/` folder stays local and is excluded from the GitHub repository. Website assets needed to run the portfolio are included under `assets/`.
 
 ## Local preview
 
